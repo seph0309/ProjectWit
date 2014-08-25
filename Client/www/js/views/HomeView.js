@@ -10,7 +10,7 @@ var HomeView = function () {
 
     this.render = function() {
         this.$el.html(this.template());
-        $('.snap-drawers', this.$el).html(snapDrawerView.$el);
+        $('.snap-drawers', this.$el).html(snapDrawerView.render().$el);
         return this;
     };
 
