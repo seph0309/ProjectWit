@@ -1,0 +1,47 @@
+{
+	"status": "OK",
+	"message": "Query successful",
+	"data": [
+		{
+			"id": 1,
+			"name": "Menu 1",
+			"description": "Lorem ipsum dolor sit amet",
+			"photo": "api/images/1.jpg"
+		}, {
+			"id": 2,
+			"name": "Menu 2",
+			"description": "Lorem ipsum dolor sit amet",
+			"photo": "api/images/2.jpg"
+		}, {
+			"id": 3,
+			"name": "Menu 3",
+			"description": "Lorem ipsum dolor sit amet",
+			"photo": "api/images/3.jpg"
+		}, {
+			"id": 4,
+			"name": "Menu 4",
+			"description": "Lorem ipsum dolor sit amet",
+			"photo": "api/images/4.jpg"
+		}, {
+			"id": 5,
+			"name": "Menu 5",
+			"description": "Lorem ipsum dolor sit amet",
+			"photo": "api/images/5.jpg"
+		}, {
+			"id": 6,
+			"name": "Menu 6",
+			"description": "Lorem ipsum dolor sit amet",
+			"photo": "api/images/6.jpg"
+		}, {
+			"id": 7,
+			"name": "Menu 7",
+			"description": "Lorem ipsum dolor sit amet",
+			"photo": "api/images/7.jpg"
+		}, {
+			"id": 8,
+			"name": "Menu 8",
+			"description": "Lorem ipsum dolor sit amet",
+			"photo": "api/images/8.jpg"
+		}
+	]
+}

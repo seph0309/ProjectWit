@@ -30,11 +30,19 @@
 	    </div>
 	
 	    <div class="content" id="content">
-	        <br>
-	        <!--Filler Paragraph-->
-	        <p>
-	            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu purus diam. Nulla tincidunt molestie velit sed egestas. Phasellus commodo dolor nec lectus euismod, sed venenatis metus facilisis. Donec molestie tempor accumsan. Donec accumsan faucibus viverra. Duis varius tempus quam, quis sollicitudin erat consequat at. Duis eget dictum libero. Praesent ornare est non quam faucibus dictum. Pellentesque quis urna molestie, condimentum justo eu, vestibulum tortor.
-	        </p>
+	        <ul class="table-grid">
+	    	{{#each this}}
+			  <li class="table-grid-cell media">
+			    <a class="navigate-right">
+			      <img class="media-object pull-left" src="{{photo}}">
+			      <div class="media-body">
+			        {{name}}
+			        <p>{{description}}</p>
+			      </div>
+			    </a>
+			  </li>
+			{{/each}}
+			</ul>
 	    </div>
 	    <div class="snap-drawers"/></div>
     </script>
@@ -61,6 +69,7 @@
 	<script src="lib/jquery.js"></script>
 	<script src="lib/pageslider.js"></script>
 	<script src="lib/router.js"></script>
+	<script src="js/services/json/HomeService.js"></script>
 	<script src="js/views/HomeView.js"></script>
 	<script src="js/views/SnapDrawerView.js"></script>
 	<script src="js/app.js"></script>
@@ -71,7 +80,7 @@
         });
 
         /* Get reference to toggle button, the html element with ID "open-left" */
-        var myToggleButton = document.getElementById('open-left')
+        var myToggleButton = document.getElementById('open-left');
 
         /* Add event listener to our toggle button */
         myToggleButton.addEventListener('click', function () {

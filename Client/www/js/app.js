@@ -5,14 +5,20 @@
     HomeView.prototype.template = Handlebars.compile($("#home-tpl").html());
     SnapDrawerView.prototype.template = Handlebars.compile($("#snap-drawer-tpl").html());
 
+	var homeService = new HomeService();
+	
     var slider = new PageSlider($('body'));
     
-    router.addRoute('', function() {
-        console.log('empty');
-        slider.slidePage(new HomeView().render().$el);
+    homeService.initialize().done(function () {
+	    router.addRoute('', function() {
+	        console.log('home');
+	        slider.slidePage(new HomeView(homeService).render().$el);
+	    });
+	
+	    router.start();
+    
+    	
     });
-
-    router.start();
     
     //service.initialize().done(function () {
     //});
@@ -48,7 +54,7 @@
             d = a.target;
             while (!f.test(d.nodeName))
                 d = d.parentNode;
-            "href" in d && (d.href.indexOf("http") || ~d.href.indexOf(e.host)) && (a.preventDefault(), e.href = d.href)
-        }, !1)
+            "href" in d && (d.href.indexOf("http") || ~d.href.indexOf(e.host)) && (a.preventDefault(), e.href = d.href);
+        }, !1);
     }
 })(document, window.navigator, "standalone");
