@@ -34,10 +34,9 @@ Icon
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
-
-*.dll
-*.dll
-*.dll
+ 
 *.dll
 *.cache
 *.suo
+Server/ProjectWit.Server/ProjectWit.Model/obj/Debug/TempPE/ProjectWit.Model.Designer.cs.dll
+Server/ProjectWit.Server/ProjectWit.Server.v12.suo
