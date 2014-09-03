@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WITModelStoreContainer" CdmEntityContainer="WITEntities">
+    <EntitySetMapping Name="Wit_Category">
+      <EntityTypeMapping TypeName="WITModel.Wit_Category">
+        <MappingFragment StoreEntitySet="Wit_Category">
+          <ScalarProperty Name="Category_UID" ColumnName="Category_UID" />
+          <ScalarProperty Name="Company_UID" ColumnName="Company_UID" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wit_Company">
+      <EntityTypeMapping TypeName="WITModel.Wit_Company">
+        <MappingFragment StoreEntitySet="Wit_Company">
+          <ScalarProperty Name="Company_UID" ColumnName="Company_UID" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+          <ScalarProperty Name="CompanyNumber" ColumnName="CompanyNumber" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wit_Item">
+      <EntityTypeMapping TypeName="WITModel.Wit_Item">
+        <MappingFragment StoreEntitySet="Wit_Item">
+          <ScalarProperty Name="Item_UID" ColumnName="Item_UID" />
+          <ScalarProperty Name="Category_UID" ColumnName="Category_UID" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+          <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+          <ScalarProperty Name="OnStock" ColumnName="OnStock" />
+          <ScalarProperty Name="SpiceLevel" ColumnName="SpiceLevel" />
+          <ScalarProperty Name="Likes" ColumnName="Likes" />
+          <ScalarProperty Name="FoodMark" ColumnName="FoodMark" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="DiscountedPrice" ColumnName="DiscountedPrice" />
+          <ScalarProperty Name="IsBestSeller" ColumnName="IsBestSeller" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wit_Order">
+      <EntityTypeMapping TypeName="WITModel.Wit_Order">
+        <MappingFragment StoreEntitySet="Wit_Order">
+          <ScalarProperty Name="Order_UID" ColumnName="Order_UID" />
+          <ScalarProperty Name="Transaction_UID" ColumnName="Transaction_UID" />
+          <ScalarProperty Name="Item_UID" ColumnName="Item_UID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wit_Role">
+      <EntityTypeMapping TypeName="WITModel.Wit_Role">
+        <MappingFragment StoreEntitySet="Wit_Role">
+          <ScalarProperty Name="Role_UID" ColumnName="Role_UID" />
+          <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wit_Status">
+      <EntityTypeMapping TypeName="WITModel.Wit_Status">
+        <MappingFragment StoreEntitySet="Wit_Status">
+          <ScalarProperty Name="Status_UID" ColumnName="Status_UID" />
+          <ScalarProperty Name="Company_UID" ColumnName="Company_UID" />
+          <ScalarProperty Name="SatusDescription" ColumnName="SatusDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wit_Table">
+      <EntityTypeMapping TypeName="WITModel.Wit_Table">
+        <MappingFragment StoreEntitySet="Wit_Table">
+          <ScalarProperty Name="Table_UID" ColumnName="Table_UID" />
+          <ScalarProperty Name="Company_UID" ColumnName="Company_UID" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="TableDescription" ColumnName="TableDescription" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wit_Transaction">
+      <EntityTypeMapping TypeName="WITModel.Wit_Transaction">
+        <MappingFragment StoreEntitySet="Wit_Transaction">
+          <ScalarProperty Name="Transaction_UID" ColumnName="Transaction_UID" />
+          <ScalarProperty Name="Table_UID" ColumnName="Table_UID" />
+          <ScalarProperty Name="NumberOfGuest" ColumnName="NumberOfGuest" />
+          <ScalarProperty Name="Status_UID" ColumnName="Status_UID" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wit_User">
+      <EntityTypeMapping TypeName="WITModel.Wit_User">
+        <MappingFragment StoreEntitySet="Wit_User">
+          <ScalarProperty Name="User_UID" ColumnName="User_UID" />
+          <ScalarProperty Name="FirsName" ColumnName="FirsName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Company_UID" ColumnName="Company_UID" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wit_UserRole">
+      <EntityTypeMapping TypeName="WITModel.Wit_UserRole">
+        <MappingFragment StoreEntitySet="Wit_UserRole">
+          <ScalarProperty Name="UserRole_UID" ColumnName="UserRole_UID" />
+          <ScalarProperty Name="Role_UID" ColumnName="Role_UID" />
+          <ScalarProperty Name="User_UID" ColumnName="User_UID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
