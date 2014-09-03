@@ -100,8 +100,10 @@
     <EntitySetMapping Name="Wit_User">
       <EntityTypeMapping TypeName="WITModel.Wit_User">
         <MappingFragment StoreEntitySet="Wit_User">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="User_UID" ColumnName="User_UID" />
-          <ScalarProperty Name="FirsName" ColumnName="FirsName" />
           <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="Company_UID" ColumnName="Company_UID" />

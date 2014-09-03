@@ -93,12 +93,14 @@
       <PropertyRef Name="User_UID" />
     </Key>
     <Property Name="User_UID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="FirsName" Type="nvarchar" MaxLength="20" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="20" />
     <Property Name="MiddleName" Type="nvarchar" MaxLength="20" />
     <Property Name="LastName" Type="nvarchar" MaxLength="20" />
     <Property Name="Company_UID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="EmailAddress" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Wit_UserRole">
     <Key>

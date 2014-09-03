@@ -20,12 +20,14 @@ namespace ProjectWit.Model
         }
     
         public System.Guid User_UID { get; set; }
-        public string FirsName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public System.Guid Company_UID { get; set; }
         public string EmailAddress { get; set; }
         public string Password { get; set; }
+        public string FirstName { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public string ModifiedBy { get; set; }
     
         public virtual Wit_Company Wit_Company { get; set; }
         public virtual ICollection<Wit_UserRole> Wit_UserRole { get; set; }

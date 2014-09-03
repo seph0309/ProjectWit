@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WITModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WITModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Wit_Category">
           <Key>
             <PropertyRef Name="Category_UID" />
@@ -98,12 +98,14 @@
             <PropertyRef Name="User_UID" />
           </Key>
           <Property Name="User_UID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="FirsName" Type="nvarchar" MaxLength="20" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="20" />
           <Property Name="MiddleName" Type="nvarchar" MaxLength="20" />
           <Property Name="LastName" Type="nvarchar" MaxLength="20" />
           <Property Name="Company_UID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Wit_UserRole">
           <Key>
@@ -301,8 +303,7 @@
             <End Role="Wit_UserRole" EntitySet="Wit_UserRole" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WITModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -417,7 +418,6 @@
             <PropertyRef Name="User_UID" />
           </Key>
           <Property Name="User_UID" Type="Guid" Nullable="false" />
-          <Property Name="FirsName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="MiddleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Company_UID" Type="Guid" Nullable="false" />
@@ -425,6 +425,9 @@
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Wit_Company" Relationship="Self.FK_Wit_User_Wit_Company" FromRole="Wit_User" ToRole="Wit_Company" />
           <NavigationProperty Name="Wit_UserRole" Relationship="Self.FK_Wit_UserRole_Wit_User" FromRole="Wit_User" ToRole="Wit_UserRole" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Wit_UserRole">
           <Key>
@@ -729,8 +732,10 @@
           <EntitySetMapping Name="Wit_User">
             <EntityTypeMapping TypeName="WITModel.Wit_User">
               <MappingFragment StoreEntitySet="Wit_User">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="User_UID" ColumnName="User_UID" />
-                <ScalarProperty Name="FirsName" ColumnName="FirsName" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Company_UID" ColumnName="Company_UID" />
