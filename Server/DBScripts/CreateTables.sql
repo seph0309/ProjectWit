@@ -1,6 +1,6 @@
 USE [WIT]
 GO
-/****** Object:  Table [dbo].[Wit_Category]    Script Date: 9/3/2014 10:21:20 PM ******/
+/****** Object:  Table [dbo].[Wit_Category]    Script Date: 9/3/2014 10:36:15 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -18,7 +18,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Company]    Script Date: 9/3/2014 10:21:20 PM ******/
+/****** Object:  Table [dbo].[Wit_Company]    Script Date: 9/3/2014 10:36:15 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -37,7 +37,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Item]    Script Date: 9/3/2014 10:21:20 PM ******/
+/****** Object:  Table [dbo].[Wit_Item]    Script Date: 9/3/2014 10:36:15 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -64,7 +64,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Order]    Script Date: 9/3/2014 10:21:20 PM ******/
+/****** Object:  Table [dbo].[Wit_Order]    Script Date: 9/3/2014 10:36:15 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -83,7 +83,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Role]    Script Date: 9/3/2014 10:21:20 PM ******/
+/****** Object:  Table [dbo].[Wit_Role]    Script Date: 9/3/2014 10:36:15 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -98,7 +98,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Status]    Script Date: 9/3/2014 10:21:20 PM ******/
+/****** Object:  Table [dbo].[Wit_Status]    Script Date: 9/3/2014 10:36:15 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -114,7 +114,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Table]    Script Date: 9/3/2014 10:21:20 PM ******/
+/****** Object:  Table [dbo].[Wit_Table]    Script Date: 9/3/2014 10:36:15 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -133,7 +133,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Transaction]    Script Date: 9/3/2014 10:21:20 PM ******/
+/****** Object:  Table [dbo].[Wit_Transaction]    Script Date: 9/3/2014 10:36:15 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -152,14 +152,14 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_User]    Script Date: 9/3/2014 10:21:20 PM ******/
+/****** Object:  Table [dbo].[Wit_User]    Script Date: 9/3/2014 10:36:15 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Wit_User](
 	[User_UID] [uniqueidentifier] NOT NULL,
-	[FirsName] [nvarchar](20) NULL,
+	[FirstName] [nvarchar](20) NULL,
 	[MiddleName] [nvarchar](20) NULL,
 	[LastName] [nvarchar](20) NULL,
 	[Company_UID] [uniqueidentifier] NOT NULL,
@@ -174,7 +174,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_UserRole]    Script Date: 9/3/2014 10:21:20 PM ******/
+/****** Object:  Table [dbo].[Wit_UserRole]    Script Date: 9/3/2014 10:36:15 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
