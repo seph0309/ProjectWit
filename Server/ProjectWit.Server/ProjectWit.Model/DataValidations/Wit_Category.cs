@@ -11,7 +11,11 @@ namespace ProjectWit.Model
     public class Wit_CategoryMetaData
     { 
         public System.Guid Category_UID { get; set; }
+        [Required]
+        [Display(Name = "Company")]
         public System.Guid Company_UID { get; set; }
+        [Required]
+        [Display(Name = "Category")]
         public string CategoryName { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }

@@ -11,6 +11,8 @@ namespace ProjectWit.Model
     public class Wit_RoleMetaData
     {
         public System.Guid Role_UID { get; set; }
+        [Required]
+        [Display(Name = "Role Description")]
         public string RoleDescription { get; set; }
 
     }

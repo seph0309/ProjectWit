@@ -11,7 +11,10 @@ namespace ProjectWit.Model
     public class Wit_StatusMetaData
     {
         public System.Guid Status_UID { get; set; }
+        [Required]
+        [Display(Name = "Company")]
         public System.Guid Company_UID { get; set; }
+        [Display(Name = "Description")]
         public string SatusDescription { get; set; }
 
     }

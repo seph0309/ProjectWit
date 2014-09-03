@@ -11,6 +11,8 @@ namespace ProjectWit.Model
     public class Wit_OrderMetaData
     {
         public System.Guid Order_UID { get; set; }
+        [Required]
+        [Display(Name = "Transaction")]
         public System.Guid Transaction_UID { get; set; }
         public System.Guid Item_UID { get; set; }
         public int Quantity { get; set; }

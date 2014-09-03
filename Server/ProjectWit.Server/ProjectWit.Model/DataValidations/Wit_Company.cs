@@ -12,8 +12,12 @@ namespace ProjectWit.Model
     {
     
         public System.Guid Company_UID { get; set; }
+        [Required]
+        [Display(Name = "Company")]
         public string CompanyName { get; set; }
+        [Display(Name = "Address")]
         public string CompanyAddress { get; set; }
+        [Display(Name = "Phone Number")]
         public string CompanyNumber { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
