@@ -40,3 +40,4 @@ Icon
 *.dll
 *.dll
 *.cache
+*.suo
