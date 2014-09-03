@@ -1,6 +1,6 @@
 USE [WIT]
 GO
-/****** Object:  Table [dbo].[Wit_Category]    Script Date: 8/31/2014 3:02:44 AM ******/
+/****** Object:  Table [dbo].[Wit_Category]    Script Date: 9/3/2014 10:21:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -18,7 +18,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Company]    Script Date: 8/31/2014 3:02:44 AM ******/
+/****** Object:  Table [dbo].[Wit_Company]    Script Date: 9/3/2014 10:21:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -37,7 +37,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Item]    Script Date: 8/31/2014 3:02:44 AM ******/
+/****** Object:  Table [dbo].[Wit_Item]    Script Date: 9/3/2014 10:21:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -64,7 +64,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Order]    Script Date: 8/31/2014 3:02:44 AM ******/
+/****** Object:  Table [dbo].[Wit_Order]    Script Date: 9/3/2014 10:21:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -83,7 +83,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Role]    Script Date: 8/31/2014 3:02:44 AM ******/
+/****** Object:  Table [dbo].[Wit_Role]    Script Date: 9/3/2014 10:21:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -98,7 +98,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Status]    Script Date: 8/31/2014 3:02:44 AM ******/
+/****** Object:  Table [dbo].[Wit_Status]    Script Date: 9/3/2014 10:21:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -114,7 +114,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Table]    Script Date: 8/31/2014 3:02:44 AM ******/
+/****** Object:  Table [dbo].[Wit_Table]    Script Date: 9/3/2014 10:21:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -133,7 +133,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Transaction]    Script Date: 8/31/2014 3:02:44 AM ******/
+/****** Object:  Table [dbo].[Wit_Transaction]    Script Date: 9/3/2014 10:21:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -152,7 +152,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_User]    Script Date: 8/31/2014 3:02:44 AM ******/
+/****** Object:  Table [dbo].[Wit_User]    Script Date: 9/3/2014 10:21:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -165,6 +165,8 @@ CREATE TABLE [dbo].[Wit_User](
 	[Company_UID] [uniqueidentifier] NOT NULL,
 	[EmailAddress] [nvarchar](20) NOT NULL,
 	[Password] [nvarchar](50) NOT NULL,
+	[ModifiedDate] [datetime] NULL,
+	[ModifiedBy] [nvarchar](50) NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[User_UID] ASC
@@ -172,7 +174,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_UserRole]    Script Date: 8/31/2014 3:02:44 AM ******/
+/****** Object:  Table [dbo].[Wit_UserRole]    Script Date: 9/3/2014 10:21:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -190,11 +192,19 @@ PRIMARY KEY CLUSTERED
 GO
 ALTER TABLE [dbo].[Wit_Category] ADD  DEFAULT (newsequentialid()) FOR [Category_UID]
 GO
+ALTER TABLE [dbo].[Wit_Category] ADD  CONSTRAINT [DF_Wit_Category_ModifiedDate]  DEFAULT (getdate()) FOR [ModifiedDate]
+GO
 ALTER TABLE [dbo].[Wit_Company] ADD  DEFAULT (newsequentialid()) FOR [Company_UID]
+GO
+ALTER TABLE [dbo].[Wit_Company] ADD  CONSTRAINT [DF_Wit_Company_ModifiedDate]  DEFAULT (getdate()) FOR [ModifiedDate]
 GO
 ALTER TABLE [dbo].[Wit_Item] ADD  DEFAULT (newsequentialid()) FOR [Item_UID]
 GO
+ALTER TABLE [dbo].[Wit_Item] ADD  CONSTRAINT [DF_Wit_Item_ModifiedDate]  DEFAULT (getdate()) FOR [ModifiedDate]
+GO
 ALTER TABLE [dbo].[Wit_Order] ADD  DEFAULT (newsequentialid()) FOR [Order_UID]
+GO
+ALTER TABLE [dbo].[Wit_Order] ADD  CONSTRAINT [DF_Wit_Order_ModifiedDate]  DEFAULT (getdate()) FOR [ModifiedDate]
 GO
 ALTER TABLE [dbo].[Wit_Role] ADD  DEFAULT (newsequentialid()) FOR [Role_UID]
 GO
@@ -202,9 +212,15 @@ ALTER TABLE [dbo].[Wit_Status] ADD  DEFAULT (newsequentialid()) FOR [Status_UID]
 GO
 ALTER TABLE [dbo].[Wit_Table] ADD  DEFAULT (newsequentialid()) FOR [Table_UID]
 GO
+ALTER TABLE [dbo].[Wit_Table] ADD  CONSTRAINT [DF_Wit_Table_ModifiedDate]  DEFAULT (getdate()) FOR [ModifiedDate]
+GO
 ALTER TABLE [dbo].[Wit_Transaction] ADD  DEFAULT (newsequentialid()) FOR [Transaction_UID]
 GO
+ALTER TABLE [dbo].[Wit_Transaction] ADD  CONSTRAINT [DF_Wit_Transaction_ModifiedDate]  DEFAULT (getdate()) FOR [ModifiedDate]
+GO
 ALTER TABLE [dbo].[Wit_User] ADD  DEFAULT (newsequentialid()) FOR [User_UID]
+GO
+ALTER TABLE [dbo].[Wit_User] ADD  CONSTRAINT [DF_Wit_User_ModifiedDate]  DEFAULT (getdate()) FOR [ModifiedDate]
 GO
 ALTER TABLE [dbo].[Wit_UserRole] ADD  DEFAULT (newsequentialid()) FOR [UserRole_UID]
 GO
