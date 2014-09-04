@@ -157,7 +157,6 @@
           <Property Name="LastName" Type="nvarchar" MaxLength="20" />
           <Property Name="Company_UID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -554,7 +553,6 @@
           <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Company_UID" Type="Guid" Nullable="false" />
           <Property Name="EmailAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Wit_Company" Relationship="Self.FK_Wit_User_Wit_Company" FromRole="Wit_User" ToRole="Wit_Company" />
           <NavigationProperty Name="Wit_UserRole" Relationship="Self.FK_Wit_UserRole_Wit_User" FromRole="Wit_User" ToRole="Wit_UserRole" />
           <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -973,7 +971,6 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Company_UID" ColumnName="Company_UID" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

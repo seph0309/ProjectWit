@@ -115,7 +115,6 @@
     <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Company_UID" Type="Guid" Nullable="false" />
     <Property Name="EmailAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Wit_Company" Relationship="Self.FK_Wit_User_Wit_Company" FromRole="Wit_User" ToRole="Wit_Company" />
     <NavigationProperty Name="Wit_UserRole" Relationship="Self.FK_Wit_UserRole_Wit_User" FromRole="Wit_User" ToRole="Wit_UserRole" />
     <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
