@@ -49,6 +49,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>ProjectWit.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>ProjectWit.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>ProjectWit.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>ProjectWit.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>ProjectWit.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataValidations\Wit_Category.cs" />
     <Compile Include="DataValidations\Wit_Commons.cs" />
     <Compile Include="DataValidations\Wit_Company.cs" />

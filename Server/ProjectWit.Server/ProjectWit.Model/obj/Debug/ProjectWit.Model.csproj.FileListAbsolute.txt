@@ -17,4 +17,3 @@ D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server
 D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\bin\Debug\EntityFramework.SqlServer.xml
 D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\obj\Debug\ProjectWit.Model.dll
 D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\obj\Debug\ProjectWit.Model.pdb
-D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\obj\Debug\ProjectWit.Model.csprojResolveAssemblyReference.cache

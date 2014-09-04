@@ -35,5 +35,10 @@ namespace ProjectWit.Model
         public virtual DbSet<Wit_Transaction> Wit_Transaction { get; set; }
         public virtual DbSet<Wit_User> Wit_User { get; set; }
         public virtual DbSet<Wit_UserRole> Wit_UserRole { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     }
 }
