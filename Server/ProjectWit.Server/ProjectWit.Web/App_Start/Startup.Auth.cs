@@ -28,9 +28,9 @@ namespace ProjectWit.Web
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "478542335579679",
+               appSecret: "4fa89a46d26df05e726ed5dc1b11b703");
 
             //app.UseGoogleAuthentication();
         }
