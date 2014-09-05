@@ -55,3 +55,5 @@ D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server
 D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server\ProjectWit.Web\obj\Debug\ProjectWit.Web.csprojResolveAssemblyReference.cache
 D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server\ProjectWit.Web\obj\Debug\ProjectWit.Web.dll
 D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server\ProjectWit.Web\obj\Debug\ProjectWit.Web.pdb
+D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Web\obj\Debug\ProjectWit.Web.csprojResolveAssemblyReference.cache
+D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Web\obj\Debug\ProjectWit.Web.pdb
