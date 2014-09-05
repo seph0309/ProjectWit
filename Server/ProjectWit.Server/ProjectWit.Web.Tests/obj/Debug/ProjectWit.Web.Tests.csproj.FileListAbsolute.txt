@@ -44,5 +44,3 @@ D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server
 D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server\ProjectWit.Web.Tests\obj\Debug\ProjectWit.Web.Tests.pdb
 D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server\ProjectWit.Web.Tests\bin\Debug\Microsoft.Owin.Security.Facebook.dll
 D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server\ProjectWit.Web.Tests\bin\Debug\Microsoft.Owin.Security.Facebook.xml
-D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Web.Tests\obj\Debug\ProjectWit.Web.Tests.csprojResolveAssemblyReference.cache
-D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Web.Tests\obj\Debug\ProjectWit.Web.Tests.pdb
