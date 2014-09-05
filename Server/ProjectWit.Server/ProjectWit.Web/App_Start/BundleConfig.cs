@@ -25,7 +25,13 @@ namespace ProjectWit.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/font-awesome.min",
+                      "~/Content/sb-admin-2.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/MyAccountNavigation").Include(
+                      "~/Scripts/metisMenu.min.js",
+                      "~/Scripts/sb-admin-2.js"));
         }
     }
 }
