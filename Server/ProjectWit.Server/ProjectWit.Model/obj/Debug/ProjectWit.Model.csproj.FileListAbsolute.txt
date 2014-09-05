@@ -17,3 +17,12 @@ D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server
 D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\bin\Debug\EntityFramework.SqlServer.xml
 D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\obj\Debug\ProjectWit.Model.dll
 D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\obj\Debug\ProjectWit.Model.pdb
+D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\bin\Debug\ProjectWit.Model.dll.config
+D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\bin\Debug\ProjectWit.Model.dll
+D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\bin\Debug\ProjectWit.Model.pdb
+D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\bin\Debug\EntityFramework.dll
+D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\bin\Debug\EntityFramework.xml
+D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\obj\Debug\ProjectWit.Model.dll
+D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\obj\Debug\ProjectWit.Model.pdb
