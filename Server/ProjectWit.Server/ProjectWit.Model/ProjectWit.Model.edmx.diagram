@@ -34,6 +34,7 @@
         <AssociationConnector Association="WITModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" />
         <AssociationConnector Association="WITModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="WITModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="WITModel.Wit_NavBar" Width="1.5" PointX="10.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

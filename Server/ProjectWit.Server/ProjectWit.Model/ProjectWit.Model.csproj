@@ -105,6 +105,9 @@
     <Compile Include="Wit_Item.cs">
       <DependentUpon>ProjectWit.tt</DependentUpon>
     </Compile>
+    <Compile Include="Wit_NavBar.cs">
+      <DependentUpon>ProjectWit.tt</DependentUpon>
+    </Compile>
     <Compile Include="Wit_Order.cs">
       <DependentUpon>ProjectWit.tt</DependentUpon>
     </Compile>

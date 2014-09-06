@@ -40,5 +40,6 @@ namespace ProjectWit.Model
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Wit_NavBar> Wit_NavBar { get; set; }
     }
 }

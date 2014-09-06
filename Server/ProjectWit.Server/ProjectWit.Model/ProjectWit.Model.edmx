@@ -99,6 +99,15 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Wit_NavBar">
+          <Key>
+            <PropertyRef Name="NavBar_UID" />
+          </Key>
+          <Property Name="NavBar_UID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Menu" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubMenu" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="URL" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="Wit_Order">
           <Key>
             <PropertyRef Name="Order_UID" />
@@ -366,6 +375,7 @@
           <EntitySet Name="Wit_Category" EntityType="Self.Wit_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Company" EntityType="Self.Wit_Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Item" EntityType="Self.Wit_Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wit_NavBar" EntityType="Self.Wit_NavBar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Order" EntityType="Self.Wit_Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Role" EntityType="Self.Wit_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Status" EntityType="Self.Wit_Status" Schema="dbo" store:Type="Tables" />
@@ -773,6 +783,7 @@
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Wit_NavBar" EntityType="WITModel.Wit_NavBar" />
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -858,6 +869,15 @@
           <End Type="WITModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="WITModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
+        <EntityType Name="Wit_NavBar">
+          <Key>
+            <PropertyRef Name="NavBar_UID" />
+          </Key>
+          <Property Name="NavBar_UID" Type="Guid" Nullable="false" />
+          <Property Name="Menu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubMenu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1039,6 +1059,16 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Wit_NavBar">
+            <EntityTypeMapping TypeName="WITModel.Wit_NavBar">
+              <MappingFragment StoreEntitySet="Wit_NavBar">
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="SubMenu" ColumnName="SubMenu" />
+                <ScalarProperty Name="Menu" ColumnName="Menu" />
+                <ScalarProperty Name="NavBar_UID" ColumnName="NavBar_UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
