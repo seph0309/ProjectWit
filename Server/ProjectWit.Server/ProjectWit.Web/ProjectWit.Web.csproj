@@ -180,6 +180,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -216,8 +217,10 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_MyAccount.cshtml" />
+    <Content Include="Views\MyAccount\_MyAccount.cshtml" />
     <Content Include="Views\MyAccount\Index.cshtml" />
+    <Content Include="Views\MyAccount\_UserProfilePartial.cshtml" />
+    <Content Include="Views\MyAccount\_NavigationBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

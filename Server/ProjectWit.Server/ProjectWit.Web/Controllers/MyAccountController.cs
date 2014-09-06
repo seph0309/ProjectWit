@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ProjectWit.Web.Controllers
 {
+    [Authorize]
     public class MyAccountController : Controller
     {
         //
@@ -14,5 +15,6 @@ namespace ProjectWit.Web.Controllers
         {
             return View();
         }
+
 	}
 }

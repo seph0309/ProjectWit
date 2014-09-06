@@ -372,7 +372,7 @@ namespace ProjectWit.Web.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "MyAccount");
             }
         }
 
