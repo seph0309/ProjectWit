@@ -46,3 +46,4 @@ Server/ProjectWit.Server/ProjectWit.Web/debug
 Server/ProjectWit.Server/ProjectWit.Web/obj
 
 Server/ProjectWit.Server/ProjectWit.Server.v12.suo
+*.suo
