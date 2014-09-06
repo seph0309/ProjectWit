@@ -40,5 +40,9 @@ Icon
 *.dll
 *.cache
 *.suo
-Server/ProjectWit.Server/ProjectWit.Model/obj/Debug/TempPE/ProjectWit.Model.Designer.cs.dll
+Server/ProjectWit.Server/ProjectWit.Model/obj
+Server/ProjectWit.Server/ProjectWit.Model/debug
+Server/ProjectWit.Server/ProjectWit.Web/debug
+Server/ProjectWit.Server/ProjectWit.Web/obj
+
 Server/ProjectWit.Server/ProjectWit.Server.v12.suo

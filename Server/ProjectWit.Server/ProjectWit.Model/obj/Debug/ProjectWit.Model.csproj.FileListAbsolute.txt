@@ -26,3 +26,4 @@ D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Mo
 D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\bin\Debug\EntityFramework.SqlServer.xml
 D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\obj\Debug\ProjectWit.Model.dll
 D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\obj\Debug\ProjectWit.Model.pdb
+D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\obj\Debug\ProjectWit.Model.csprojResolveAssemblyReference.cache
