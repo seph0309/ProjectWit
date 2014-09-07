@@ -5,7 +5,9 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Account</title>
-    @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body>
     <div id="wrapper">
@@ -31,8 +33,6 @@
 
     </div>
         
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/MyAccountNavigation")
     @RenderSection("scripts", required: false)
 </body>
