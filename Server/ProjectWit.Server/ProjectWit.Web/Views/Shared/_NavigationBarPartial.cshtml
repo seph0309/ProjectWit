@@ -71,50 +71,65 @@
 <!-- /.sidebar-collapse -->
 
 <script>
+
+
+    function PopulateNavBar(Menus)
+    {
+        $.each(Menus, function (index, Menu) {
+            elementName = Menu.Menu;
+            liName = 'li' + elementName;
+            linkName = 'link' + elementName;
+            arrowName = 'arrowIcon' + elementName;
+            if ($('#li' + elementName).length == 0) {
+
+                $('#side-menu').append(
+                '<li id="' + liName + '">' +
+                '<a id="' + linkName + '"  href="' + Menu.URL + '">' +
+                '<i class="fa fa-dashboard fa-fw" ></i> ' + /*Insert class here for the icon*/
+                    Menu.Menu +
+                '</ul>'
+                );
+            }
+            else {  /*Adding of SubMenu*/
+                if ($('#' + arrowName).length == 0) {
+                    $("#" + linkName).append(
+                        '<span id="' + arrowName + '" class="fa arrow"></span>'
+                        );
+                }
+                $('#' + liName).append(
+                '<ul class="nav nav-second-level">' +
+                '<li>' +
+                '<a href="' + Menu.URL + '">' +
+                    Menu.SubMenu +
+                '</li>' +
+                '</ul>'
+                );
+            }
+        });
+    }
+
+    if (sessionStorage.getItem("MenuKey"))
+    {
+        var Menus = JSON.parse(sessionStorage.getItem("MenuKey"));
+        PopulateNavBar(Menus)
+    }
+    else
     $(document).ready(function () {
 
         
         $.ajax({
             type: "POST",
             async: false,
-            url: "GetNavBar",
+            url: "MyAccount/GetNavBar",
             data: "{}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (Menus) {
                 var elementName;
                 var liName, linkName, arrowName;
-                $.each(Menus, function (index, Menu) {
-                    elementName = Menu.Menu;
-                    liName = 'li' + elementName;
-                    linkName = 'link' + elementName;
-                    arrowName = 'arrowIcon' + elementName;
-                    if ($('#li' + elementName).length == 0) {
-
-                        $('#side-menu').append(
-                        '<li id="' + liName + '">' +
-                        '<a id="'+ linkName + '"  href="' + Menu.URL + '">' +
-                        '<i class="fa fa-dashboard fa-fw" ></i> ' + /*Insert class here for the icon*/
-                            Menu.Menu +
-                        '</ul>'
-                        );
-                    }
-                    else {  /*Adding of SubMenu*/
-                        if ($('#' + arrowName).length == 0){
-                            $("#" + linkName).append(
-                                '<span id="' + arrowName + '" class="fa arrow"></span>' 
-                                );
-                        }
-                        $('#' + liName).append(
-                        '<ul class="nav nav-second-level">' +
-                        '<li>' +
-                        '<a href="' + Menu.URL + '">' +
-                            Menu.SubMenu +
-                        '</li>' +
-                        '</ul>' 
-                        );
-                    }
-                });
+                
+                sessionStorage.setItem("MenuKey", JSON.stringify(Menus))
+                PopulateNavBar(Menus);
             },
             failure: function (msg) {
                 alert(msg.d);

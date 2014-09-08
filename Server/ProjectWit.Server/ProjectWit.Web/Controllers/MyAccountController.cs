@@ -23,7 +23,8 @@ namespace ProjectWit.Web.Controllers
             using (WITEntities db = new WITEntities(User.Identity.Name))
             {
                 var nav = (from col in db.Wit_NavBar
-                           select new { Menu = col.Menu, SubMenu = col.SubMenu, URL = col.URL }).ToList();
+                           select new { Menu = col.Menu, SubMenu = col.SubMenu, URL = col.URL }
+                           ).OrderBy(or => or.SubMenu).ToList();
                 return Json(nav, JsonRequestBehavior.AllowGet);
             }
         }

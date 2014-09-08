@@ -11,6 +11,7 @@ using ProjectWit.Model;
 
 namespace ProjectWit.Web.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private WITEntities db = new WITEntities();
