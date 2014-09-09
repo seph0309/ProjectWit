@@ -40,3 +40,12 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+/*Change bootstrap table hover color*/
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color:ActiveCaption;
+}
+
+.table {
+  border: 3px solid #dddddd;
+}

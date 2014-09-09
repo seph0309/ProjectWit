@@ -12,7 +12,7 @@
 <body>
     <div id="wrapper">
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-inverse  navbar-fixed-top" role="navigation">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
                     @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "MyAccount", htmlAttributes: new { @title = "Log-In", @class= "navbar-brand" })
@@ -21,18 +21,21 @@
                 @Html.Partial("_UserProfilePartial");
             </ul>
 
-            <div class="navbar-default sidebar" role="navigation">
+            <div class="navbar-collapse sidebar" role="navigation">
                 @Html.Partial("_NavigationBarPartial")
             </div>
         </nav>
 
         <div id="page-wrapper">
-             @RenderBody()
-            <!-- /.row -->
+            <div class="pageWrapperDiv">
+                @RenderBody()
+                <!-- /.row -->
+            </div>
         </div>
 
     </div>
         
+    @Html.Partial("_ClassOverridePartial")
     @Scripts.Render("~/bundles/MyAccountNavigation")
     @RenderSection("scripts", required: false)
 </body>
