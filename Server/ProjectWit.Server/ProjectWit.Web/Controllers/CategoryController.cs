@@ -50,7 +50,7 @@ namespace ProjectWit.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Category_UID,Company_UID,CategoryName,ModifiedDate,ModifiedBy")] Wit_Category wit_Category)
+        public async Task<ActionResult> Create([Bind(Include = "Category_UID,Company_UID,CategoryName")] Wit_Category wit_Category)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace ProjectWit.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Category_UID,Company_UID,CategoryName,ModifiedDate,ModifiedBy")] Wit_Category wit_Category)
+        public async Task<ActionResult> Edit([Bind(Include = "Category_UID,Company_UID,CategoryName")] Wit_Category wit_Category)
         {
             if (ModelState.IsValid)
             {

@@ -99,6 +99,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ProjectWit.Model\ProjectWit.Model.csproj">
+      <Project>{aef6e2cc-1395-4fb9-9c00-5d8e212b31c7}</Project>
+      <Name>ProjectWit.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProjectWit.Web\ProjectWit.Web.csproj">
       <Project>{26A9C2B1-A8E3-41E9-A7C6-DF3A903D1CB0}</Project>
       <Name>ProjectWit.Web</Name>
