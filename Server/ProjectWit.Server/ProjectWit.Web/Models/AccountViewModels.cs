@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ProjectWit.Model;
 
 namespace ProjectWit.Web.Models
 {
@@ -59,5 +60,7 @@ namespace ProjectWit.Web.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public Wit_User Wit_User { get; set; }
     }
 }

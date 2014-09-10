@@ -9,12 +9,14 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using ProjectWit.Web.Models;
+using ProjectWit.Model;
 
 namespace ProjectWit.Web.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        WITEntities db = new WITEntities();
         public AccountController()
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
         {
@@ -66,6 +68,7 @@ namespace ProjectWit.Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName");
             return View();
         }
 
@@ -91,6 +94,7 @@ namespace ProjectWit.Web.Controllers
                 }
             }
 
+            ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", model.Wit_User.Company_UID);
             // If we got this far, something failed, redisplay form
             return View(model);
         }
