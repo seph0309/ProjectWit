@@ -3,15 +3,16 @@
 */
 
 USE [WIT]
+DELETE FROM WIT_USER
 DELETE FROM WIT_CATEGORY
 DELETE FROM WIT_COMPANY
 DELETE FROM WIT_NAVBAR
 
 INSERT INTO WIT_NAVBAR (Menu,SubMenu,URL) 
-SELECT 'AdminMaintenance',REPLACE(name,'WIT_','') , REPLACE(name,'WIT_','') + '/Index' FROM SYS.tables WHERE name LIKE 'wit%'
+SELECT 'Admin Maintenance',REPLACE(name,'WIT_','') , REPLACE(name,'WIT_','') + '/Index' FROM SYS.tables WHERE name LIKE 'wit%'
 
 INSERT INTO WIT_NAVBAR (Menu,SubMenu,URL) 
-VALUES ('AdminMaintenance', '','Item/Index')
+VALUES ('Admin Maintenance', '','Item/Index')
 
 INSERT INTO Wit_Company(Company_UID,CompanyName,CompanyAddress)
 VALUES ('2D5BDCD6-7237-E411-90A1-EC9A7436DA60','WITTAPPS','MAKATI CITY')
