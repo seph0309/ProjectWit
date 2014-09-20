@@ -7,8 +7,9 @@ namespace ProjectWit.Model
 
     [MetadataType(typeof(Wit_UserMetaData))]
     public partial class Wit_User {
-        
+
         public string ConfirmPassword { get; set; }
+        public string UserName { get; set; }
     }
 
     public class Wit_UserMetaData
