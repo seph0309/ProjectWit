@@ -77,7 +77,7 @@ namespace ProjectWit.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model,string Company_UID)
         {
             if (ModelState.IsValid)
             {
@@ -85,6 +85,9 @@ namespace ProjectWit.Web.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    db.CreateUser(user.Id, model.Wit_User.FirstName, model.Wit_User.MiddleName,
+                        model.Wit_User.LastName, new Guid(Company_UID),
+                        model.Wit_User.EmailAddress, user.UserName);
                     await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }

@@ -76,10 +76,10 @@
     function PopulateNavBar(Menus)
     {
         $.each(Menus, function (index, Menu) {
-            elementName = Menu.Menu;
-            liName = 'li' + elementName;
-            linkName = 'link' + elementName;
-            arrowName = 'arrowIcon' + elementName;
+            elementName = Menu.Menu.replace(' ', '');
+            liName = 'li' + elementName.replace(' ', '');
+            linkName = 'link' + elementName.replace(' ', '');
+            arrowName = 'arrowIcon' + elementName.replace(' ', '');
             if ($('#li' + elementName).length == 0) {
 
                 $('#side-menu').append(
@@ -90,21 +90,21 @@
                 '</ul>'
                 );
             }
-            else {  /*Adding of SubMenu*/
-                if ($('#' + arrowName).length == 0) {
-                    $("#" + linkName).append(
-                        '<span id="' + arrowName + '" class="fa arrow"></span>'
-                        );
-                }
-                $('#' + liName).append(
-                '<ul class="nav nav-second-level">' +
-                '<li>' +
-                '<a href="' + Menu.URL + '">' +
-                    Menu.SubMenu +
-                '</li>' +
-                '</ul>'
-                );
+
+            /*Adding of SubMenu*/
+            if ($('#' + arrowName).length == 0) {
+                $("#" + linkName).append(
+                    '<span id="' + arrowName + '" class="fa arrow"></span>'
+                    );
             }
+            $('#' + liName).append(
+            '<ul class="nav nav-second-level">' +
+            '<li>' +
+            '<a href="' + Menu.URL + '">' +
+                Menu.SubMenu +
+            '</li>' +
+            '</ul>'
+            );
         });
     }
 
