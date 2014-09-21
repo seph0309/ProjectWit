@@ -19,7 +19,7 @@ namespace ProjectWit.Model
             this.AspNetUsers = new HashSet<AspNetUser>();
         }
     
-        public string Id { get; set; }
+        public System.Guid Id { get; set; }
         public string Name { get; set; }
     
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
