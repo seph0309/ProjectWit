@@ -67,6 +67,7 @@
       <DependentUpon>ProjectWit.tt</DependentUpon>
     </Compile>
     <Compile Include="DataExtensions\DBContext.cs" />
+    <Compile Include="DataExtensions\UsersViewModel.cs" />
     <Compile Include="DataExtensions\Wit_Category.cs" />
     <Compile Include="DataExtensions\Wit_Commons.cs" />
     <Compile Include="DataExtensions\Wit_Company.cs" />

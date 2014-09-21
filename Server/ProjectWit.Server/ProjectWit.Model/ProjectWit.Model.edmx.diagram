@@ -7,7 +7,7 @@
       <Diagram DiagramId="bf884e410fd44d5aab77d828519a4f56" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="WITModel.Wit_Category" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WITModel.Wit_Company" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="WITModel.Wit_Item" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WITModel.Wit_Item" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="WITModel.Wit_Order" Width="1.5" PointX="7.5" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WITModel.Wit_Role" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
         <EntityTypeShape EntityType="WITModel.Wit_Status" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />

@@ -182,9 +182,6 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
         <EntityType Name="UsersViewModel">
           <Key>
             <PropertyRef Name="User_UID" />
-            <PropertyRef Name="Company_UID" />
-            <PropertyRef Name="EmailAddress" />
-            <PropertyRef Name="CompanyName" />
           </Key>
           <Property Name="User_UID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="20" />
@@ -938,9 +935,6 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
         <EntityType Name="UsersViewModel">
           <Key>
             <PropertyRef Name="User_UID" />
-            <PropertyRef Name="Company_UID" />
-            <PropertyRef Name="EmailAddress" />
-            <PropertyRef Name="CompanyName" />
           </Key>
           <Property Name="User_UID" Type="Guid" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
