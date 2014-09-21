@@ -177,6 +177,28 @@
           <Property Name="Role_UID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="User_UID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UsersViewModel">
+          <Key>
+            <PropertyRef Name="User_UID" />
+            <PropertyRef Name="Company_UID" />
+            <PropertyRef Name="EmailAddress" />
+            <PropertyRef Name="CompanyName" />
+          </Key>
+          <Property Name="User_UID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="20" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="20" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Company_UID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="CompanyNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -392,6 +414,22 @@
           <EntitySet Name="Wit_Transaction" EntityType="Self.Wit_Transaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_User" EntityType="Self.Wit_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_UserRole" EntityType="Self.Wit_UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersViewModel" EntityType="Self.UsersViewModel" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UsersViewModel].[User_UID] AS [User_UID], 
+    [UsersViewModel].[FirstName] AS [FirstName], 
+    [UsersViewModel].[MiddleName] AS [MiddleName], 
+    [UsersViewModel].[LastName] AS [LastName], 
+    [UsersViewModel].[Company_UID] AS [Company_UID], 
+    [UsersViewModel].[EmailAddress] AS [EmailAddress], 
+    [UsersViewModel].[ModifiedDate] AS [ModifiedDate], 
+    [UsersViewModel].[ModifiedBy] AS [ModifiedBy], 
+    [UsersViewModel].[UserName] AS [UserName], 
+    [UsersViewModel].[CompanyName] AS [CompanyName], 
+    [UsersViewModel].[CompanyAddress] AS [CompanyAddress], 
+    [UsersViewModel].[CompanyNumber] AS [CompanyNumber]
+    FROM [dbo].[UsersViewModel] AS [UsersViewModel]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -802,6 +840,7 @@
             <Parameter Name="EmailAddress" Mode="In" Type="String" />
             <Parameter Name="ModifiedBy" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="UsersViewModels" EntityType="WITModel.UsersViewModel" />
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -895,6 +934,26 @@
           <Property Name="Menu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SubMenu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="URL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UsersViewModel">
+          <Key>
+            <PropertyRef Name="User_UID" />
+            <PropertyRef Name="Company_UID" />
+            <PropertyRef Name="EmailAddress" />
+            <PropertyRef Name="CompanyName" />
+          </Key>
+          <Property Name="User_UID" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Company_UID" Type="Guid" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1088,6 +1147,24 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="CreateUser" FunctionName="WITModel.Store.CreateUser" />
+          <EntitySetMapping Name="UsersViewModels">
+            <EntityTypeMapping TypeName="WITModel.UsersViewModel">
+              <MappingFragment StoreEntitySet="UsersViewModel">
+                <ScalarProperty Name="CompanyNumber" ColumnName="CompanyNumber" />
+                <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Company_UID" ColumnName="Company_UID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="User_UID" ColumnName="User_UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

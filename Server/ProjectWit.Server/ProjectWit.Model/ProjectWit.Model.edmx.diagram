@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bf884e410fd44d5aab77d828519a4f56" Name="Diagram1">
+      <Diagram DiagramId="bf884e410fd44d5aab77d828519a4f56" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="WITModel.Wit_Category" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WITModel.Wit_Company" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="WITModel.Wit_Item" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
@@ -35,6 +35,7 @@
         <AssociationConnector Association="WITModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="WITModel.AspNetUserRoles" />
         <EntityTypeShape EntityType="WITModel.Wit_NavBar" Width="1.5" PointX="10.375" PointY="3.75" />
+        <EntityTypeShape EntityType="WITModel.UsersViewModel" Width="1.5" PointX="12.375" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
