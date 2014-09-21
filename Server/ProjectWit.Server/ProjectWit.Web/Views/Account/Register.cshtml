@@ -51,6 +51,7 @@
             @Html.TextBoxFor(m => m.Wit_User.LastName, new { @class = "form-control" })
         </div>
     </div>
+    @Html.HiddenFor(model => model.Wit_User.Company_UID)
     <div class="form-group">
         @Html.LabelFor(m => m.Wit_User.Company_UID, "Company", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">

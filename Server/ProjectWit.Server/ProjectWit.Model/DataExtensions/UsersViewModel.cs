@@ -21,6 +21,7 @@ namespace ProjectWit.Model
     public class UsersViewModelMetaData
     {
         [Key]
+        [Display(Name = "User Name")]
         public System.Guid User_UID { get; set; }
         [Required]
         [Display(Name = "First Name")]
@@ -31,10 +32,11 @@ namespace ProjectWit.Model
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        [Required]
+        [Required(ErrorMessage="Company required")]
         [Display(Name = "Company")]
         public System.Guid Company_UID { get; set; }
         [Display(Name = "Email")]
+        [Required(ErrorMessage="Email required")]
         [EmailAddressAttribute]
         public string EmailAddress { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }

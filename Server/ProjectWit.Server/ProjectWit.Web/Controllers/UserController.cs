@@ -72,7 +72,7 @@ namespace ProjectWit.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName");
+            ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", usersViewModel.Company_UID);
             return View(usersViewModel);
         }
 
@@ -81,22 +81,14 @@ namespace ProjectWit.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "User_UID,FirstName,MiddleName,LastName,Company_UID,EmailAddress,ModifiedDate,ModifiedBy,UserName,CompanyName,CompanyAddress,CompanyNumber")] UsersViewModel usersViewModel)
+        public async Task<ActionResult> Edit([Bind(Include = "User_UID,FirstName,MiddleName,LastName,Company_UID,EmailAddress")] UsersViewModel usersViewModel)
         {
             if (ModelState.IsValid)
-            {//TODO:Adjust editing
-                Wit_User wit_user = new Wit_User();
-                //wit_user = db.Wit_User.FindAsync(usersViewModel.User_UID.ToString());
-                wit_user.Company_UID = usersViewModel.Company_UID;
-                wit_user.User_UID = usersViewModel.User_UID;
-                wit_user.FirstName = usersViewModel.FirstName;
-                wit_user.MiddleName = usersViewModel.MiddleName;
-                wit_user.LastName = usersViewModel.LastName;
-
-                //db.Entry(usersViewModel).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+            {
+                db.UpdateUser(usersViewModel);
                 return RedirectToAction("Index");
             }
+            ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", usersViewModel.Company_UID);
             return View(usersViewModel);
         }
 
@@ -107,13 +99,8 @@ namespace ProjectWit.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Wit_User wit_user = await db.Wit_User.FindAsync(id);
-            AspNetUser aspnetuser = await db.AspNetUsers.FindAsync(id.ToString());
-
-            db.Wit_User.Remove(wit_user);
-            db.AspNetUsers.Remove(aspnetuser);
-            await db.SaveChangesAsync();
-            
+           
+            db.DeleteUser(id);
             return RedirectToAction("Index");
         }
 
