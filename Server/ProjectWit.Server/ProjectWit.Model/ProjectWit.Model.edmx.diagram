@@ -27,7 +27,7 @@
         <AssociationConnector Association="WITModel.FK_Wit_Transaction_Wit_Table" ManuallyRouted="false" />
         <AssociationConnector Association="WITModel.FK_Wit_UserRole_Wit_User" ManuallyRouted="false" />
         <EntityTypeShape EntityType="WITModel.C__MigrationHistory" Width="1.5" PointX="10.375" PointY="0.75" />
-        <EntityTypeShape EntityType="WITModel.AspNetRole" Width="1.5" PointX="7.375" PointY="8.375" />
+        <EntityTypeShape EntityType="WITModel.AspNetRole" Width="1.5" PointX="7.375" PointY="10.125" />
         <EntityTypeShape EntityType="WITModel.AspNetUserClaim" Width="1.5" PointX="11.875" PointY="7" />
         <EntityTypeShape EntityType="WITModel.AspNetUserLogin" Width="1.5" PointX="11.875" PointY="9.75" />
         <EntityTypeShape EntityType="WITModel.AspNetUser" Width="1.5" PointX="9.625" PointY="8" />

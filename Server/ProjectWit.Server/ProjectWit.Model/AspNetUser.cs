@@ -21,7 +21,7 @@ namespace ProjectWit.Model
             this.AspNetRoles = new HashSet<AspNetRole>();
         }
     
-        public System.Guid Id { get; set; }
+        public string Id { get; set; }
         public string UserName { get; set; }
         public string PasswordHash { get; set; }
         public string SecurityStamp { get; set; }
