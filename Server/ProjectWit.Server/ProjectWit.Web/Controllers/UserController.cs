@@ -39,7 +39,7 @@ namespace ProjectWit.Web.Controllers
         // GET: User/Create
         public ActionResult Create()
         {
-            return View();
+            return Redirect("/Account/Register");
         }
 
         //// POST: User/Create
@@ -72,6 +72,7 @@ namespace ProjectWit.Web.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName");
             return View(usersViewModel);
         }
 
@@ -83,8 +84,16 @@ namespace ProjectWit.Web.Controllers
         public async Task<ActionResult> Edit([Bind(Include = "User_UID,FirstName,MiddleName,LastName,Company_UID,EmailAddress,ModifiedDate,ModifiedBy,UserName,CompanyName,CompanyAddress,CompanyNumber")] UsersViewModel usersViewModel)
         {
             if (ModelState.IsValid)
-            {
-                db.Entry(usersViewModel).State = EntityState.Modified;
+            {//TODO:Adjust editing
+                Wit_User wit_user = new Wit_User();
+                //wit_user = db.Wit_User.FindAsync(usersViewModel.User_UID.ToString());
+                wit_user.Company_UID = usersViewModel.Company_UID;
+                wit_user.User_UID = usersViewModel.User_UID;
+                wit_user.FirstName = usersViewModel.FirstName;
+                wit_user.MiddleName = usersViewModel.MiddleName;
+                wit_user.LastName = usersViewModel.LastName;
+
+                //db.Entry(usersViewModel).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -98,12 +107,14 @@ namespace ProjectWit.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UsersViewModel usersViewModel = await db.UsersViewModels.FindAsync(id);
-            if (usersViewModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usersViewModel);
+            Wit_User wit_user = await db.Wit_User.FindAsync(id);
+            AspNetUser aspnetuser = await db.AspNetUsers.FindAsync(id.ToString());
+
+            db.Wit_User.Remove(wit_user);
+            db.AspNetUsers.Remove(aspnetuser);
+            await db.SaveChangesAsync();
+            
+            return RedirectToAction("Index");
         }
 
         // POST: User/Delete/5
