@@ -79,6 +79,9 @@ namespace ProjectWit.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model,string Company_UID)
         {
+            model.Wit_User.Company_UID = new Guid(Company_UID);
+            ModelState.Clear();
+            TryValidateModel(model.Wit_User);
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.UserName };
@@ -86,7 +89,7 @@ namespace ProjectWit.Web.Controllers
                 if (result.Succeeded)
                 {
                     db.CreateUser(user.Id, model.Wit_User.FirstName, model.Wit_User.MiddleName,
-                        model.Wit_User.LastName, new Guid(Company_UID),
+                        model.Wit_User.LastName, model.Wit_User.Company_UID,
                         model.Wit_User.EmailAddress, user.UserName);
                     await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
