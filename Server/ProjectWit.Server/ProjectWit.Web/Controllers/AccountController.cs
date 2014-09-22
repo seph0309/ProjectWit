@@ -79,26 +79,15 @@ namespace ProjectWit.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model,string Company_UID)
         {
-            if (model.Wit_User.Wit_Company != null)
-            {
-                model.Wit_User.Wit_Company =  db.Wit_Company.Find(model.Wit_User.Wit_Company.Company_UID);
-                model.Wit_User.Company_UID = model.Wit_User.Wit_Company.Company_UID;
-            }
-            ModelState.Clear();
-            TryValidateModel(model.Wit_User);
-            TryValidateModel(model.Wit_User.Wit_Company);
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    Wit_User wit_user = new Wit_User();
-                    wit_user = model.Wit_User;
-                    wit_user.User_UID = new Guid(user.Id);
-                    db.Wit_User.Add(wit_user);
-                    await db.SaveChangesAsync();
-
+                    db.CreateUser(user.Id, model.Wit_User.FirstName, model.Wit_User.MiddleName,
+                        model.Wit_User.LastName, new Guid(Company_UID),
+                        model.Wit_User.EmailAddress, user.UserName);
                     await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }

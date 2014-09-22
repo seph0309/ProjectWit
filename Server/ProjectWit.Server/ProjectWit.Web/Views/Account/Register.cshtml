@@ -50,12 +50,13 @@
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Wit_User.LastName, new { @class = "form-control" })
         </div>
-    </div> 
+    </div>
+    @Html.HiddenFor(model => model.Wit_User.Company_UID)
     <div class="form-group">
-        @Html.LabelFor(m => m.Wit_User.Wit_Company.Company_UID, "Company", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(m => m.Wit_User.Company_UID, "Company", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Wit_User.Wit_Company.Company_UID, (IEnumerable<SelectListItem>)ViewBag.Company_UID, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Wit_User.Wit_Company.Company_UID, "", new { @class = "text-danger" })
+            @Html.DropDownList("Company_UID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Wit_User.Company_UID, "", new { @class = "text-danger" })
         </div>
     </div>
 
