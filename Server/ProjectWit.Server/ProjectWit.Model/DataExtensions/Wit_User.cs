@@ -24,7 +24,7 @@ namespace ProjectWit.Model
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        [Required]
+        
         [Display(Name = "Company")]
         public System.Guid Company_UID { get; set; }
         [Display(Name = "Email")]
