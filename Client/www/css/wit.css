@@ -1,3 +1,39 @@
+.wit-header {
+	/*background: #E4E4E4;*/
+	text-align: center;
+}
+
+.bar-header-secondary {
+	/*background: #323944;*/
+	background: orange;
+}
+
+.bar-header-secondary .title {
+	color: #ffffff;
+}
+
+.bar-header-secondary ~ .content {
+  padding-top: 98px;
+}
+
+.bar-header-ternary {
+	top: 88px;
+}
+
+.bar-header-ternary ~ .content {
+  padding-top: 130px;
+}
+
+.content {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.content > .table-view:first-child {
+  margin-top: 5px;
+}
+
+/* Grid Layout */
 .table-grid {
 	padding-left: 0;
 	margin-top: 0;

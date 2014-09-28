@@ -11,4 +11,4 @@ var SnapDrawerView = function() {
 
     this.initialize();
 
-}
+};

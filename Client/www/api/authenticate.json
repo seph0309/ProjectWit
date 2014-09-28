@@ -1,0 +1,9 @@
+{
+	"status": "OK",
+	"message": "Login successful",
+	"data": {
+		"id": 1,
+		"username": "user",
+		"role": "user"
+	}
+}

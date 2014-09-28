@@ -15,12 +15,43 @@
 </head>
 <body>
 	
-	<script id="home-tpl" type="text/template">
+	<script id="login-tpl" type="text/template">
+		<header class="bar bar-nav wit-header">
+	        <img class="logo" src="img/logo.png" height="44px"/>
+	    </header>
+	    <div class="bar bar-standard bar-header-secondary">
+	        <h1 class="title">Wit Menu Login</h1>
+	    </div>
+	    <div class="content">
+	    	<form>
+			  <input type="email" placeholder="Email" class="email">
+			  <input type="password" placeholder="Password" class="password">
+			  <button class="btn btn-primary btn-block submit">Submit</button>
+			</form>
+	    </div>
+	</script>
+	
+    <script id="snap-drawer-tpl" type="text/template">
+        <br><br><br>
+        <div class="snap-drawer snap-drawer-left">
+            <div>
+                <ul>
+                    <li><a href="a.html"><span class="icon icon-person" style="font-size:inherit"> Promo of the Day</span></a></li>
+                    <li><a href="b.html"><span class="icon icon-person" style=" font-size:inherit"> Read Reviews</span></a></li>
+                    <li><a href="c.html"><span class="icon icon-person" style=" font-size:inherit"> Follow-Up Order</span></a></li>
+                    <li><a href="d.html"><span class="icon icon-person" style=" font-size:inherit"> About Us</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <!--<div class="snap-drawer snap-drawer-right"><div>sASAS<br><br><br><br><br>sd</div></div>-->
+    </script>
+    
+    <script id="home-tpl" type="text/template">
 	    <header class="bar bar-nav">
 	        <button class="btn btn-link btn-nav pull-left">
 	            <span id="open-left" class="icon icon-list"><a href="#"></a></span>
 	        </button>
-	        <h1 class="title">Project Wit</h1>
+	        <h1 class="title">Menu Highlights</h1>
 	    </header>
 	
 	    <!-- Icons in standard bar fixed to the bottom of the screen -->
@@ -47,19 +78,36 @@
 	    <div class="snap-drawers"/></div>
     </script>
     
-    <script id="snap-drawer-tpl" type="text/template">
-        <br><br><br>
-        <div class="snap-drawer snap-drawer-left">
-            <div>
-                <ul>
-                    <li><a href="a.html"><span class="icon icon-person" style="font-size:inherit"> Promo of the Day</span></a></li>
-                    <li><a href="b.html"><span class="icon icon-person" style=" font-size:inherit"> Read Reviews</span></a></li>
-                    <li><a href="c.html"><span class="icon icon-person" style=" font-size:inherit"> Follow-Up Order</span></a></li>
-                    <li><a href="d.html"><span class="icon icon-person" style=" font-size:inherit"> About Us</span></a></li>
-                </ul>
-            </div>
-        </div>
-        <!--<div class="snap-drawer snap-drawer-right"><div>sASAS<br><br><br><br><br>sd</div></div>-->
+    <script id="table-select-tpl" type="text/template">
+	    <header class="bar bar-nav">
+	        <button class="btn btn-link btn-nav pull-left">
+	            <span id="open-left" class="icon icon-list"><a href="#"></a></span>
+	        </button>
+	        <h1 class="title">Table Select</h1>
+	    </header>
+	
+	    <!-- Icons in standard bar fixed to the bottom of the screen -->
+	    <div class="bar bar-standard bar-footer">
+	        <a class="icon icon-compose pull-left"></a>
+	        <a class="icon icon-gear pull-right"></a>
+	    </div>
+	
+	    <div class="content" id="content">
+			<ul class="table-view">
+		        {{#each this}}
+		        <li class="table-view-cell media">
+		            <a href="#highlights/{{ id }}">
+		                <img class="media-object pull-left" src="{{pic}}">
+		                <div class="media-body">
+		                    {{name}}
+		                    <p>{{description}}</p>
+		                </div>
+		            </a>
+		        </li>
+		        {{/each}}
+		    </ul>  
+	    </div>
+	    <div class="snap-drawers"/></div>
     </script>
     
     <script src="cordova.js"></script>
@@ -69,29 +117,14 @@
 	<script src="lib/jquery.js"></script>
 	<script src="lib/pageslider.js"></script>
 	<script src="lib/router.js"></script>
+	<script src="js/services/json/AuthService.js"></script>
 	<script src="js/services/json/HomeService.js"></script>
-	<script src="js/views/HomeView.js"></script>
+	<script src="js/services/json/TableSelectService.js"></script>
+	<script src="js/views/LoginView.js"></script>
 	<script src="js/views/SnapDrawerView.js"></script>
+	<script src="js/views/HomeView.js"></script>
+	<script src="js/views/TableSelectView.js"></script>
 	<script src="js/app.js"></script>
 	
-    <script type="text/javascript">
-        var snapper = new Snap({
-            element: document.getElementById('content')
-        });
-
-        /* Get reference to toggle button, the html element with ID "open-left" */
-        var myToggleButton = document.getElementById('open-left');
-
-        /* Add event listener to our toggle button */
-        myToggleButton.addEventListener('click', function () {
-
-            if (snapper.state().state == "left") {
-                snapper.close();
-            } else {
-                snapper.open('left');
-            }
-
-        });
-    </script>
 </body>
 </html>
