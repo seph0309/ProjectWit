@@ -47,18 +47,23 @@
     </script>
     
     <script id="home-tpl" type="text/template">
-	    <header class="bar bar-nav">
+		<header class="bar bar-nav wit-header">
 	        <button class="btn btn-link btn-nav pull-left">
 	            <span id="open-left" class="icon icon-list"><a href="#"></a></span>
 	        </button>
-	        <h1 class="title">Menu Highlights</h1>
+	        <img class="logo" src="img/logo.png" height="44px"/>
 	    </header>
+	    <div class="bar bar-standard bar-header-secondary">
+	        <h1 class="title">Featured Menu</h1>
+	    </div>
+
 	
-	    <!-- Icons in standard bar fixed to the bottom of the screen -->
+	    <!-- Icons in standard bar fixed to the bottom of the screen 
 	    <div class="bar bar-standard bar-footer">
 	        <a class="icon icon-compose pull-left"></a>
 	        <a class="icon icon-gear pull-right"></a>
 	    </div>
+	    -->
 	
 	    <div class="content" id="content">
 	        <ul class="table-grid">
@@ -79,24 +84,21 @@
     </script>
     
     <script id="table-select-tpl" type="text/template">
-	    <header class="bar bar-nav">
+		<header class="bar bar-nav wit-header">
 	        <button class="btn btn-link btn-nav pull-left">
 	            <span id="open-left" class="icon icon-list"><a href="#"></a></span>
 	        </button>
-	        <h1 class="title">Table Select</h1>
+	        <img class="logo" src="img/logo.png" height="44px"/>
 	    </header>
-	
-	    <!-- Icons in standard bar fixed to the bottom of the screen -->
-	    <div class="bar bar-standard bar-footer">
-	        <a class="icon icon-compose pull-left"></a>
-	        <a class="icon icon-gear pull-right"></a>
+	    <div class="bar bar-standard bar-header-secondary">
+	        <h1 class="title">Table Select</h1>
 	    </div>
 	
 	    <div class="content" id="content">
 			<ul class="table-view">
 		        {{#each this}}
 		        <li class="table-view-cell media">
-		            <a href="#highlights/{{ id }}">
+		            <a href="#home/{{ id }}/{{ name }}">
 		                <img class="media-object pull-left" src="{{pic}}">
 		                <div class="media-body">
 		                    {{name}}

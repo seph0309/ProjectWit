@@ -5,6 +5,9 @@ var app = {
 		this.email = window.localStorage.getItem("email");
 		this.password = window.localStorage.getItem("password");
 		this.role = window.localStorage.getItem("role");
+		this.passPhrase = window.localStorage.getItem("passPhrase");
+		this.currentTableId = window.localStorage.getItem("currentTableId");
+		this.currentTableName = window.localStorage.getItem("currentTableName");
 	},
 	
 	login: function(email, password, role) {
@@ -22,9 +25,17 @@ var app = {
 			window.localStorage.setItem("email", null);
 			window.localStorage.setItem("password", null);
 			window.localStorage.setItem("role", null);
+			window.localStorage.setItem("passPhrase", null);
+			window.localStorage.setItem("currentTableId", null);
+			window.localStorage.setItem("currentTableName", null);
 			
 			window.location = 'index.html';
 		}
+	},
+	
+	setCurrentTable: function(id, name) {
+		window.localStorage.setItem("currentTableId", id);
+		window.localStorage.setItem("currentTableName", name);
 	}
 	
 };
@@ -58,8 +69,9 @@ var app = {
 	        });
 	    });
 	    
-	    router.addRoute('home', function() {
+	    router.addRoute('home/:tableId/:tableName', function(tableId, tableName) {
 	        console.log('home');
+	        app.setCurrentTable(tableId, tableName);
 	        homeService.initialize().done(function () {
 		        slider.slidePage(new HomeView(homeService).render().$el);
 	        });

@@ -1,4 +1,4 @@
-var HomeView = function (service) {
+var HomeView = function (service, tableId, tableName) {
 
     var snapDrawerView;
     var highlights;
