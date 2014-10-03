@@ -39,9 +39,11 @@ namespace ProjectWit.Model
         [Required(ErrorMessage="Email required")]
         [EmailAddressAttribute]
         public string EmailAddress { get; set; }
+        [Display(Name = "Date Modified")]
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
         public string UserName { get; set; }
+        [Display(Name = "Company")]
         public string CompanyName { get; set; }
         public string CompanyAddress { get; set; }
         public string CompanyNumber { get; set; }

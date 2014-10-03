@@ -7,6 +7,9 @@
         <ul class="dropdown-menu dropdown-user">
             <li>
                 <a href="#"><i class="fa fa-user fa-fw"></i> Users Profile</a>
+                <li>
+                    @Html.ActionLink("User Profile", "Edit","User", new { id = Session["UserID"] }, new { @class = "fa fa-user fa-fw" })
+                </li>
             </li>
             <li>
                 <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>

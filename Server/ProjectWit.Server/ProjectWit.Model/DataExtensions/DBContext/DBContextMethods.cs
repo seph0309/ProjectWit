@@ -9,42 +9,8 @@
 
     public partial class WITEntities : DbContext
     {
-        string User_UID = string.Empty;
-        public WITEntities(string userID) 
-        {
-            User_UID = userID;
-        }
-        public override System.Threading.Tasks.Task<int> SaveChangesAsync()
-        {
-            SetProperties();
-            return base.SaveChangesAsync();
-        }
 
-        public override int SaveChanges()
-        {
-            SetProperties();
-            return base.SaveChanges();
-        }
 
-        private void SetProperties()
-        {
-            var modifiedEntries = this.ChangeTracker.Entries()
-                .Where(x => x.State == EntityState.Added || x.State == EntityState.Modified);
-
-            foreach (var dbEntityEntry in modifiedEntries)
-            {
-                if (dbEntityEntry.State == EntityState.Added)
-                {
-                    ////Remove GUID's value when saving
-                    //if (dbEntityEntry.Entity.GetType() == typeof(ProjectWit.Model.Wit_Category))
-                    //    dbEntityEntry.Property("Category_UID").CurrentValue = null;
-                }
-                    
-
-                dbEntityEntry.Property("ModifiedDate").CurrentValue = DateTime.Now;
-                dbEntityEntry.Property("ModifiedBy").CurrentValue = "Joseph";
-            }
-        }
 
         public List<Wit_User> GetUsers()
         {
@@ -71,7 +37,7 @@
                 wit_user.MiddleName = usersViewModel.MiddleName;
                 wit_user.LastName = usersViewModel.LastName;
                 wit_user.EmailAddress = usersViewModel.EmailAddress;
-                this.SaveChangesAsync();
+                this.SaveChanges();
                 return true;
             }
             else
@@ -86,6 +52,18 @@
             this.AspNetUsers.Remove(aspnetuser);
             this.SaveChangesAsync();
             return true;
+        }
+
+        /// <summary>
+        /// Gets if the user being edited is the same as the current user login
+        /// </summary>
+        /// <param name="UID"></param>
+        /// <returns></returns>
+        public bool IsUserMyProfile(string sessionID,string UID)
+        {
+            if (sessionID == UID)
+                return true;
+            else return false;
         }
     }
 }

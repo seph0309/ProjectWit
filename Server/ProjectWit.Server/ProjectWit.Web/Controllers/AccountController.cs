@@ -13,7 +13,6 @@ using ProjectWit.Model;
 
 namespace ProjectWit.Web.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         WITEntities db = new WITEntities();
@@ -92,7 +91,7 @@ namespace ProjectWit.Web.Controllers
                         model.Wit_User.LastName, model.Wit_User.Company_UID,
                         model.Wit_User.EmailAddress, user.UserName);
                     await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "MyAccount");
                 }
                 else
                 {
@@ -300,6 +299,7 @@ namespace ProjectWit.Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
+            Session.Clear();
             return RedirectToAction("Index", "Home");
         }
 
@@ -346,6 +346,7 @@ namespace ProjectWit.Web.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
+            Session["userID"] = user.Id;
         }
 
         private void AddErrors(IdentityResult result)

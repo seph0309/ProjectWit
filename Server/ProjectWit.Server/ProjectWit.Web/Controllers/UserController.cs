@@ -11,6 +11,7 @@ using ProjectWit.Model;
 
 namespace ProjectWit.Web.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private WITEntities db = new WITEntities();
@@ -73,6 +74,10 @@ namespace ProjectWit.Web.Controllers
                 return HttpNotFound();
             }
             ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", usersViewModel.Company_UID);
+           if(Convert.ToString(Session["UserID"]) == id.ToString())
+               ViewBag.Title = "User Profile";
+           else
+               ViewBag.Title = "Edit User";
             return View(usersViewModel);
         }
 
@@ -81,12 +86,15 @@ namespace ProjectWit.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "User_UID,FirstName,MiddleName,LastName,Company_UID,EmailAddress")] UsersViewModel usersViewModel)
+        public ActionResult Edit([Bind(Include = "User_UID,FirstName,MiddleName,LastName,Company_UID,EmailAddress")] UsersViewModel usersViewModel)
         {
             if (ModelState.IsValid)
             {
                 db.UpdateUser(usersViewModel);
-                return RedirectToAction("Index");
+                if (Convert.ToString(Session["UserID"]) == usersViewModel.User_UID.ToString().ToUpper())
+                    return RedirectToAction("Index","MyAccount",null);
+                else
+                    return RedirectToAction("Index");
             }
             ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", usersViewModel.Company_UID);
             return View(usersViewModel);

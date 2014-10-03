@@ -1,18 +1,15 @@
 ﻿@model ProjectWit.Model.UsersViewModel
 
 @{
-    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_MyAccountLayout.cshtml";
 }
-
-<h2>Edit</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>UsersViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.User_UID)
