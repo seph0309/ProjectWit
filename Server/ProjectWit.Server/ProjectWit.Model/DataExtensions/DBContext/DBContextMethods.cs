@@ -10,21 +10,6 @@
     public partial class WITEntities : DbContext
     {
 
-
-
-        public List<Wit_User> GetUsers()
-        {
-            string sql = string.Format("SELECT WIT_USER.User_UID, AspNetUsers.UserName AS UserName,WIT_USER.FirstName, WIT_USER.MiddleName,WIT_USER.LastName,");
-            sql += string.Format("Wit_Company.Company_UID,Wit_Company.CompanyName,Wit_User.EmailAddress, WIT_USER.ModifiedDate,WIT_USER.ModifiedBy FROM ");
-            sql += string.Format("WIT_USER INNER JOIN AspNetUsers ON Wit_User.User_UID= AspNetUsers.Id INNER JOIN Wit_Company ON Wit_User.Company_UID= Wit_Company.Company_UID ");
-            var wit_users = Wit_User.SqlQuery(sql).ToList();
-            var wit = this.UsersViewModels.Where(w => w.User_UID == new Guid("C200BBF2-A140-487B-992A-5741C9D03C20")).ToList();
-
-            UsersViewModel usersViewModel = this.UsersViewModels.Find(new Guid("C200BBF2-A140-487B-992A-5741C9D03C20"));
-
-            return wit_users;
-        }
-
         public bool UpdateUser(UsersViewModel usersViewModel)
         {
             Wit_User wit_user = new Wit_User();
@@ -54,16 +39,5 @@
             return true;
         }
 
-        /// <summary>
-        /// Gets if the user being edited is the same as the current user login
-        /// </summary>
-        /// <param name="UID"></param>
-        /// <returns></returns>
-        public bool IsUserMyProfile(string sessionID,string UID)
-        {
-            if (sessionID == UID)
-                return true;
-            else return false;
-        }
     }
 }
