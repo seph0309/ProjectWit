@@ -34,9 +34,19 @@
             UsersViewModel usersViewModel = new UsersViewModel();
             usersViewModel = this.UsersViewModels.Where(m => m.User_UID == userID).Single();
 
-            
+            List<AspNetRole> list = new List<AspNetRole>();
+            for (int i = 0; i < 10; i++)
+            {
+                list.Add(new AspNetRole
+                {
+                    Id = string.Format("ID{0}", i.ToString()),
+                    Name = string.Format("Name{0}", i.ToString())
+                });
+            }
+            usersViewModel.Role = list;
 
-            return usersViewModel;
+
+                return usersViewModel;
         }
 
         public bool DeleteUser(Guid? guid)
