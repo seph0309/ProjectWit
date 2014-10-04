@@ -20,7 +20,8 @@ namespace ProjectWit.Web.Controllers
             {
                 AccountController ac = new AccountController();
                 var user = await ac.UserManager.FindByNameAsync(User.Identity.Name);
-                Session["UserID"] = user.Id;
+                if (user != null)
+                    Session["UserID"] = user.Id;
             }
             return View();
         }
