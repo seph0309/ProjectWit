@@ -119,13 +119,6 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Wit_Role">
-          <Key>
-            <PropertyRef Name="Role_UID" />
-          </Key>
-          <Property Name="Role_UID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="RoleDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="Wit_Status">
           <Key>
             <PropertyRef Name="Status_UID" />
@@ -169,32 +162,27 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Wit_UserRole">
-          <Key>
-            <PropertyRef Name="UserRole_UID" />
-          </Key>
-          <Property Name="UserRole_UID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Role_UID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="User_UID" Type="uniqueidentifier" Nullable="false" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UsersViewModel">
           <Key>
             <PropertyRef Name="User_UID" />
+            
+            
+            
           </Key>
           <Property Name="User_UID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="20" />
           <Property Name="MiddleName" Type="nvarchar" MaxLength="20" />
           <Property Name="LastName" Type="nvarchar" MaxLength="20" />
-          <Property Name="Company_UID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Company_UID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CompanyAddress" Type="nvarchar" MaxLength="100" />
           <Property Name="CompanyNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyAddress" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -360,30 +348,6 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Wit_UserRole_Wit_Role">
-          <End Role="Wit_Role" Type="Self.Wit_Role" Multiplicity="1" />
-          <End Role="Wit_UserRole" Type="Self.Wit_UserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Wit_Role">
-              <PropertyRef Name="Role_UID" />
-            </Principal>
-            <Dependent Role="Wit_UserRole">
-              <PropertyRef Name="Role_UID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Wit_UserRole_Wit_User">
-          <End Role="Wit_User" Type="Self.Wit_User" Multiplicity="1" />
-          <End Role="Wit_UserRole" Type="Self.Wit_UserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Wit_User">
-              <PropertyRef Name="User_UID" />
-            </Principal>
-            <Dependent Role="Wit_UserRole">
-              <PropertyRef Name="User_UID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Function Name="CreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="nvarchar" Mode="In" />
           <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
@@ -405,26 +369,24 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <EntitySet Name="Wit_Item" EntityType="Self.Wit_Item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_NavBar" EntityType="Self.Wit_NavBar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Order" EntityType="Self.Wit_Order" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Wit_Role" EntityType="Self.Wit_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Status" EntityType="Self.Wit_Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Table" EntityType="Self.Wit_Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Transaction" EntityType="Self.Wit_Transaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_User" EntityType="Self.Wit_User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Wit_UserRole" EntityType="Self.Wit_UserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersViewModel" EntityType="Self.UsersViewModel" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [UsersViewModel].[User_UID] AS [User_UID], 
+    [UsersViewModel].[UserName] AS [UserName], 
     [UsersViewModel].[FirstName] AS [FirstName], 
     [UsersViewModel].[MiddleName] AS [MiddleName], 
     [UsersViewModel].[LastName] AS [LastName], 
-    [UsersViewModel].[Company_UID] AS [Company_UID], 
     [UsersViewModel].[EmailAddress] AS [EmailAddress], 
-    [UsersViewModel].[ModifiedDate] AS [ModifiedDate], 
     [UsersViewModel].[ModifiedBy] AS [ModifiedBy], 
-    [UsersViewModel].[UserName] AS [UserName], 
+    [UsersViewModel].[ModifiedDate] AS [ModifiedDate], 
+    [UsersViewModel].[Company_UID] AS [Company_UID], 
     [UsersViewModel].[CompanyName] AS [CompanyName], 
-    [UsersViewModel].[CompanyAddress] AS [CompanyAddress], 
-    [UsersViewModel].[CompanyNumber] AS [CompanyNumber]
+    [UsersViewModel].[CompanyNumber] AS [CompanyNumber], 
+    [UsersViewModel].[CompanyAddress] AS [CompanyAddress]
     FROM [dbo].[UsersViewModel] AS [UsersViewModel]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
@@ -478,14 +440,6 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <AssociationSet Name="FK_Wit_User_Wit_Company" Association="Self.FK_Wit_User_Wit_Company">
             <End Role="Wit_Company" EntitySet="Wit_Company" />
             <End Role="Wit_User" EntitySet="Wit_User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Wit_UserRole_Wit_Role" Association="Self.FK_Wit_UserRole_Wit_Role">
-            <End Role="Wit_Role" EntitySet="Wit_Role" />
-            <End Role="Wit_UserRole" EntitySet="Wit_UserRole" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Wit_UserRole_Wit_User" Association="Self.FK_Wit_UserRole_Wit_User">
-            <End Role="Wit_User" EntitySet="Wit_User" />
-            <End Role="Wit_UserRole" EntitySet="Wit_UserRole" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -553,14 +507,6 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <NavigationProperty Name="Wit_Item" Relationship="Self.FK_Wit_Order_Wit_Item" FromRole="Wit_Order" ToRole="Wit_Item" />
           <NavigationProperty Name="Wit_Transaction" Relationship="Self.FK_Wit_Order_Wit_Transaction" FromRole="Wit_Order" ToRole="Wit_Transaction" />
         </EntityType>
-        <EntityType Name="Wit_Role">
-          <Key>
-            <PropertyRef Name="Role_UID" />
-          </Key>
-          <Property Name="Role_UID" Type="Guid" Nullable="false" />
-          <Property Name="RoleDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Wit_UserRole" Relationship="Self.FK_Wit_UserRole_Wit_Role" FromRole="Wit_Role" ToRole="Wit_UserRole" />
-        </EntityType>
         <EntityType Name="Wit_Status">
           <Key>
             <PropertyRef Name="Status_UID" />
@@ -608,20 +554,9 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Property Name="Company_UID" Type="Guid" Nullable="false" />
           <Property Name="EmailAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Wit_Company" Relationship="Self.FK_Wit_User_Wit_Company" FromRole="Wit_User" ToRole="Wit_Company" />
-          <NavigationProperty Name="Wit_UserRole" Relationship="Self.FK_Wit_UserRole_Wit_User" FromRole="Wit_User" ToRole="Wit_UserRole" />
           <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Wit_UserRole">
-          <Key>
-            <PropertyRef Name="UserRole_UID" />
-          </Key>
-          <Property Name="UserRole_UID" Type="Guid" Nullable="false" />
-          <Property Name="Role_UID" Type="Guid" Nullable="false" />
-          <Property Name="User_UID" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Wit_Role" Relationship="Self.FK_Wit_UserRole_Wit_Role" FromRole="Wit_UserRole" ToRole="Wit_Role" />
-          <NavigationProperty Name="Wit_User" Relationship="Self.FK_Wit_UserRole_Wit_User" FromRole="Wit_UserRole" ToRole="Wit_User" />
         </EntityType>
         <Association Name="FK_Wit_Category_Wit_Company">
           <End Role="Wit_Company" Type="Self.Wit_Company" Multiplicity="1" />
@@ -707,18 +642,6 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Wit_UserRole_Wit_Role">
-          <End Role="Wit_Role" Type="Self.Wit_Role" Multiplicity="1" />
-          <End Role="Wit_UserRole" Type="Self.Wit_UserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Wit_Role">
-              <PropertyRef Name="Role_UID" />
-            </Principal>
-            <Dependent Role="Wit_UserRole">
-              <PropertyRef Name="Role_UID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Wit_Transaction_Wit_Status">
           <End Role="Wit_Status" Type="Self.Wit_Status" Multiplicity="1" />
           <End Role="Wit_Transaction" Type="Self.Wit_Transaction" Multiplicity="*" />
@@ -743,29 +666,15 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Wit_UserRole_Wit_User">
-          <End Role="Wit_User" Type="Self.Wit_User" Multiplicity="1" />
-          <End Role="Wit_UserRole" Type="Self.Wit_UserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Wit_User">
-              <PropertyRef Name="User_UID" />
-            </Principal>
-            <Dependent Role="Wit_UserRole">
-              <PropertyRef Name="User_UID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="WITEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Wit_Category" EntityType="Self.Wit_Category" />
           <EntitySet Name="Wit_Company" EntityType="Self.Wit_Company" />
           <EntitySet Name="Wit_Item" EntityType="Self.Wit_Item" />
           <EntitySet Name="Wit_Order" EntityType="Self.Wit_Order" />
-          <EntitySet Name="Wit_Role" EntityType="Self.Wit_Role" />
           <EntitySet Name="Wit_Status" EntityType="Self.Wit_Status" />
           <EntitySet Name="Wit_Table" EntityType="Self.Wit_Table" />
           <EntitySet Name="Wit_Transaction" EntityType="Self.Wit_Transaction" />
           <EntitySet Name="Wit_User" EntityType="Self.Wit_User" />
-          <EntitySet Name="Wit_UserRole" EntityType="Self.Wit_UserRole" />
           <AssociationSet Name="FK_Wit_Category_Wit_Company" Association="Self.FK_Wit_Category_Wit_Company">
             <End Role="Wit_Company" EntitySet="Wit_Company" />
             <End Role="Wit_Category" EntitySet="Wit_Category" />
@@ -794,10 +703,6 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
             <End Role="Wit_Transaction" EntitySet="Wit_Transaction" />
             <End Role="Wit_Order" EntitySet="Wit_Order" />
           </AssociationSet>
-          <AssociationSet Name="FK_Wit_UserRole_Wit_Role" Association="Self.FK_Wit_UserRole_Wit_Role">
-            <End Role="Wit_Role" EntitySet="Wit_Role" />
-            <End Role="Wit_UserRole" EntitySet="Wit_UserRole" />
-          </AssociationSet>
           <AssociationSet Name="FK_Wit_Transaction_Wit_Status" Association="Self.FK_Wit_Transaction_Wit_Status">
             <End Role="Wit_Status" EntitySet="Wit_Status" />
             <End Role="Wit_Transaction" EntitySet="Wit_Transaction" />
@@ -805,10 +710,6 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <AssociationSet Name="FK_Wit_Transaction_Wit_Table" Association="Self.FK_Wit_Transaction_Wit_Table">
             <End Role="Wit_Table" EntitySet="Wit_Table" />
             <End Role="Wit_Transaction" EntitySet="Wit_Transaction" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Wit_UserRole_Wit_User" Association="Self.FK_Wit_UserRole_Wit_User">
-            <End Role="Wit_User" EntitySet="Wit_User" />
-            <End Role="Wit_UserRole" EntitySet="Wit_UserRole" />
           </AssociationSet>
           <EntitySet Name="C__MigrationHistory" EntityType="WITModel.C__MigrationHistory" />
           <EntitySet Name="AspNetRoles" EntityType="WITModel.AspNetRole" />
@@ -1010,14 +911,6 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Wit_Role">
-            <EntityTypeMapping TypeName="WITModel.Wit_Role">
-              <MappingFragment StoreEntitySet="Wit_Role">
-                <ScalarProperty Name="Role_UID" ColumnName="Role_UID" />
-                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Wit_Status">
             <EntityTypeMapping TypeName="WITModel.Wit_Status">
               <MappingFragment StoreEntitySet="Wit_Status">
@@ -1062,15 +955,6 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Company_UID" ColumnName="Company_UID" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Wit_UserRole">
-            <EntityTypeMapping TypeName="WITModel.Wit_UserRole">
-              <MappingFragment StoreEntitySet="Wit_UserRole">
-                <ScalarProperty Name="UserRole_UID" ColumnName="UserRole_UID" />
-                <ScalarProperty Name="Role_UID" ColumnName="Role_UID" />
-                <ScalarProperty Name="User_UID" ColumnName="User_UID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

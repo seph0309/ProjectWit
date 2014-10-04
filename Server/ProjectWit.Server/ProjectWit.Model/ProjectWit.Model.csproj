@@ -114,9 +114,6 @@
     <Compile Include="Wit_Order.cs">
       <DependentUpon>ProjectWit.tt</DependentUpon>
     </Compile>
-    <Compile Include="Wit_Role.cs">
-      <DependentUpon>ProjectWit.tt</DependentUpon>
-    </Compile>
     <Compile Include="Wit_Status.cs">
       <DependentUpon>ProjectWit.tt</DependentUpon>
     </Compile>
@@ -127,9 +124,6 @@
       <DependentUpon>ProjectWit.tt</DependentUpon>
     </Compile>
     <Compile Include="Wit_User.cs">
-      <DependentUpon>ProjectWit.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Wit_UserRole.cs">
       <DependentUpon>ProjectWit.tt</DependentUpon>
     </Compile>
   </ItemGroup>

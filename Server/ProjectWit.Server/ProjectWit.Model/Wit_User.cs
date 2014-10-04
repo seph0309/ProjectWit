@@ -14,11 +14,6 @@ namespace ProjectWit.Model
     
     public partial class Wit_User
     {
-        public Wit_User()
-        {
-            this.Wit_UserRole = new HashSet<Wit_UserRole>();
-        }
-    
         public System.Guid User_UID { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
@@ -29,6 +24,5 @@ namespace ProjectWit.Model
         public string ModifiedBy { get; set; }
     
         public virtual Wit_Company Wit_Company { get; set; }
-        public virtual ICollection<Wit_UserRole> Wit_UserRole { get; set; }
     }
 }

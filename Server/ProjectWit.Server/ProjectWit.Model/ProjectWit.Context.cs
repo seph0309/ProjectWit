@@ -31,12 +31,10 @@ namespace ProjectWit.Model
         public virtual DbSet<Wit_Company> Wit_Company { get; set; }
         public virtual DbSet<Wit_Item> Wit_Item { get; set; }
         public virtual DbSet<Wit_Order> Wit_Order { get; set; }
-        public virtual DbSet<Wit_Role> Wit_Role { get; set; }
         public virtual DbSet<Wit_Status> Wit_Status { get; set; }
         public virtual DbSet<Wit_Table> Wit_Table { get; set; }
         public virtual DbSet<Wit_Transaction> Wit_Transaction { get; set; }
         public virtual DbSet<Wit_User> Wit_User { get; set; }
-        public virtual DbSet<Wit_UserRole> Wit_UserRole { get; set; }
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
