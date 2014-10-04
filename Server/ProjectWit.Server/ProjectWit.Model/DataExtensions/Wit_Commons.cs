@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ProjectWit.Model
 {
-    class Wit_Commons
+    public static class Wit_Commons
     {
+        public const string LoginPath = "/Account/Login";
     }
 }

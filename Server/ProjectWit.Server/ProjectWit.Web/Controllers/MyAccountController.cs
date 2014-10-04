@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ProjectWit.Model;
+using ProjectWit.Web.Models;
+using System.Threading.Tasks;
 
 namespace ProjectWit.Web.Controllers
 {
@@ -12,8 +14,14 @@ namespace ProjectWit.Web.Controllers
     {
         //
         // GET: /MyAccount/
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
+            if (Session["UserID"] == null)
+            {
+                AccountController ac = new AccountController();
+                var user = await ac.UserManager.FindByNameAsync(User.Identity.Name);
+                Session["UserID"] = user.Id;
+            }
             return View();
         }
 
@@ -27,6 +35,5 @@ namespace ProjectWit.Web.Controllers
                 return Json(nav, JsonRequestBehavior.AllowGet);
             }
         }
-
 	}
 }
