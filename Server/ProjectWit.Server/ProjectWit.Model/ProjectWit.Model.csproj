@@ -74,12 +74,10 @@
     <Compile Include="DataExtensions\Wit_Company.cs" />
     <Compile Include="DataExtensions\Wit_Item.cs" />
     <Compile Include="DataExtensions\Wit_Order.cs" />
-    <Compile Include="DataExtensions\Wit_Role.cs" />
     <Compile Include="DataExtensions\Wit_Status.cs" />
     <Compile Include="DataExtensions\Wit_Table.cs" />
     <Compile Include="DataExtensions\Wit_Transaction.cs" />
     <Compile Include="DataExtensions\Wit_User.cs" />
-    <Compile Include="DataExtensions\Wit_UserRole.cs" />
     <Compile Include="ProjectWit.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -16,6 +16,8 @@ namespace ProjectWit.Model
     [MetadataType(typeof(UsersViewModelMetaData))]
     public partial class UsersViewModel
     {
+        [Display(Name="Roles")]
+        public List<AspNetRole> Role;
     }
 
     public class UsersViewModelMetaData
