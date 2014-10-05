@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using ProjectWit.Model;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProjectWit.Web.Models
 {
@@ -23,6 +27,19 @@ namespace ProjectWit.Web.Models
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
+            UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this));
         }
+        public async Task<List<AspNetRole>> GetRoles(string UserID)
+        {
+           List<AspNetRole> aspNetRole = new List<AspNetRole>();
+            //Get Roles from user
+            var identityUserRole = await UserManager.FindByIdAsync(UserID);
+
+            foreach (IdentityUserRole role in identityUserRole.Roles)
+                aspNetRole.Add(new AspNetRole { Id = role.Role.Id.ToString(), Name = role.Role.Name.ToString() });
+
+            return aspNetRole;
+        }
+        public UserManager<ApplicationUser> UserManager { get; private set; }
     }
 }

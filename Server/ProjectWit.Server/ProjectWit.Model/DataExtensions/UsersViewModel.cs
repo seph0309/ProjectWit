@@ -12,12 +12,26 @@ namespace ProjectWit.Model
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
 
     [MetadataType(typeof(UsersViewModelMetaData))]
     public partial class UsersViewModel
-    {
+    {    
         [Display(Name="Roles")]
-        public List<AspNetRole> Role;
+        public List<AspNetRole> AspNetRole;
+
+        public bool IsSysAdmin
+        {
+            get
+            {
+                if (AspNetRole == null) return false;
+
+                var getSysAdmin = from col in AspNetRole 
+                                  where col.Name == "SYSADMIN"
+                                  select col;
+                return getSysAdmin.Count() > 0;
+            }
+        }
     }
 
     public class UsersViewModelMetaData

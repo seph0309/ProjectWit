@@ -8,6 +8,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProjectWit.Model;
+using Microsoft.AspNet.Identity.EntityFramework;
+using ProjectWit.Web.Models;
+using System.Collections;
 
 namespace ProjectWit.Web.Controllers
 {
@@ -15,6 +18,7 @@ namespace ProjectWit.Web.Controllers
     public class UserController : Controller
     {
         private WITEntities db = new WITEntities();
+        private ApplicationDbContext Userdb = new ApplicationDbContext();
 
         // GET: User
         public async Task<ActionResult> Index()
@@ -43,25 +47,7 @@ namespace ProjectWit.Web.Controllers
             return Redirect("/Account/Register");
         }
 
-        //// POST: User/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Create([Bind(Include = "User_UID,FirstName,MiddleName,LastName,Company_UID,EmailAddress,ModifiedDate,ModifiedBy,UserName,CompanyName,CompanyAddress,CompanyNumber")] UsersViewModel usersViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        usersViewModel.User_UID = Guid.NewGuid();
-        //        db.UsersViewModels.Add(usersViewModel);
-        //        await db.SaveChangesAsync();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(usersViewModel);
-        //}
-
-        // GET: User/Edit/5
+        // GET: User/Edit/0416
         public async Task<ActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -69,15 +55,19 @@ namespace ProjectWit.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             UsersViewModel usersViewModel = await db.UsersViewModels.FindAsync(id);
+            
             if (usersViewModel == null)
             {
                 return HttpNotFound();
             }
+            usersViewModel.AspNetRole =await Userdb.GetRoles(usersViewModel.User_UID.ToString());
+
+            ViewBag.AspNetRole = new SelectList((IEnumerable)usersViewModel.AspNetRole,"Id","Name");
             ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", usersViewModel.Company_UID);
            if(Convert.ToString(Session["UserID"]) == id.ToString())
                ViewBag.Title = "User Profile";
            else
-               ViewBag.Title = "Edit User";
+               ViewBag.Title = "Edit My Profile";
             return View(usersViewModel);
         }
 

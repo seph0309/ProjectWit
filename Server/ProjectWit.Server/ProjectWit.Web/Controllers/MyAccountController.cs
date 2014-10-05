@@ -18,8 +18,8 @@ namespace ProjectWit.Web.Controllers
         {
             if (Session["UserID"] == null)
             {
-                AccountController ac = new AccountController();
-                var user = await ac.UserManager.FindByNameAsync(User.Identity.Name);
+                ApplicationDbContext db = new ApplicationDbContext();
+                var user = await db.UserManager.FindByNameAsync(User.Identity.Name);
                 if (user != null)
                     Session["UserID"] = user.Id;
             }

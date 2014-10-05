@@ -59,7 +59,21 @@
                 @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <h3>
+            Roles
+        </h3>
+        <div class="form-group ">
+            @*Not working yet*@
+            @foreach (var role in @Model.AspNetRole)
+            {
+                <div class="col-md-10">
+                    @Html.Label(role.Name, new { @class = "col-md-2 control-label" })
+                    @Html.CheckBox(role.Name, true, new { @class = "checkbox-inline" })
+                    <hr />
+                </div>
+            }
+        </div>
+        Is User SYSADMIN?: @Model.IsSysAdmin
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />

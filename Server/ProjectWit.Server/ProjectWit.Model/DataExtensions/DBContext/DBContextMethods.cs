@@ -43,7 +43,7 @@
                     Name = string.Format("Name{0}", i.ToString())
                 });
             }
-            usersViewModel.Role = list;
+            usersViewModel.AspNetRole = list;
 
 
                 return usersViewModel;
