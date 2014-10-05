@@ -66,6 +66,7 @@
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>ProjectWit.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataExtensions\AspNetRole.cs" />
     <Compile Include="DataExtensions\DBContext\DBContextMethods.cs" />
     <Compile Include="DataExtensions\DBContext\DBContext.cs" />
     <Compile Include="DataExtensions\UsersViewModel.cs" />

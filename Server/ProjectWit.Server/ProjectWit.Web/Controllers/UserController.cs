@@ -48,22 +48,22 @@ namespace ProjectWit.Web.Controllers
         }
 
         // GET: User/Edit/0416
-        public async Task<ActionResult> Edit(Guid? id)
+        public ActionResult Edit(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UsersViewModel usersViewModel = await db.UsersViewModels.FindAsync(id);
+            UsersViewModel usersViewModel = db.UsersViewModels.Find(id);
             
             if (usersViewModel == null)
             {
                 return HttpNotFound();
             }
-            usersViewModel.AspNetRole =await Userdb.GetRoles(usersViewModel.User_UID.ToString());
+            usersViewModel.AspNetRole = ((List<AspNetRole>)Userdb.GetRoles(usersViewModel.User_UID.ToString()));
 
-            ViewBag.AspNetRole = new SelectList((IEnumerable)usersViewModel.AspNetRole,"Id","Name");
             ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", usersViewModel.Company_UID);
+            ViewBag.IsSysAdmin = usersViewModel.IsSysAdmin;
            if(Convert.ToString(Session["UserID"]) == id.ToString())
                ViewBag.Title = "User Profile";
            else
@@ -76,16 +76,19 @@ namespace ProjectWit.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "User_UID,FirstName,MiddleName,LastName,Company_UID,EmailAddress")] UsersViewModel usersViewModel)
+        public ActionResult Edit([Bind(Include = "User_UID,FirstName,MiddleName,LastName,Company_UID,EmailAddress,Id,Name,isSelected")] UsersViewModel usersViewModel, List<AspNetRole> aspnetRole)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 db.UpdateUser(usersViewModel);
+                Userdb.UpdateRole(usersViewModel.User_UID.ToString(), aspnetRole);
+
                 if (Convert.ToString(Session["UserID"]) == usersViewModel.User_UID.ToString().ToUpper())
                     return RedirectToAction("Index","MyAccount",null);
                 else
                     return RedirectToAction("Index");
             }
+            usersViewModel.AspNetRole = Userdb.GetRoles(usersViewModel.User_UID.ToString());
             ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", usersViewModel.Company_UID);
             return View(usersViewModel);
         }

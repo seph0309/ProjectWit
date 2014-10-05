@@ -2,7 +2,9 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using ProjectWit.Model;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace ProjectWit.Web.Models
 {
@@ -29,17 +31,58 @@ namespace ProjectWit.Web.Models
         {
             UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this));
         }
-        public async Task<List<AspNetRole>> GetRoles(string UserID)
+        public List<AspNetRole> GetRoles(string UserID)
         {
-           List<AspNetRole> aspNetRole = new List<AspNetRole>();
             //Get Roles from user
-            var identityUserRole = await UserManager.FindByIdAsync(UserID);
+            List<AspNetRole> aspNetRole = new List<AspNetRole>();
 
-            foreach (IdentityUserRole role in identityUserRole.Roles)
-                aspNetRole.Add(new AspNetRole { Id = role.Role.Id.ToString(), Name = role.Role.Name.ToString() });
-
+            //Get all Roles
+            using (WITEntities db= new WITEntities())
+            {
+                var allRoles = db.AspNetRoles.ToList();
+                var identityUserRole = db.AspNetRoles.Where(m => m.AspNetUsers.Any(user=>user.Id== UserID)).ToList();
+    
+                foreach(AspNetRole role in allRoles)
+                {
+                    var isSelected = from x in identityUserRole
+                                     where x.Id == role.Id
+                                     select x;
+                       
+                    aspNetRole.Add(new AspNetRole { 
+                        Id = role.Id.ToString(), 
+                        Name = role.Name.ToString(),
+                        IsSelected = (isSelected.Count() > 0)
+                    });
+                }
+            }
             return aspNetRole;
         }
+
+        public void UpdateRole(string userId, List<AspNetRole> aspNetRole)
+        {
+            //Clear all roles the add the ones that is selected
+            ClearAllRoles(userId);
+            foreach (AspNetRole role in aspNetRole)
+            {
+                if (role.IsSelected)
+                    UserManager.AddToRole(userId, role.Name);
+            }
+        }
+
+        public void ClearAllRoles(string userID)
+        {
+            using (WITEntities db = new WITEntities())
+            {
+                //Clear all roles in User
+                var aspNetRoles = db.AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == userID)).ToList();
+
+                foreach (AspNetRole role in aspNetRoles)
+                {
+                    UserManager.RemoveFromRole(userID, role.Name);
+                }
+            }
+        }
+
         public UserManager<ApplicationUser> UserManager { get; private set; }
     }
 }
