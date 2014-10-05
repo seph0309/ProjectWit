@@ -78,7 +78,7 @@ namespace ProjectWit.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "User_UID,FirstName,MiddleName,LastName,Company_UID,EmailAddress,Id,Name,isSelected")] UsersViewModel usersViewModel, List<AspNetRole> aspnetRole)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 db.UpdateUser(usersViewModel);
                 Userdb.UpdateRole(usersViewModel.User_UID.ToString(), aspnetRole);
