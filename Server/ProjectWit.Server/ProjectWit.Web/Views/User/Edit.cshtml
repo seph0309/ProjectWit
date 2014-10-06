@@ -63,26 +63,21 @@
             Roles
         </h3>
 
-        <div class="form-group ">
+        <div class="form-group">
             <table >
                 <tr class="table-striped">
                     @for (int index = 0; index < @Model.AspNetRole.Count; index++)
                     {
                         @Html.HiddenFor(x => x.AspNetRole[index].Id)
                         @Html.HiddenFor(x => x.AspNetRole[index].Name)
-                        @Html.HiddenFor(x => x.AspNetRole[index].IsSelected)
+                        @*@Html.HiddenFor(x => x.AspNetRole[index].IsSelected, new { id = "AspNetRole[" + index + "].IsSelected"})*@
 
-                        //id = "AspNetRole_1__IsSelected"
                         <td>
-                            @*@Html.LabelFor(x => x.AspNetRole[index].Name, new { @class = "col-md-2 control-label" })*@
-
-                            <label class="control-label col-md-2" for="checkboxRole_@index">
-                                @Model.AspNetRole[index].Name
-                            </label>
-                            @*@Html.Label(@Model.AspNetRole[index].Name, @Model.AspNetRole[index].Name, new { @class = "control-label col-md-2" })*@
+                            @Html.Label(@Model.AspNetRole[index].Name, new { @class = "control-label col-md-2", @for = "AspNetRole[" + index + "].IsSelected" })
                         </td>
                         <td>
-                            @Html.CheckBoxFor(x => x.AspNetRole[index].IsSelected, new { @class = "checkbox-inline", id="checkboxRole_" + index })
+                            @*TODO: Set disable if !ViewBag.IsSysAdmin*@
+                            @Html.CheckBoxFor(x => x.AspNetRole[index].IsSelected, new { @class = "checkbox-inline", id = "AspNetRole[" + index + "].IsSelected"})
                         </td>
                     }
                 </tr>

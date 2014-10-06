@@ -27,7 +27,7 @@ namespace ProjectWit.Model
                 if (AspNetRole == null) return false;
 
                 var getSysAdmin = from col in AspNetRole 
-                                  where col.Name == "SYSADMIN"
+                                  where col.Name == "SYSADMIN" && col.IsSelected
                                   select col;
                 return getSysAdmin.Count() > 0;
             }

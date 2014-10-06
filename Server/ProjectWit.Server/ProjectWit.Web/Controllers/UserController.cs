@@ -64,10 +64,12 @@ namespace ProjectWit.Web.Controllers
 
             ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", usersViewModel.Company_UID);
             ViewBag.IsSysAdmin = usersViewModel.IsSysAdmin;
-           if(Convert.ToString(Session["UserID"]) == id.ToString())
-               ViewBag.Title = "User Profile";
-           else
-               ViewBag.Title = "Edit My Profile";
+
+            if (Convert.ToString(Session["UserID"]) == id.ToString())
+                ViewBag.Title = "User Profile";
+            else
+                ViewBag.Title = "Edit My Profile";
+
             return View(usersViewModel);
         }
 
@@ -76,7 +78,7 @@ namespace ProjectWit.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "User_UID,FirstName,MiddleName,LastName,Company_UID,EmailAddress,Id,Name,isSelected")] UsersViewModel usersViewModel, List<AspNetRole> aspnetRole)
+        public ActionResult Edit([Bind(Include = "User_UID,FirstName,MiddleName,LastName,Company_UID,EmailAddress,Id,Name,IsSelected")] UsersViewModel usersViewModel, List<AspNetRole> aspnetRole)
         {
             if (ModelState.IsValid)
             {
