@@ -54,13 +54,12 @@ namespace ProjectWit.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UsersViewModel usersViewModel = db.UsersViewModels.Find(id);
+            UsersViewModel usersViewModel = db.GetUserDetail(id);
             
             if (usersViewModel == null)
             {
                 return HttpNotFound();
             }
-            usersViewModel.AspNetRole = ((List<AspNetRole>)Userdb.GetRoles(usersViewModel.User_UID.ToString()));
 
             ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", usersViewModel.Company_UID);
             ViewBag.IsSysAdmin = usersViewModel.IsSysAdmin;
@@ -82,15 +81,15 @@ namespace ProjectWit.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                usersViewModel.AspNetRole = aspnetRole;
                 db.UpdateUser(usersViewModel);
-                Userdb.UpdateRole(usersViewModel.User_UID.ToString(), aspnetRole);
+                Userdb.UpdateRole(usersViewModel.User_UID.ToString(), usersViewModel.AspNetRole);
 
                 if (Convert.ToString(Session["UserID"]) == usersViewModel.User_UID.ToString().ToUpper())
                     return RedirectToAction("Index","MyAccount",null);
                 else
                     return RedirectToAction("Index");
             }
-            usersViewModel.AspNetRole = Userdb.GetRoles(usersViewModel.User_UID.ToString());
             ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", usersViewModel.Company_UID);
             return View(usersViewModel);
         }

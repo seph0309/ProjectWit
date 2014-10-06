@@ -22,32 +22,73 @@
                 wit_user.MiddleName = usersViewModel.MiddleName;
                 wit_user.LastName = usersViewModel.LastName;
                 wit_user.EmailAddress = usersViewModel.EmailAddress;
+
+                //Comment out for the meantime because it throws an primary key error. Use IdentityModel.UpdateRole() for the moment
+                //UpdateRole(usersViewModel.User_UID.ToString(), usersViewModel.AspNetRole);
                 this.SaveChanges();
                 return true;
             }
             else
                 return false;
         }
+        private void UpdateRole(string userId, List<AspNetRole> aspNetRole)
+        {
+            AspNetUser _aspNetUser = this.AspNetUsers.Find(userId);
 
+            //Clear all roles in User
+            var aspNetRoles = this.AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == userId)).ToList();
+            var aspNetUseRoles = this.AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == userId)).ToList();
+
+             foreach(AspNetRole role in AspNetRoles)
+             {
+                 _aspNetUser.AspNetRoles.Remove(role);
+             }            
+             
+            foreach (AspNetRole role in aspNetRole)
+            {
+                if (role.IsSelected)
+                    _aspNetUser.AspNetRoles.Add(role);
+            }
+        }
+        
         public UsersViewModel GetUserDetail(Guid? userID)
         {
-            UsersViewModel usersViewModel = new UsersViewModel();
-            usersViewModel = this.UsersViewModels.Where(m => m.User_UID == userID).Single();
-
-            List<AspNetRole> list = new List<AspNetRole>();
-            for (int i = 0; i < 10; i++)
-            {
-                list.Add(new AspNetRole
-                {
-                    Id = string.Format("ID{0}", i.ToString()),
-                    Name = string.Format("Name{0}", i.ToString())
-                });
-            }
-            usersViewModel.AspNetRole = list;
-
-
-                return usersViewModel;
+            UsersViewModel usersViewModel = this.UsersViewModels.Find(userID);
+            
+            if (usersViewModel == null) return null;
+            
+            usersViewModel.AspNetRole = GetRoles(userID.ToString());
+            return usersViewModel;
         }
+
+        private List<AspNetRole> GetRoles(string UserID)
+        {
+            //Get Roles from user
+            List<AspNetRole> aspNetRole = new List<AspNetRole>();
+
+            //Get all Roles
+            using (WITEntities db = new WITEntities())
+            {
+                var allRoles = db.AspNetRoles.ToList();
+                var identityUserRole = db.AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == UserID)).ToList();
+
+                foreach (AspNetRole role in allRoles)
+                {
+                    var isSelected = from x in identityUserRole
+                                     where x.Id == role.Id
+                                     select x;
+
+                    aspNetRole.Add(new AspNetRole
+                    {
+                        Id = role.Id.ToString(),
+                        Name = role.Name.ToString(),
+                        IsSelected = (isSelected.Count() > 0)
+                    });
+                }
+            }
+            return aspNetRole;
+        }
+
 
         public bool DeleteUser(Guid? guid)
         {
