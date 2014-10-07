@@ -13,7 +13,7 @@ using ProjectWit.Web.Models;
 namespace ProjectWit.Web.Controllers
 {
     [WitAuthorize]
-    public class CategoryController : Controller
+    public class CategoryController : WitBaseController
     {
         private WITEntities db = new WITEntities();
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ProjectWit.Web.Controllers
 {
     [WitAuthorize]
-    public class MyAccountController : Controller
+    public class MyAccountController : WitBaseController
     {
         //
         // GET: /MyAccount/
@@ -21,7 +21,9 @@ namespace ProjectWit.Web.Controllers
                 ApplicationDbContext db = new ApplicationDbContext();
                 var user = await db.UserManager.FindByNameAsync(User.Identity.Name);
                 if (user != null)
-                    Session["UserID"] = user.Id;
+                {
+                    SetSessions(user);
+                }
             }
             return View();
         }

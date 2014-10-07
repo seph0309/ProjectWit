@@ -19,19 +19,6 @@ namespace ProjectWit.Model
     {    
         [Display(Name="Roles")]
         public List<AspNetRole> AspNetRole;
-
-        public bool IsSysAdmin
-        {
-            get
-            {
-                if (AspNetRole == null) return false;
-
-                var getSysAdmin = from col in AspNetRole 
-                                  where col.Name == "SYSADMIN" && col.IsSelected
-                                  select col;
-                return getSysAdmin.Count() > 0;
-            }
-        }
     }
 
     public class UsersViewModelMetaData

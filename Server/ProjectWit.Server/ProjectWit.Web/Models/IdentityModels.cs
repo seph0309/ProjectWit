@@ -24,6 +24,18 @@ namespace ProjectWit.Web.Models
                 base.Id = value.ToUpper();
             }
         }
+        public bool IsSysAdmin
+        {
+            get
+            {
+                if (this.Roles == null) return false;
+
+                var getSysAdmin = from col in this.Roles
+                                  where col.Role.Name == "SYSADMIN"
+                                  select col;
+                return getSysAdmin.Count() > 0;
+            }
+        }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -34,9 +46,8 @@ namespace ProjectWit.Web.Models
             UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this));
         }
 
-        public void UpdateUserLogin(IAuthenticationManager AuthenticationManager, string userId)
+        public void UpdateUserLogin(IAuthenticationManager AuthenticationManager, ApplicationUser user)
         {
-            var user = UserManager.FindById(userId);
             if (user != null)
             {
                 AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);

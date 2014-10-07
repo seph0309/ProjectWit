@@ -13,7 +13,7 @@ using ProjectWit.Model;
 
 namespace ProjectWit.Web.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : WitBaseController
     {
         WITEntities db = new WITEntities();
         public AccountController()
@@ -346,8 +346,9 @@ namespace ProjectWit.Web.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
-            Session["userID"] = user.Id;
+            SetSessions(user);
         }
+
 
         private void AddErrors(IdentityResult result)
         {

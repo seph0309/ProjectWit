@@ -17,7 +17,7 @@ using Microsoft.Owin.Security;
 namespace ProjectWit.Web.Controllers
 {
     [WitAuthorize]
-    public class UserController : Controller
+    public class UserController : WitBaseController
     {
         private WITEntities db = new WITEntities();
         private ApplicationDbContext Userdb = new ApplicationDbContext();
@@ -64,7 +64,7 @@ namespace ProjectWit.Web.Controllers
             }
 
             ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", usersViewModel.Company_UID);
-            ViewBag.IsSysAdmin = usersViewModel.IsSysAdmin;
+            ViewBag.IsSysAdmin = (bool)Session["IsSysAdmin"];
 
             if (Convert.ToString(Session["UserID"]) == id.ToString())
                 ViewBag.Title = "User Profile";
@@ -86,10 +86,11 @@ namespace ProjectWit.Web.Controllers
                 usersViewModel.AspNetRole = aspnetRole;
                 db.UpdateUser(usersViewModel);
 
-                Userdb.UpdateUserLogin(HttpContext.GetOwinContext().Authentication, usersViewModel.User_UID.ToString());
-
                 if (Convert.ToString(Session["UserID"]) == usersViewModel.User_UID.ToString().ToUpper())
-                    return RedirectToAction("Index","MyAccount",null);
+                {
+                    ReloadCurrentSession(usersViewModel.User_UID.ToString());
+                    return RedirectToAction("Index", "MyAccount", null);
+                }
                 else
                     return RedirectToAction("Index");
             }
