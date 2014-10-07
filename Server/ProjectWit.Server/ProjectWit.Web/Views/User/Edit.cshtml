@@ -64,8 +64,8 @@
         </h3>
 
         <div class="form-group">
-            <table >
-                <tr class="table-striped">
+            <table class="table-responsive">
+                <tr>
                     @for (int index = 0; index < @Model.AspNetRole.Count; index++)
                     {
                         @Html.HiddenFor(x => x.AspNetRole[index].Id)
@@ -77,7 +77,14 @@
                         </td>
                         <td>
                             @*TODO: Set disable if !ViewBag.IsSysAdmin*@
-                            @Html.CheckBoxFor(x => x.AspNetRole[index].IsSelected, new { @class = "checkbox-inline", id = "AspNetRole[" + index + "].IsSelected"})
+                            @if (ViewBag.IsSysAdmin)
+                            {
+                                @Html.CheckBoxFor(x => x.AspNetRole[index].IsSelected, new { @class = "checkbox-inline", id = "AspNetRole[" + index + "].IsSelected" })
+                            }
+                            else
+                            {
+                                @Html.CheckBoxFor(x => x.AspNetRole[index].IsSelected, new { @class = "checkbox-inline", id = "AspNetRole[" + index + "].IsSelected", disabled ="disabled" })
+                            }
                         </td>
                     }
                 </tr>
