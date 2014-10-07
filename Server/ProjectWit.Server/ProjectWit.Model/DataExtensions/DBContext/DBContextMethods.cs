@@ -32,12 +32,23 @@
         }
         private void UpdateRole(string userId, List<AspNetRole> aspNetRole)
         {
-            //TODO: Try not to use ExecuteSqlCommand here because we can't rollback changes
-            this.Database.ExecuteSqlCommand("DELETE FROM AspNetUserRoles WHERE UserId={0}",userId);
-            foreach (AspNetRole role in aspNetRole)
+            using (var tran = this.Database.BeginTransaction())
             {
-                if (role.IsSelected)
-                    this.Database.ExecuteSqlCommand("INSERT INTO AspNetUserRoles (RoleId,UserId) VALUES ({0},{1})", role.Id, userId);
+                try
+                {
+                    this.Database.ExecuteSqlCommand("DELETE FROM AspNetUserRoles WHERE UserId={0}", userId);
+                    foreach (AspNetRole role in aspNetRole)
+                    {
+                        if (role.IsSelected)
+                            this.Database.ExecuteSqlCommand("INSERT INTO AspNetUserRoles (RoleId,UserId) VALUES ({0},{1})", role.Id, userId);
+                    }
+                    tran.Commit();
+                }
+                catch(Exception ex)
+                {
+                    tran.Rollback();
+                    throw ex;
+                }
             }
         }
         
