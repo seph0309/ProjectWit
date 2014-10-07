@@ -52,7 +52,7 @@ VALUES (@UserID ,@UserName, 'AKhzjiA1IUNU/1oocYMYx48xteD7aBOCPr/pUiH4e1M/ikFMxDv
 INSERT INTO Wit_User(User_UID, FirstName,MiddleName,LastName,Company_UID,EmailAddress)
 VALUES (@UserID ,@UserName, 'S',@UserName,'2D5BDCD6-7237-E411-90A1-EC9A7436DA60','seph0309@gmail.com')
 
-IF @UserName='SYADMIN'
+IF @UserName='SYSADMIN'
 BEGIN
 	INSERT INTO AspNetUserRoles (UserId,RoleId)
 	SELECT @UserID ,Id FROM AspNetRoles
