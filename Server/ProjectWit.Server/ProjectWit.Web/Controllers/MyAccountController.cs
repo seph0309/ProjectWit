@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProjectWit.Web.Controllers
 {
-    [Authorize]
+    [WitAuthorize]
     public class MyAccountController : Controller
     {
         //

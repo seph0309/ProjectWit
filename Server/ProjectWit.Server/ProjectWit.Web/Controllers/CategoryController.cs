@@ -8,10 +8,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProjectWit.Model;
+using ProjectWit.Web.Models;
 
 namespace ProjectWit.Web.Controllers
 {
-    [Authorize]
+    [WitAuthorize]
     public class CategoryController : Controller
     {
         private WITEntities db = new WITEntities();

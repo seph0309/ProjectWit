@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
 using ProjectWit.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 
 
 namespace ProjectWit.Web.Models
@@ -30,6 +32,17 @@ namespace ProjectWit.Web.Models
             : base("DefaultConnection")
         {
             UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this));
+        }
+
+        public void UpdateUserLogin(IAuthenticationManager AuthenticationManager, string userId)
+        {
+            var user = UserManager.FindById(userId);
+            if (user != null)
+            {
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                var identity = UserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+                AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
+            }
         }
 
         public UserManager<ApplicationUser> UserManager { get; private set; }

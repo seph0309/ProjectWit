@@ -11,10 +11,12 @@ using ProjectWit.Model;
 using Microsoft.AspNet.Identity.EntityFramework;
 using ProjectWit.Web.Models;
 using System.Collections;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 
 namespace ProjectWit.Web.Controllers
 {
-    [Authorize]
+    [WitAuthorize]
     public class UserController : Controller
     {
         private WITEntities db = new WITEntities();
@@ -48,7 +50,6 @@ namespace ProjectWit.Web.Controllers
         }
 
         // GET: User/Edit/0416
-        [Authorize(Roles = "GUEST")]
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -85,8 +86,7 @@ namespace ProjectWit.Web.Controllers
                 usersViewModel.AspNetRole = aspnetRole;
                 db.UpdateUser(usersViewModel);
 
-                //TODO: Update Role here
-                //Userdb.UserManager.GetLoginsAsync(usersViewModel.User_UID.ToString());
+                Userdb.UpdateUserLogin(HttpContext.GetOwinContext().Authentication, usersViewModel.User_UID.ToString());
 
                 if (Convert.ToString(Session["UserID"]) == usersViewModel.User_UID.ToString().ToUpper())
                     return RedirectToAction("Index","MyAccount",null);
