@@ -48,6 +48,7 @@ namespace ProjectWit.Web.Controllers
         }
 
         // GET: User/Edit/0416
+        [Authorize(Roles = "GUEST")]
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -83,7 +84,9 @@ namespace ProjectWit.Web.Controllers
             {
                 usersViewModel.AspNetRole = aspnetRole;
                 db.UpdateUser(usersViewModel);
-                Userdb.UpdateRole(usersViewModel.User_UID.ToString(), usersViewModel.AspNetRole);
+
+                //TODO: Update Role here
+                //Userdb.UserManager.GetLoginsAsync(usersViewModel.User_UID.ToString());
 
                 if (Convert.ToString(Session["UserID"]) == usersViewModel.User_UID.ToString().ToUpper())
                     return RedirectToAction("Index","MyAccount",null);

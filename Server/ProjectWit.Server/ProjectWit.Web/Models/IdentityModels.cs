@@ -31,31 +31,6 @@ namespace ProjectWit.Web.Models
         {
             UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this));
         }
-        
-        public void UpdateRole(string userId, List<AspNetRole> aspNetRole)
-        {
-            //Clear all roles the add the ones that is selected
-            ClearAllRoles(userId);
-            foreach (AspNetRole role in aspNetRole)
-            {
-                if (role.IsSelected)
-                    UserManager.AddToRole(userId, role.Name);
-            }
-        }
-
-        private void ClearAllRoles(string userID)
-        {
-            using (WITEntities db = new WITEntities())
-            {
-                //Clear all roles in User
-                var aspNetRoles = db.AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == userID)).ToList();
-
-                foreach (AspNetRole role in aspNetRoles)
-                {
-                    UserManager.RemoveFromRole(userID, role.Name);
-                }
-            }
-        }
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
     }

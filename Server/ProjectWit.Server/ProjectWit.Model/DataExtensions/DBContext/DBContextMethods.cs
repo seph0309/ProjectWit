@@ -23,8 +23,7 @@
                 wit_user.LastName = usersViewModel.LastName;
                 wit_user.EmailAddress = usersViewModel.EmailAddress;
 
-                //Comment out for the meantime because it throws an primary key error. Use IdentityModel.UpdateRole() for the moment
-                //UpdateRole(usersViewModel.User_UID.ToString(), usersViewModel.AspNetRole);
+                UpdateRole(usersViewModel.User_UID.ToString().ToUpper(), usersViewModel.AspNetRole);
                 this.SaveChanges();
                 return true;
             }
@@ -33,21 +32,12 @@
         }
         private void UpdateRole(string userId, List<AspNetRole> aspNetRole)
         {
-            AspNetUser _aspNetUser = this.AspNetUsers.Find(userId);
-
-            //Clear all roles in User
-            var aspNetRoles = this.AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == userId)).ToList();
-            var aspNetUseRoles = this.AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == userId)).ToList();
-
-             foreach(AspNetRole role in AspNetRoles)
-             {
-                 _aspNetUser.AspNetRoles.Remove(role);
-             }            
-             
+            //TODO: Try not to use ExecuteSqlCommand here because we can't rollback changes
+            this.Database.ExecuteSqlCommand("DELETE FROM AspNetUserRoles WHERE UserId={0}",userId);
             foreach (AspNetRole role in aspNetRole)
             {
                 if (role.IsSelected)
-                    _aspNetUser.AspNetRoles.Add(role);
+                    this.Database.ExecuteSqlCommand("INSERT INTO AspNetUserRoles (RoleId,UserId) VALUES ({0},{1})", role.Id, userId);
             }
         }
         
