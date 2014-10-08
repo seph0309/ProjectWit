@@ -21,27 +21,36 @@ namespace ProjectWit.Web.Controllers
         //All common methods goes here
         ApplicationDbContext Userdb = new ApplicationDbContext();
 
-        /// <summary>
-        /// Updates the session key values
-        /// </summary>
-        /// <param name="user"></param>
+        
         public void SetSessions(ApplicationUser user)
         {
             Session["userID"] = user.Id;
             Session["IsSysAdmin"] = user.IsSysAdmin;
         }
 
-        /// <summary>
-        /// Reloads the current session key values
-        /// </summary>
-        /// <param name="userID"></param>
         public void ReloadCurrentSession(string userID)
         {
             var user = Userdb.UserManager.FindById(userID);
             Userdb.UpdateUserLogin(HttpContext.GetOwinContext().Authentication, user);
             SetSessions(user);
         }
-    
+
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        {
+            base.Initialize(requestContext);
+
+            if (Session["UserID"] == null)
+            {
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    var user = db.UserManager.FindByName(User.Identity.Name);
+                    if (user != null)
+                    {
+                        SetSessions(user);
+                    }
+                }
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

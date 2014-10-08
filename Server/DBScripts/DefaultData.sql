@@ -16,6 +16,12 @@ DELETE FROM Wit_NavBar
 INSERT INTO WIT_NAVBAR (Menu,SubMenu,URL) 
 SELECT 'Admin Maintenance',REPLACE(name,'WIT_','') , REPLACE(name,'WIT_','') + '/Index' FROM SYS.tables WHERE name LIKE 'wit%'
 
+INSERT INTO WIT_NAVBAR (Menu,SubMenu,URL) 
+VALUES('My Profile', 'User Profile','/Account/Manage')
+
+INSERT INTO WIT_NAVBAR (Menu,SubMenu,URL) 
+VALUES('My Profile', 'Change Password','/Account/Manage')
+
 INSERT INTO Wit_Company(Company_UID,CompanyName,CompanyAddress)
 VALUES ('2D5BDCD6-7237-E411-90A1-EC9A7436DA60','WITTAPPS','MAKATI CITY')
 

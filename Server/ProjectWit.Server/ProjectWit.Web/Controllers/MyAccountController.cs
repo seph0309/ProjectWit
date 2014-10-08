@@ -16,15 +16,6 @@ namespace ProjectWit.Web.Controllers
         // GET: /MyAccount/
         public async Task<ActionResult> Index()
         {
-            if (Session["UserID"] == null)
-            {
-                ApplicationDbContext db = new ApplicationDbContext();
-                var user = await db.UserManager.FindByNameAsync(User.Identity.Name);
-                if (user != null)
-                {
-                    SetSessions(user);
-                }
-            }
             return View();
         }
 
@@ -34,7 +25,7 @@ namespace ProjectWit.Web.Controllers
             {
                 var nav = (from col in db.Wit_NavBar
                            select new { Menu = col.Menu, SubMenu = col.SubMenu, URL = col.URL }
-                           ).OrderBy(or => or.SubMenu).ToList();
+                           ).OrderBy(or => or.Menu).ToList();
                 return Json(nav, JsonRequestBehavior.AllowGet);
             }
         }

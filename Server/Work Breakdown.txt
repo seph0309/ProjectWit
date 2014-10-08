@@ -1,18 +1,9 @@
-1. User Profile
-	Disable userID textbox
-	Unit test
-2. My Profile
-	Disable userID textbox
-	Rearrange logo and 'User Profile' css
-	Unit test
 3. Roles
 	Study aspnetroles
 	Add role to User
 	UI Design
 	Security per page
-	
+
+Add Unauthorized page
 	
 Others:
-
-Add rollback to stored procedures
-	[CreateUser]

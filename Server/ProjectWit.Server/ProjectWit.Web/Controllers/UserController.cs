@@ -54,7 +54,8 @@ namespace ProjectWit.Web.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                id = new Guid(Session["UserID"].ToString());
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             UsersViewModel usersViewModel = db.GetUserDetail(id);
             
