@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,6 +52,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -175,6 +179,9 @@
     <Compile Include="Models\WitAuthorize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="WitService.svc.cs">
+      <DependentUpon>WitService.svc</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -188,6 +195,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="WitService.svc" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -255,6 +263,10 @@
     <ProjectReference Include="..\ProjectWit.Model\ProjectWit.Model.csproj">
       <Project>{aef6e2cc-1395-4fb9-9c00-5d8e212b31c7}</Project>
       <Name>ProjectWit.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectWit.Service\ProjectWit.Service.csproj">
+      <Project>{5f49d4a1-2e7f-4b6a-adcc-6c6534173ffc}</Project>
+      <Name>ProjectWit.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
