@@ -4,6 +4,7 @@ namespace ProjectWit.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     [MetadataType(typeof(Wit_CompanyMetaData))]
     public partial class Wit_Company { }
@@ -11,6 +12,8 @@ namespace ProjectWit.Model
     public class Wit_CompanyMetaData
     {
     
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public System.Guid Company_UID { get; set; }
         [Required]
         [Display(Name = "Company")]
