@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ProjectWit.Web.Models
 {
-    public interface ISessionManagement
+    public interface ISessionManager
     {
         void SetSessions(ApplicationUser user);
         void ReloadCurrentSession(string userID);

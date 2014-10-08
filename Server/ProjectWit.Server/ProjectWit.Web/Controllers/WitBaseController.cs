@@ -16,7 +16,7 @@ using Microsoft.Owin.Security;
 
 namespace ProjectWit.Web.Controllers
 {
-    public abstract class WitBaseController : Controller, ISessionManagement
+    public abstract class WitBaseController : Controller, ISessionManager
     {
         //All common methods goes here
         ApplicationDbContext Userdb = new ApplicationDbContext();
