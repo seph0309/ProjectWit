@@ -14,9 +14,16 @@ namespace ProjectWit.Model
     
     public partial class Wit_NavBar
     {
+        public Wit_NavBar()
+        {
+            this.AspNetRoles = new HashSet<AspNetRole>();
+        }
+    
         public System.Guid NavBar_UID { get; set; }
         public string Menu { get; set; }
         public string SubMenu { get; set; }
         public string URL { get; set; }
+    
+        public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
 }

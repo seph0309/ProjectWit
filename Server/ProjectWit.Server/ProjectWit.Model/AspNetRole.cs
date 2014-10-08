@@ -17,11 +17,13 @@ namespace ProjectWit.Model
         public AspNetRole()
         {
             this.AspNetUsers = new HashSet<AspNetUser>();
+            this.Wit_NavBar = new HashSet<Wit_NavBar>();
         }
     
         public string Id { get; set; }
         public string Name { get; set; }
     
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        public virtual ICollection<Wit_NavBar> Wit_NavBar { get; set; }
     }
 }

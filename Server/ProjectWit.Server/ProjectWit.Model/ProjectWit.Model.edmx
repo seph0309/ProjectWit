@@ -94,7 +94,7 @@
           <Property Name="Likes" Type="int" />
           <Property Name="FoodMark" Type="nvarchar" MaxLength="20" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="DiscountedPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DiscountedPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="IsBestSeller" Type="bit" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
@@ -107,6 +107,14 @@
           <Property Name="Menu" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SubMenu" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="URL" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Wit_NavBarRoles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="NavBar_UID" />
+          </Key>
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="NavBar_UID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Wit_Order">
           <Key>
@@ -264,6 +272,30 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Wit_NavBarRoles_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="Wit_NavBarRoles" Type="Self.Wit_NavBarRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wit_NavBarRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wit_NavBarRoles_Wit_NavBar">
+          <End Role="Wit_NavBar" Type="Self.Wit_NavBar" Multiplicity="1" />
+          <End Role="Wit_NavBarRoles" Type="Self.Wit_NavBarRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wit_NavBar">
+              <PropertyRef Name="NavBar_UID" />
+            </Principal>
+            <Dependent Role="Wit_NavBarRoles">
+              <PropertyRef Name="NavBar_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Wit_Order_Wit_Item">
           <End Role="Wit_Item" Type="Self.Wit_Item" Multiplicity="1" />
           <End Role="Wit_Order" Type="Self.Wit_Order" Multiplicity="*" />
@@ -368,6 +400,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <EntitySet Name="Wit_Company" EntityType="Self.Wit_Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Item" EntityType="Self.Wit_Item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_NavBar" EntityType="Self.Wit_NavBar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wit_NavBarRoles" EntityType="Self.Wit_NavBarRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Order" EntityType="Self.Wit_Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Status" EntityType="Self.Wit_Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Table" EntityType="Self.Wit_Table" Schema="dbo" store:Type="Tables" />
@@ -412,6 +445,14 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <AssociationSet Name="FK_Wit_Item_Wit_Category" Association="Self.FK_Wit_Item_Wit_Category">
             <End Role="Wit_Category" EntitySet="Wit_Category" />
             <End Role="Wit_Item" EntitySet="Wit_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wit_NavBarRoles_AspNetRoles" Association="Self.FK_Wit_NavBarRoles_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="Wit_NavBarRoles" EntitySet="Wit_NavBarRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wit_NavBarRoles_Wit_NavBar" Association="Self.FK_Wit_NavBarRoles_Wit_NavBar">
+            <End Role="Wit_NavBar" EntitySet="Wit_NavBar" />
+            <End Role="Wit_NavBarRoles" EntitySet="Wit_NavBarRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_Wit_Order_Wit_Item" Association="Self.FK_Wit_Order_Wit_Item">
             <End Role="Wit_Item" EntitySet="Wit_Item" />
@@ -487,7 +528,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Property Name="Likes" Type="Int32" />
           <Property Name="FoodMark" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="DiscountedPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DiscountedPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="IsBestSeller" Type="Boolean" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -739,6 +780,10 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
             <Parameter Name="ModifiedBy" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="UsersViewModels" EntityType="WITModel.UsersViewModel" />
+          <AssociationSet Name="Wit_NavBarRoles" Association="WITModel.Wit_NavBarRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="Wit_NavBar" EntitySet="Wit_NavBar" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -757,6 +802,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUsers" Relationship="WITModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+          <NavigationProperty Name="Wit_NavBar" Relationship="WITModel.Wit_NavBarRoles" FromRole="AspNetRole" ToRole="Wit_NavBar" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
@@ -832,6 +878,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Property Name="Menu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SubMenu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="URL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRoles" Relationship="WITModel.Wit_NavBarRoles" FromRole="Wit_NavBar" ToRole="AspNetRole" />
         </EntityType>
         <EntityType Name="UsersViewModel">
           <Key>
@@ -850,6 +897,10 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Property Name="CompanyAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CompanyNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <Association Name="Wit_NavBarRoles">
+          <End Type="WITModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="WITModel.Wit_NavBar" Role="Wit_NavBar" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1043,6 +1094,14 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="Wit_NavBarRoles" TypeName="WITModel.Wit_NavBarRoles" StoreEntitySet="Wit_NavBarRoles">
+            <EndProperty Name="Wit_NavBar">
+              <ScalarProperty Name="NavBar_UID" ColumnName="NavBar_UID" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

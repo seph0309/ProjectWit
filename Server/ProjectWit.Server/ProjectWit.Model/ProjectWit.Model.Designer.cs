@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\JOSEPH FILES\GitHubProjects\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\ProjectWit.Model.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\JosephPataludDocuments\SourceCodes\GitHub\ProjectWit\Server\ProjectWit.Server\ProjectWit.Model\ProjectWit.Model.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -29,7 +29,7 @@ namespace ProjectWit.Model
         public Nullable<int> Likes { get; set; }
         public string FoodMark { get; set; }
         public decimal Amount { get; set; }
-        public Nullable<decimal> DiscountedPrice { get; set; }
+        public decimal DiscountedPrice { get; set; }
         public Nullable<bool> IsBestSeller { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }

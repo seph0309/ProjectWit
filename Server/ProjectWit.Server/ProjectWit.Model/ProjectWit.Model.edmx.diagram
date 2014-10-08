@@ -32,6 +32,7 @@
         <AssociationConnector Association="WITModel.AspNetUserRoles" />
         <EntityTypeShape EntityType="WITModel.Wit_NavBar" Width="1.5" PointX="10.375" PointY="3.75" />
         <EntityTypeShape EntityType="WITModel.UsersViewModel" Width="1.5" PointX="12.375" PointY="1" />
+        <AssociationConnector Association="WITModel.Wit_NavBarRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
