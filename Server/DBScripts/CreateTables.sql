@@ -1,6 +1,6 @@
 USE [WIT]
 GO
-/****** Object:  StoredProcedure [dbo].[CreateUser]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  StoredProcedure [dbo].[CreateUser]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -30,8 +30,9 @@ VALUES
 
 
 
+
 GO
-/****** Object:  StoredProcedure [dbo].[spCreateDummyData]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  StoredProcedure [dbo].[spCreateDummyData]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -63,8 +64,9 @@ BEGIN
 	SELECT @UserID ,Id FROM AspNetRoles WHERE Name=@UserName
 END
 
+
 GO
-/****** Object:  Table [dbo].[__MigrationHistory]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  Table [dbo].[__MigrationHistory]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -86,7 +88,7 @@ CREATE TABLE [dbo].[__MigrationHistory](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -101,7 +103,7 @@ CREATE TABLE [dbo].[AspNetRoles](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -118,7 +120,7 @@ CREATE TABLE [dbo].[AspNetUserClaims](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -136,7 +138,7 @@ CREATE TABLE [dbo].[AspNetUserLogins](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -152,7 +154,7 @@ CREATE TABLE [dbo].[AspNetUserRoles](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -170,7 +172,7 @@ CREATE TABLE [dbo].[AspNetUsers](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Category]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  Table [dbo].[Wit_Category]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -188,7 +190,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Company]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  Table [dbo].[Wit_Company]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -207,7 +209,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Item]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  Table [dbo].[Wit_Item]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -223,18 +225,18 @@ CREATE TABLE [dbo].[Wit_Item](
 	[Likes] [int] NULL,
 	[FoodMark] [nvarchar](20) NULL,
 	[Amount] [decimal](18, 2) NOT NULL,
-	[DiscountedPrice] [decimal](18, 2) NULL,
+	[DiscountedPrice] [decimal](18, 2) NOT NULL,
 	[IsBestSeller] [bit] NULL,
 	[ModifiedDate] [datetime] NULL,
 	[ModifiedBy] [nvarchar](50) NULL,
-PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK__Wit_Item__924FBB2C46F1ABD1] PRIMARY KEY CLUSTERED 
 (
 	[Item_UID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_NavBar]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  Table [dbo].[Wit_NavBar]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -251,7 +253,7 @@ CREATE TABLE [dbo].[Wit_NavBar](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Order]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  Table [dbo].[Wit_Order]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -270,7 +272,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Status]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  Table [dbo].[Wit_Status]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -286,7 +288,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Table]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  Table [dbo].[Wit_Table]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -305,7 +307,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_Transaction]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  Table [dbo].[Wit_Transaction]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -324,7 +326,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Wit_User]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  Table [dbo].[Wit_User]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -345,7 +347,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  View [dbo].[UsersViewModel]    Script Date: 10/7/2014 11:09:41 PM ******/
+/****** Object:  View [dbo].[UsersViewModel]    Script Date: 10/8/2014 7:40:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -361,6 +363,7 @@ INNER JOIN AspNetUsers ON Wit_User.User_UID= AspNetUsers.Id
 INNER JOIN Wit_Company ON Wit_User.Company_UID = Wit_Company.Company_UID
 
 
+
 GO
 ALTER TABLE [dbo].[Wit_Category] ADD  DEFAULT (newsequentialid()) FOR [Category_UID]
 GO
@@ -370,7 +373,11 @@ ALTER TABLE [dbo].[Wit_Company] ADD  DEFAULT (newsequentialid()) FOR [Company_UI
 GO
 ALTER TABLE [dbo].[Wit_Company] ADD  CONSTRAINT [DF_Wit_Company_ModifiedDate]  DEFAULT (getdate()) FOR [ModifiedDate]
 GO
-ALTER TABLE [dbo].[Wit_Item] ADD  DEFAULT (newsequentialid()) FOR [Item_UID]
+ALTER TABLE [dbo].[Wit_Item] ADD  CONSTRAINT [DF__Wit_Item__Item_U__31EC6D26]  DEFAULT (newsequentialid()) FOR [Item_UID]
+GO
+ALTER TABLE [dbo].[Wit_Item] ADD  CONSTRAINT [DF_Wit_Item_Amount]  DEFAULT ((0)) FOR [Amount]
+GO
+ALTER TABLE [dbo].[Wit_Item] ADD  CONSTRAINT [DF_Wit_Item_DiscountedPrice]  DEFAULT ((0)) FOR [DiscountedPrice]
 GO
 ALTER TABLE [dbo].[Wit_Item] ADD  CONSTRAINT [DF_Wit_Item_ModifiedDate]  DEFAULT (getdate()) FOR [ModifiedDate]
 GO
