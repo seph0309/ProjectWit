@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using ProjectWit.Model;
 
 namespace ProjectWit.Service
 {
@@ -18,7 +19,12 @@ namespace ProjectWit.Service
     {
 
         [OperationContract]
-        string GetData(int value);
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
+        Wit_Company GetData(int value);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
+        bool Login(string userName, string password);
         
         [OperationContract]
         void Test();

@@ -45,5 +45,13 @@ namespace ProjectWit.Model.Tests
             }
 
         }
+
+        [TestMethod]
+        public void TestPassword()
+        {
+            string password = "password";
+            string cryptoPassword = Wit_Cryptography.HashPassword(password);
+            bool ver = Wit_Cryptography.VerifyHashedPassword("AKhzjiA1IUNU/1oocYMYx48xteD7aBOCPr/pUiH4e1M/ikFMxDvr1vCxclpCDjsgwQ==", password);
+        }
     }
 }

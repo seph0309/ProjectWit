@@ -7,17 +7,14 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
+using ProjectWit.Model;
 
 namespace ProjectWit.Web
 {
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class WitService : IWitService
+    public class WitService : WitServiceBase, IWitService 
     {
-        // To use HTTP GET, add [WebGet] attribute. (Default ResponseFormat is WebMessageFormat.Json)
-        // To create an operation that returns XML,
-        //     add [WebGet(ResponseFormat=WebMessageFormat.Xml)],
-        //     and include the following line in the operation body:
-        //         WebOperationContext.Current.OutgoingResponse.ContentType = "text/xml";
+      
         public void DoWork()
         {
             // Add your operation implementation here
@@ -26,14 +23,20 @@ namespace ProjectWit.Web
 
         // Add more operations here and mark them with [OperationContract]
 
-        public string GetData(int value)
+        public Wit_Company GetData(int value)
         {
-            throw new NotImplementedException();
+            return new Wit_Company{ CompanyName = "SephSample", CompanyNumber = "12345" };
         }
 
         public void Test()
         {
             throw new NotImplementedException();
+        }
+
+
+        public bool Login(string userName, string password)
+        {
+            return LoginUser(userName, password);
         }
     }
 }
