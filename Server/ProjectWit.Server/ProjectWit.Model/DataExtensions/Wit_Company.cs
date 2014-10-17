@@ -12,8 +12,6 @@ namespace ProjectWit.Model
     public class Wit_CompanyMetaData
     {
     
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public System.Guid Company_UID { get; set; }
         [Required]
         [Display(Name = "Company")]

@@ -53,7 +53,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="nvarchar(max)" />
           <Property Name="PasswordHash" Type="nvarchar(max)" />
           <Property Name="SecurityStamp" Type="nvarchar(max)" />
@@ -63,7 +63,7 @@
           <Key>
             <PropertyRef Name="Category_UID" />
           </Key>
-          <Property Name="Category_UID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Category_UID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Company_UID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" />
@@ -73,7 +73,7 @@
           <Key>
             <PropertyRef Name="Company_UID" />
           </Key>
-          <Property Name="Company_UID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Company_UID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CompanyAddress" Type="nvarchar" MaxLength="100" />
           <Property Name="CompanyNumber" Type="nvarchar" MaxLength="50" />
@@ -84,7 +84,7 @@
           <Key>
             <PropertyRef Name="Item_UID" />
           </Key>
-          <Property Name="Item_UID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Item_UID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Category_UID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ItemName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ItemDescription" Type="nvarchar" MaxLength="50" />
@@ -103,7 +103,7 @@
           <Key>
             <PropertyRef Name="NavBar_UID" />
           </Key>
-          <Property Name="NavBar_UID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NavBar_UID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Menu" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SubMenu" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="URL" Type="nvarchar" MaxLength="500" />
@@ -120,7 +120,7 @@
           <Key>
             <PropertyRef Name="Order_UID" />
           </Key>
-          <Property Name="Order_UID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Order_UID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Transaction_UID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Item_UID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
@@ -131,7 +131,7 @@
           <Key>
             <PropertyRef Name="Status_UID" />
           </Key>
-          <Property Name="Status_UID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Status_UID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Company_UID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SatusDescription" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -139,7 +139,7 @@
           <Key>
             <PropertyRef Name="Table_UID" />
           </Key>
-          <Property Name="Table_UID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Table_UID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Company_UID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TableName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TableDescription" Type="nvarchar" MaxLength="50" />
@@ -150,7 +150,7 @@
           <Key>
             <PropertyRef Name="Transaction_UID" />
           </Key>
-          <Property Name="Transaction_UID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Transaction_UID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Table_UID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="NumberOfGuest" Type="int" />
           <Property Name="Status_UID" Type="uniqueidentifier" Nullable="false" />
@@ -161,7 +161,7 @@
           <Key>
             <PropertyRef Name="User_UID" />
           </Key>
-          <Property Name="User_UID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="User_UID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="20" />
           <Property Name="MiddleName" Type="nvarchar" MaxLength="20" />
           <Property Name="LastName" Type="nvarchar" MaxLength="20" />
@@ -491,7 +491,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Key>
             <PropertyRef Name="Category_UID" />
           </Key>
-          <Property Name="Category_UID" Type="Guid" Nullable="false" />
+          <Property Name="Category_UID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Company_UID" Type="Guid" Nullable="false" />
           <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
@@ -503,7 +503,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Key>
             <PropertyRef Name="Company_UID" />
           </Key>
-          <Property Name="Company_UID" Type="Guid" Nullable="false" />
+          <Property Name="Company_UID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CompanyAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CompanyNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -518,7 +518,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Key>
             <PropertyRef Name="Item_UID" />
           </Key>
-          <Property Name="Item_UID" Type="Guid" Nullable="false" />
+          <Property Name="Item_UID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Category_UID" Type="Guid" Nullable="false" />
           <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ItemDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -539,7 +539,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Key>
             <PropertyRef Name="Order_UID" />
           </Key>
-          <Property Name="Order_UID" Type="Guid" Nullable="false" />
+          <Property Name="Order_UID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Transaction_UID" Type="Guid" Nullable="false" />
           <Property Name="Item_UID" Type="Guid" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
@@ -552,7 +552,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Key>
             <PropertyRef Name="Status_UID" />
           </Key>
-          <Property Name="Status_UID" Type="Guid" Nullable="false" />
+          <Property Name="Status_UID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Company_UID" Type="Guid" Nullable="false" />
           <Property Name="SatusDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Wit_Company" Relationship="Self.FK_Wit_Status_Wit_Company" FromRole="Wit_Status" ToRole="Wit_Company" />
@@ -562,7 +562,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Key>
             <PropertyRef Name="Table_UID" />
           </Key>
-          <Property Name="Table_UID" Type="Guid" Nullable="false" />
+          <Property Name="Table_UID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Company_UID" Type="Guid" Nullable="false" />
           <Property Name="TableName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TableDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -575,7 +575,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Key>
             <PropertyRef Name="Transaction_UID" />
           </Key>
-          <Property Name="Transaction_UID" Type="Guid" Nullable="false" />
+          <Property Name="Transaction_UID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Table_UID" Type="Guid" Nullable="false" />
           <Property Name="NumberOfGuest" Type="Int32" />
           <Property Name="Status_UID" Type="Guid" Nullable="false" />
@@ -589,7 +589,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Key>
             <PropertyRef Name="User_UID" />
           </Key>
-          <Property Name="User_UID" Type="Guid" Nullable="false" />
+          <Property Name="User_UID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MiddleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Company_UID" Type="Guid" Nullable="false" />
@@ -829,7 +829,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -874,7 +874,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Key>
             <PropertyRef Name="NavBar_UID" />
           </Key>
-          <Property Name="NavBar_UID" Type="Guid" Nullable="false" />
+          <Property Name="NavBar_UID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Menu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SubMenu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="URL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />

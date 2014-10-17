@@ -34,7 +34,7 @@ namespace ProjectWit.Model.Tests
                 {
                     for (int x = 0; x < 20; x++)
                     {
-                        db.Wit_Company.Add(new Wit_Company {Company_UID=new Guid(DateTime.Now.ToString()), CompanyAddress = "san pedro", CompanyName = "Sample" });
+                        db.Wit_Company.Add(new Wit_Company {CompanyAddress = "san pedro", CompanyName = "Sample" });
                     }
                     db.SaveChanges();
                 }
