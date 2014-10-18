@@ -136,6 +136,7 @@
           <Property Name="Browser" Type="nvarchar" MaxLength="50" />
           <Property Name="DeviceType" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Wit_Status">
           <Key>
@@ -944,6 +945,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Property Name="DeviceType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Wit_User" Relationship="WITModel.FK_Wit_Session_Wit_User" FromRole="Wit_Session" ToRole="Wit_User" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Wit_Session_Wit_User">
           <End Type="WITModel.Wit_User" Role="Wit_User" Multiplicity="1" />
@@ -1161,6 +1163,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <EntitySetMapping Name="Wit_Session">
             <EntityTypeMapping TypeName="WITModel.Wit_Session">
               <MappingFragment StoreEntitySet="Wit_Session">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
                 <ScalarProperty Name="Browser" ColumnName="Browser" />

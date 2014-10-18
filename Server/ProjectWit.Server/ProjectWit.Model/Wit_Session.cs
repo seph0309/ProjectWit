@@ -19,6 +19,7 @@ namespace ProjectWit.Model
         public string Browser { get; set; }
         public string DeviceType { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public string ModifiedBy { get; set; }
     
         public virtual Wit_User Wit_User { get; set; }
     }
