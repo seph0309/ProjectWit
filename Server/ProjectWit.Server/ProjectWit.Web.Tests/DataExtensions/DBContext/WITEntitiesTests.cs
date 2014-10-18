@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjectWit.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ProjectWit.Web;
 namespace ProjectWit.Model.Tests
 {
     [TestClass()]
@@ -30,14 +31,10 @@ namespace ProjectWit.Model.Tests
         {
             try
             {
-                using (WITEntities db = new WITEntities())
-                {
-                    for (int x = 0; x < 20; x++)
-                    {
-                        db.Wit_Company.Add(new Wit_Company {CompanyAddress = "san pedro", CompanyName = "Sample" });
-                    }
-                    db.SaveChanges();
-                }
+
+                WitService wt = new WitService();
+                wt.Login("SYSADMIN", "password");
+
             }
             catch(Exception ex)
             {
@@ -53,5 +50,6 @@ namespace ProjectWit.Model.Tests
             string cryptoPassword = Wit_Cryptography.HashPassword(password);
             bool ver = Wit_Cryptography.VerifyHashedPassword("AKhzjiA1IUNU/1oocYMYx48xteD7aBOCPr/pUiH4e1M/ikFMxDvr1vCxclpCDjsgwQ==", password);
         }
+
     }
 }
