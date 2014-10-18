@@ -127,6 +127,16 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Wit_Session">
+          <Key>
+            <PropertyRef Name="Session_UID" />
+          </Key>
+          <Property Name="Session_UID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="User_UID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Browser" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeviceType" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Wit_Status">
           <Key>
             <PropertyRef Name="Status_UID" />
@@ -320,6 +330,18 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Wit_Session_Wit_User">
+          <End Role="Wit_User" Type="Self.Wit_User" Multiplicity="1" />
+          <End Role="Wit_Session" Type="Self.Wit_Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wit_User">
+              <PropertyRef Name="User_UID" />
+            </Principal>
+            <Dependent Role="Wit_Session">
+              <PropertyRef Name="User_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Wit_Status_Wit_Company">
           <End Role="Wit_Company" Type="Self.Wit_Company" Multiplicity="1" />
           <End Role="Wit_Status" Type="Self.Wit_Status" Multiplicity="*" />
@@ -402,6 +424,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <EntitySet Name="Wit_NavBar" EntityType="Self.Wit_NavBar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_NavBarRoles" EntityType="Self.Wit_NavBarRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Order" EntityType="Self.Wit_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wit_Session" EntityType="Self.Wit_Session" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Status" EntityType="Self.Wit_Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Table" EntityType="Self.Wit_Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wit_Transaction" EntityType="Self.Wit_Transaction" Schema="dbo" store:Type="Tables" />
@@ -461,6 +484,10 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <AssociationSet Name="FK_Wit_Order_Wit_Transaction" Association="Self.FK_Wit_Order_Wit_Transaction">
             <End Role="Wit_Transaction" EntitySet="Wit_Transaction" />
             <End Role="Wit_Order" EntitySet="Wit_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wit_Session_Wit_User" Association="Self.FK_Wit_Session_Wit_User">
+            <End Role="Wit_User" EntitySet="Wit_User" />
+            <End Role="Wit_Session" EntitySet="Wit_Session" />
           </AssociationSet>
           <AssociationSet Name="FK_Wit_Status_Wit_Company" Association="Self.FK_Wit_Status_Wit_Company">
             <End Role="Wit_Company" EntitySet="Wit_Company" />
@@ -598,6 +625,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Wit_Session" Relationship="WITModel.FK_Wit_Session_Wit_User" FromRole="Wit_User" ToRole="Wit_Session" />
         </EntityType>
         <Association Name="FK_Wit_Category_Wit_Company">
           <End Role="Wit_Company" Type="Self.Wit_Company" Multiplicity="1" />
@@ -784,6 +812,11 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="Wit_NavBar" EntitySet="Wit_NavBar" />
           </AssociationSet>
+          <EntitySet Name="Wit_Session" EntityType="WITModel.Wit_Session" />
+          <AssociationSet Name="FK_Wit_Session_Wit_User" Association="WITModel.FK_Wit_Session_Wit_User">
+            <End Role="Wit_User" EntitySet="Wit_User" />
+            <End Role="Wit_Session" EntitySet="Wit_Session" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -900,6 +933,29 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
         <Association Name="Wit_NavBarRoles">
           <End Type="WITModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="WITModel.Wit_NavBar" Role="Wit_NavBar" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Wit_Session">
+          <Key>
+            <PropertyRef Name="Session_UID" />
+          </Key>
+          <Property Name="Session_UID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_UID" Type="Guid" Nullable="false" />
+          <Property Name="Browser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Wit_User" Relationship="WITModel.FK_Wit_Session_Wit_User" FromRole="Wit_Session" ToRole="Wit_User" />
+        </EntityType>
+        <Association Name="FK_Wit_Session_Wit_User">
+          <End Type="WITModel.Wit_User" Role="Wit_User" Multiplicity="1" />
+          <End Type="WITModel.Wit_Session" Role="Wit_Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wit_User">
+              <PropertyRef Name="User_UID" />
+            </Principal>
+            <Dependent Role="Wit_Session">
+              <PropertyRef Name="User_UID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1102,6 +1158,17 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Wit_Session">
+            <EntityTypeMapping TypeName="WITModel.Wit_Session">
+              <MappingFragment StoreEntitySet="Wit_Session">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="Browser" ColumnName="Browser" />
+                <ScalarProperty Name="User_UID" ColumnName="User_UID" />
+                <ScalarProperty Name="Session_UID" ColumnName="Session_UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -42,6 +42,7 @@ namespace ProjectWit.Model
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Wit_NavBar> Wit_NavBar { get; set; }
         public virtual DbSet<UsersViewModel> UsersViewModels { get; set; }
+        public virtual DbSet<Wit_Session> Wit_Session { get; set; }
     
         public virtual int CreateUser(string id, string firstName, string middleName, string lastName, Nullable<System.Guid> company_UID, string emailAddress, string modifiedBy)
         {

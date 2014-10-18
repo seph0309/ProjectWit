@@ -114,6 +114,9 @@
     <Compile Include="Wit_Order.cs">
       <DependentUpon>ProjectWit.tt</DependentUpon>
     </Compile>
+    <Compile Include="Wit_Session.cs">
+      <DependentUpon>ProjectWit.tt</DependentUpon>
+    </Compile>
     <Compile Include="Wit_Status.cs">
       <DependentUpon>ProjectWit.tt</DependentUpon>
     </Compile>
