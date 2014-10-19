@@ -8,6 +8,7 @@ using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
 using ProjectWit.Model;
+using ProjectWit.Service.ServiceArguments;
 
 namespace ProjectWit.Web
 {
@@ -44,14 +45,11 @@ namespace ProjectWit.Web
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public Guid Login(string userName, string password,string browser, string deviceType)
+        public LoginServiceArgs Login(string userName, string password, string browser, string deviceType)
         {
-            if (AuthenticateUser(userName, password, browser, deviceType))
-            {
-                return SessionID;
-            }
-            else
-                return SessionID;
+            LoginServiceArgs serviceArgs = new LoginServiceArgs(userName, password, browser, deviceType);
+
+            return serviceArgs; 
         }
     }
 }

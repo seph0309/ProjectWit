@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using ProjectWit.Model;
+using ProjectWit.Service.ServiceArguments;
 
 namespace ProjectWit.Service
 {
@@ -28,7 +29,7 @@ namespace ProjectWit.Service
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        Guid Login(string userName, string password, string browser, string deviceType);
+        LoginServiceArgs Login(string userName, string password, string browser, string deviceType);
  
     }
 

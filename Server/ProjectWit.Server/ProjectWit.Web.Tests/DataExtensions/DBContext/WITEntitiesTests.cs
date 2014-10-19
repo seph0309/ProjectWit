@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ProjectWit.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProjectWit.Web;
+using ProjectWit.Service.ServiceArguments;
 namespace ProjectWit.Model.Tests
 {
     [TestClass()]
@@ -33,7 +34,10 @@ namespace ProjectWit.Model.Tests
             {
 
                 WitService wt = new WitService();
-                wt.Login("SYSADMIN", "password","Chrome","Ipad");
+                LoginServiceArgs args;
+                args = wt.Login("SYSADMIN", "password", "Chrome", "Ipad");
+                args = wt.Login("SYSADMIN", "passworD", "Chrome", "Ipad");
+                args = wt.Login("admin", "password", "Chrome", "Ipad");
 
             }
             catch(Exception ex)
