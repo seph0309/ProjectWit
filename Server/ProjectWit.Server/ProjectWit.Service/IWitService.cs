@@ -20,16 +20,16 @@ namespace ProjectWit.Service
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        List<Wit_Company> GetData(int value);
+        List<Wit_Company> GetListData(int value);
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        bool Login(string userName, string password);
-        
-        [OperationContract]
-        void Test();
+        Wit_Company GetData(int value);
 
-        // TODO: Add your service operations here
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
+        Guid Login(string userName, string password, string browser, string deviceType);
+ 
     }
 
 }

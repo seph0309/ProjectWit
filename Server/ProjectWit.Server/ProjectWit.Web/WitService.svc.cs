@@ -23,7 +23,7 @@ namespace ProjectWit.Web
 
         // Add more operations here and mark them with [OperationContract]
 
-        public List<Wit_Company> GetData(int value)
+        public List<Wit_Company> GetListData(int value)
         {
             List<Wit_Company> comp = new List<Wit_Company>();
             comp.Add(new Wit_Company { CompanyName = "SephSample", CompanyNumber = "12345" });
@@ -32,15 +32,26 @@ namespace ProjectWit.Web
             return comp;
         }
 
-        public void Test()
+        public Wit_Company GetData(int value)
         {
-            throw new NotImplementedException();
+            return new Wit_Company { CompanyName = "SephSample", CompanyNumber = "12345" };
         }
 
 
-        public bool Login(string userName, string password)
+        /// <summary>
+        /// Authenticates the user and returns Session ID and Categories/Items list
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public Guid Login(string userName, string password,string browser, string deviceType)
         {
-            return LoginUser(userName, password);
+            if (AuthenticateUser(userName, password, browser, deviceType))
+            {
+                return SessionID;
+            }
+            else
+                return SessionID;
         }
     }
 }

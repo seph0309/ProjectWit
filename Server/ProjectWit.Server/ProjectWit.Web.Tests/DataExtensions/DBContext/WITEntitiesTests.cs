@@ -27,13 +27,13 @@ namespace ProjectWit.Model.Tests
         /// This method test if generated UID is incremental
         /// </summary>
         [TestMethod]
-        public void TestUserUIDGeneration()
+        public void TestWitService()
         {
             try
             {
 
                 WitService wt = new WitService();
-                wt.Login("SYSADMIN", "password");
+                wt.Login("SYSADMIN", "password","Chrome","Ipad");
 
             }
             catch(Exception ex)
