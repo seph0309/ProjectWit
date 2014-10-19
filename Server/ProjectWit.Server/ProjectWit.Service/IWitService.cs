@@ -20,7 +20,7 @@ namespace ProjectWit.Service
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        Wit_Company GetData(int value);
+        List<Wit_Company> GetData(int value);
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]

@@ -11,7 +11,7 @@ using ProjectWit.Model;
 
 namespace ProjectWit.Web
 {
-    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+    //[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class WitService : WitServiceBase, IWitService 
     {
       
@@ -23,9 +23,13 @@ namespace ProjectWit.Web
 
         // Add more operations here and mark them with [OperationContract]
 
-        public Wit_Company GetData(int value)
+        public List<Wit_Company> GetData(int value)
         {
-            return new Wit_Company{ CompanyName = "SephSample", CompanyNumber = "12345" };
+            List<Wit_Company> comp = new List<Wit_Company>();
+            comp.Add(new Wit_Company { CompanyName = "SephSample", CompanyNumber = "12345" });
+            comp.Add(new Wit_Company { CompanyName = "SephSample", CompanyNumber = "12345" });
+            comp.Add(new Wit_Company { CompanyName = "SephSample", CompanyNumber = "12345" });
+            return comp;
         }
 
         public void Test()
