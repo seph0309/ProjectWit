@@ -3,17 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ProjectWit.Model;
+using System.Runtime.Serialization;
 
 namespace ProjectWit.Service.ServiceArguments
 {
+    [DataContract]
     public class LoginServiceArgs
     {
+        [DataMember]
         public Guid? SessionID { get; set; }
+        [DataMember]
         public string Browser { get; set; }
+        [DataMember]
         public string DeviceType { get; set; }
+        [DataMember]
         public string CompanyUID;
+        [DataMember]
         public bool IsAuthenticated { get; set; }
+        [DataMember]
         public List<Wit_Category> wit_Category;
+        [DataMember]
         public List<Wit_Item> wit_Item;
 
         private List<Wit_Category> GetCategories(string companyUID)
@@ -40,7 +49,9 @@ namespace ProjectWit.Service.ServiceArguments
                 return _comp.CompanyUID.ToString();
             }
         }
-
+        public LoginServiceArgs()
+        {
+        }
         public LoginServiceArgs(string userName, string browser, string deviceType)
         {
             if (GetSession(userName, false) != null) IsAuthenticated = true;
