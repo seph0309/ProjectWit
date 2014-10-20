@@ -15,19 +15,18 @@ namespace ProjectWit.Service
     /// <summary>
     /// Implementation is in ProjectWit.Web
     /// </summary>
-    [ServiceContract]
+    [ServiceContract(Namespace="http://wittapps.com/WitService")]
     public interface IWitService
     {
-
-        [OperationContract]
+        [OperationContract(Name = "GetListData")]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
         List<Wit_Company> GetListData(int value);
 
-        [OperationContract]
+        [OperationContract(Name = "GetData")]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
         Wit_Company GetData(int value);
 
-        [OperationContract]
+        [OperationContract(Name = "Login")]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
         LoginServiceArgs Login(string userName, string password, string browser, string deviceType);
  

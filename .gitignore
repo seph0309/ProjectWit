@@ -49,3 +49,4 @@ Server/ProjectWit.Server/ProjectWit.Server.v12.suo
 *.suo
 Client/www/SampleAjax Calls/index.html
 Client/www/SampleAjax Calls/jquery-1.8.2.min.js
+*.config
