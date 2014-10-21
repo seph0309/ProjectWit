@@ -21,24 +21,35 @@ namespace ProjectWit.Service.ServiceArguments
         [DataMember]
         public bool IsAuthenticated { get; set; }
         [DataMember]
-        public List<Wit_Category> wit_Category;
+        public List<Wit_Category> Categories;
         [DataMember]
-        public List<Wit_Item> wit_Item;
+        public List<Wit_Item> Items;
 
         private List<Wit_Category> GetCategories(string companyUID)
         {
-            wit_Category = new List<Wit_Category>();
-            
-            //using(WITEntities db= new WITEntities())
-            //{
-            //   var cat = db.Wit_Category.Where(m => m.Company_UID == new Guid(companyUID)).ToList();
-            //    foreach(Wit_Category category in cat)
-            //    {
-            //        wit_Category.Add(cat);
-            //    }
-            //}
-            return wit_Category;
+            Categories = new List<Wit_Category>();
+            Items= new List<Wit_Item>();
+
+            using (WITEntities db = new WITEntities())
+            {
+                var cat = db.Wit_Category.Where(m => m.Company_UID == new Guid(companyUID)).ToList();
+                foreach (Wit_Category category in cat)
+                {
+                    Categories.Add(new Wit_Category(category));
+                    AddItem(category);
+                }
+            }
+            return Categories;
         }
+
+        private void AddItem(Wit_Category category)
+        {
+            foreach (Wit_Item item in category.Wit_Item)
+            {
+                Items.Add(new Wit_Item(item));
+            }
+        }
+
         private string GetCompanyUID(string UserUID)
         {
             using (WITEntities db = new WITEntities())
@@ -59,9 +70,9 @@ namespace ProjectWit.Service.ServiceArguments
 
         public LoginServiceArgs(string userName, string password, string browser, string deviceType)
         {
-            AuthenticateUser(userName, password, browser, deviceType);
-            //Populate category and item
-            GetCategories(CompanyUID);
+            if(AuthenticateUser(userName, password, browser, deviceType))
+                //Populate category and item
+                GetCategories(CompanyUID);
         }
 
         private bool AuthenticateUser(string userName, string password, string browser, string deviceType)
@@ -74,7 +85,7 @@ namespace ProjectWit.Service.ServiceArguments
             {
                 var user = db.AspNetUsers.Where(m => m.UserName == userName.ToString()).Single();
 
-                if (user != null)
+                if (user != null && !String.IsNullOrEmpty(password))
                 {
                     bool authenticatePassword = Wit_Cryptography.VerifyHashedPassword(user.PasswordHash, password);
                     if (authenticatePassword)

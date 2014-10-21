@@ -6,7 +6,18 @@ namespace ProjectWit.Model
     using System.Collections.Generic;
 
     [MetadataType(typeof(Wit_CategoryMetaData))]
-    public partial class Wit_Category { }
+    public partial class Wit_Category { 
+    
+        public Wit_Category(Wit_Category _wit_Category)
+        {
+            Category_UID = _wit_Category.Category_UID;
+            CategoryName = _wit_Category.CategoryName;
+            Company_UID = _wit_Category.Company_UID;
+            ModifiedBy = _wit_Category.ModifiedBy;
+            ModifiedDate = _wit_Category.ModifiedDate;
+        }
+    
+    }
 
     public class Wit_CategoryMetaData
     { 
