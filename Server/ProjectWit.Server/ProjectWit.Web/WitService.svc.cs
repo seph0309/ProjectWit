@@ -13,7 +13,7 @@ using ProjectWit.Service.ServiceArguments;
 namespace ProjectWit.Web
 {
     //[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class WitService : WitServiceBase, IWitService 
+    public class WitService : IWitService 
     {
       
         public void DoWork()

@@ -75,7 +75,7 @@
     <Compile Include="IWitService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceArguments\LoginServiceArgs.cs" />
-    <Compile Include="WitServiceBase.cs" />
+    <Compile Include="WitSessionServiceBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

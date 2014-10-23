@@ -8,18 +8,10 @@ using System.Runtime.Serialization;
 namespace ProjectWit.Service.ServiceArguments
 {
     [DataContract]
-    public class LoginServiceArgs
+    public class LoginServiceArgs: WitSessionServiceBase
     {
         [DataMember]
-        public Guid? SessionID { get; set; }
-        [DataMember]
-        public string Browser { get; set; }
-        [DataMember]
-        public string DeviceType { get; set; }
-        [DataMember]
         public string CompanyUID;
-        [DataMember]
-        public bool IsAuthenticated { get; set; }
         [DataMember]
         public List<Wit_Category> Categories;
         [DataMember]
@@ -96,32 +88,6 @@ namespace ProjectWit.Service.ServiceArguments
                     }
                 }
                 return false;
-            }
-        }
-
-        private Guid? GetSession(string userUID, bool saveWhenNoSession)
-        {
-            using (WITEntities db = new WITEntities())
-            {
-                var _getSession = (from col in db.Wit_Session
-                                   where col.User_UID == new Guid(userUID)
-                                   select new { Session_UID = col.Session_UID }).ToList();
-
-                if (_getSession.Count > 0)
-                {
-                    IsAuthenticated = true;
-                    return _getSession[0].Session_UID;
-                }
-                else
-                {
-                    if (saveWhenNoSession)
-                    {
-                        db.Wit_Session.Add(new Wit_Session { User_UID = new Guid(userUID), Browser = Browser, DeviceType = DeviceType });
-                        db.SaveChanges();
-                        return GetSession(userUID, false);
-                    }
-                    else return null;
-                }
             }
         }
     }
