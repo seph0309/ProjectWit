@@ -10,11 +10,11 @@ namespace ProjectWit.Service.ServiceArguments
     [DataContract]
     public class LoginServiceArgs: WitSessionServiceBase
     {
-        [DataMember]
+        [DataMember(Order = 0)]
         public string CompanyUID;
-        [DataMember]
+        [DataMember(Order = 2)]
         public List<Wit_Category> Categories;
-        [DataMember]
+        [DataMember(Order = 1)]
         public List<Wit_Item> Items;
 
         private List<Wit_Category> GetCategories(string companyUID)

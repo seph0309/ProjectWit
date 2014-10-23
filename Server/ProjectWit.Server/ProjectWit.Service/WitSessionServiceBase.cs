@@ -10,16 +10,16 @@ namespace ProjectWit.Service
     [DataContract]
     public abstract class WitSessionServiceBase
     {
-        [DataMember]
-        public string Browser { get; set; }
-        [DataMember]
-        public string DeviceType { get; set; }
-        [DataMember]
-        public string ErrorMessage { get; set; }
-        [DataMember]
-        public bool IsAuthenticated { get; set; }
-        [DataMember]
+        [DataMember(Order = 0)]
         public Guid? SessionID { get; set; }
+        [DataMember(Order = 1)]
+        public bool IsAuthenticated { get; set; }
+        [DataMember(Order = 2)]
+        public string ErrorMessage { get; set; }
+        [DataMember(Order = 3)]
+        public string DeviceType { get; set; }
+        [DataMember(Order = 4)]
+        public string Browser { get; set; }
 
         public WitSessionServiceBase()
         {
