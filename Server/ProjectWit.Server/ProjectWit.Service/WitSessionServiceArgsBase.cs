@@ -8,14 +8,14 @@ using System.Runtime.Serialization;
 namespace ProjectWit.Service
 {
     [DataContract]
-    public abstract class WitSessionServiceBase
+    public abstract class WitSessionServiceArgsBase
     {
         [DataMember(Order = 0)]
         public Guid? SessionID { get; set; }
         [DataMember(Order = 1)]
         public bool IsAuthenticated { get; set; }
         [DataMember(Order = 2)]
-        public string ErrorMessage { get; set; }
+        public List<string> LogMessage { get; set; }
         [DataMember(Order = 3)]
         public string DeviceType { get; set; }
         [DataMember(Order = 4)]
@@ -24,9 +24,9 @@ namespace ProjectWit.Service
         internal string _userUID;
         internal string _companyUID;
 
-        internal WitSessionServiceBase()
+        internal WitSessionServiceArgsBase()
         {
-
+            LogMessage = new List<string>();
         }
 
         internal bool AuthenticateSession(string sessionUID)

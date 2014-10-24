@@ -8,14 +8,13 @@ using System.Runtime.Serialization;
 namespace ProjectWit.Service.ServiceArguments
 {
     [DataContract]
-    public class LoginServiceArgs: WitSessionServiceBase
+    public class LoginServiceArgs: WitSessionServiceArgsBase
     {
     
         [DataMember(Order = 0)]
         public List<Wit_Category> Categories;
         [DataMember(Order = 1)]
         public List<Wit_Item> Items;
-         
 
         private List<Wit_Category> GetCategories(string companyUID)
         {
@@ -69,7 +68,7 @@ namespace ProjectWit.Service.ServiceArguments
                 }
             }
             else
-                ErrorMessage = "Invalid Session";
+                LogMessage.Add("Invalid Session");
         }
 
         public LoginServiceArgs(string userName, string password, string browser, string deviceType)
@@ -99,8 +98,7 @@ namespace ProjectWit.Service.ServiceArguments
                         return true;
                     }
                 }
-                   
-                ErrorMessage = "Wrong Username/Password";
+                LogMessage.Add("Wrong Username/Password");
                 return false;
             }
         }
