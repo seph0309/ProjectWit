@@ -87,6 +87,8 @@ namespace ProjectWit.Service.ServiceArguments
             {
                 if (TerminateSessionID(sessionID) > 0)
                     LogMessage.Add("Session Deleted");
+                else
+                    LogMessage.Add("Session does not exist");
             }
             else
                 LogMessage.Add("Invalid Session");
