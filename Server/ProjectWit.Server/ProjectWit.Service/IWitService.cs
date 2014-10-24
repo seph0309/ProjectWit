@@ -18,6 +18,7 @@ namespace ProjectWit.Service
     [ServiceContract(Namespace="http://wittapps.com/WitService")]
     public interface IWitService
     {
+        #region Test Data HERE
         [OperationContract(Name = "GetListData")]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
         List<Wit_Company> GetListData(int value);
@@ -25,10 +26,16 @@ namespace ProjectWit.Service
         [OperationContract(Name = "GetData")]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
         Wit_Company GetData(int value);
+        #endregion
 
-        [OperationContract(Name = "Login")]
+        [OperationContract(Name = "LoginByUser")]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        LoginServiceArgs Login(string userName, string password, string browser, string deviceType);
+        LoginServiceArgs LoginByUser(string userName, string password, string browser, string deviceType);
+
+
+        [OperationContract(Name = "LoginBySession")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
+        LoginServiceArgs LoginBySession(string sessionUID);
  
     }
 

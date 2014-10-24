@@ -10,12 +10,12 @@ namespace ProjectWit.Service.ServiceArguments
     [DataContract]
     public class LoginServiceArgs: WitSessionServiceBase
     {
+    
         [DataMember(Order = 0)]
-        public string CompanyUID;
-        [DataMember(Order = 2)]
         public List<Wit_Category> Categories;
         [DataMember(Order = 1)]
         public List<Wit_Item> Items;
+         
 
         private List<Wit_Category> GetCategories(string companyUID)
         {
@@ -42,31 +42,43 @@ namespace ProjectWit.Service.ServiceArguments
             }
         }
 
-        private string GetCompanyUID(string UserUID)
+        private void InitializeCompanyUID(string UserUID)
         {
             using (WITEntities db = new WITEntities())
             {
                 var _comp = (from col in db.Wit_User
                               where col.User_UID == new Guid(UserUID)
                               select new { CompanyUID = col.Company_UID }).Single();
-                return _comp.CompanyUID.ToString();
+                _companyUID = _comp.CompanyUID.ToString();
             }
         }
         public LoginServiceArgs()
         {
         }
-        public LoginServiceArgs(string userName, string browser, string deviceType)
+     
+        public LoginServiceArgs(string sessionUID)
         {
-            if (GetSession(userName, false) != null) IsAuthenticated = true;
+            if (Wit_Commons.IsStringGUID(sessionUID))
+            {
+                AuthenticateSession(sessionUID);
+                if (!IsAuthenticated) return;
+                else
+                {
+                    InitializeCompanyUID(_userUID);
+                    GetCategories(_companyUID);
+                }
+            }
+            else
+                ErrorMessage = "Invalid Session";
         }
 
         public LoginServiceArgs(string userName, string password, string browser, string deviceType)
         {
             if(AuthenticateUser(userName, password, browser, deviceType))
                 //Populate category and item
-                GetCategories(CompanyUID);
+                GetCategories(_companyUID);
         }
-
+  
         private bool AuthenticateUser(string userName, string password, string browser, string deviceType)
         {
             Browser = browser;
@@ -75,18 +87,20 @@ namespace ProjectWit.Service.ServiceArguments
             if (userName == null) return false;
             using (WITEntities db = new WITEntities())
             {
-                var user = db.AspNetUsers.Where(m => m.UserName == userName.ToString()).Single();
+                var user = db.AspNetUsers.Where(m => m.UserName == userName.ToString()).FirstOrDefault();
 
                 if (user != null && !String.IsNullOrEmpty(password))
                 {
                     bool authenticatePassword = Wit_Cryptography.VerifyHashedPassword(user.PasswordHash, password);
                     if (authenticatePassword)
                     {
-                        CompanyUID = GetCompanyUID(user.Id);
-                        SessionID = GetSession(user.Id, true);
+                        InitializeCompanyUID(user.Id);
+                        AuthenticateSession(user.Id, true);
                         return true;
                     }
                 }
+                   
+                ErrorMessage = "Wrong Username/Password";
                 return false;
             }
         }

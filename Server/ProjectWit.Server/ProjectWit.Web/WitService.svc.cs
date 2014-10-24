@@ -13,9 +13,10 @@ using ProjectWit.Service.ServiceArguments;
 namespace ProjectWit.Web
 {
     //[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class WitService : IWitService 
+    public class WitService : IWitService
     {
-      
+
+        #region Test Data HERE
         public void DoWork()
         {
             // Add your operation implementation here
@@ -37,6 +38,7 @@ namespace ProjectWit.Web
         {
             return new Wit_Company { CompanyName = "SephSample", CompanyNumber = "12345" };
         }
+        #endregion
 
 
         /// <summary>
@@ -45,11 +47,21 @@ namespace ProjectWit.Web
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public LoginServiceArgs Login(string userName, string password, string browser, string deviceType)
-        {
+        public LoginServiceArgs LoginByUser(string userName, string password, string browser, string deviceType)
+        { 
             LoginServiceArgs serviceArgs = new LoginServiceArgs(userName, password, browser, deviceType);
-
             return serviceArgs; 
+        }
+
+        /// <summary>
+        /// Authenticates using SessionUID
+        /// </summary>
+        /// <param name="sessionUID"></param>
+        /// <returns></returns>
+        public LoginServiceArgs LoginBySession(string sessionUID)
+        {
+            LoginServiceArgs serviceArgs = new LoginServiceArgs(sessionUID);
+            return serviceArgs;
         }
     }
 }

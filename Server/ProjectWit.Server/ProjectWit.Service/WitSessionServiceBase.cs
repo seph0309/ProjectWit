@@ -21,12 +21,33 @@ namespace ProjectWit.Service
         [DataMember(Order = 4)]
         public string Browser { get; set; }
 
-        public WitSessionServiceBase()
+        internal string _userUID;
+        internal string _companyUID;
+
+        internal WitSessionServiceBase()
         {
 
         }
 
-        public Guid? GetSession(string userUID, bool saveWhenNoSession)
+        internal bool AuthenticateSession(string sessionUID)
+        {
+            using(WITEntities db = new WITEntities())
+            {
+
+                var _getSession = (from col in db.Wit_Session
+                                   where col.Session_UID == new Guid(sessionUID)
+                                   select new { Session_UID = col.Session_UID, UserUID = col.User_UID }).ToList();
+
+                if (_getSession.Count == 0) return false;
+                else
+                {
+                    InitializeSession(_getSession[0].Session_UID, _getSession[0].UserUID.ToString());
+                }
+            }
+            return true;
+        }
+ 
+        internal void AuthenticateSession(string userUID, bool saveWhenNoSession)
         {
             using (WITEntities db = new WITEntities())
             {
@@ -36,8 +57,7 @@ namespace ProjectWit.Service
 
                 if (_getSession.Count > 0)
                 {
-                    IsAuthenticated = true;
-                    return _getSession[0].Session_UID;
+                    InitializeSession(_getSession[0].Session_UID, userUID); 
                 }
                 else
                 {
@@ -46,11 +66,17 @@ namespace ProjectWit.Service
                         Wit_Session session = new Wit_Session { User_UID = new Guid(userUID), Browser = Browser, DeviceType = DeviceType };
                         db.Wit_Session.Add(session);
                         db.SaveChanges();
-                        return session.Session_UID;
+                        InitializeSession(session.Session_UID, userUID); 
                     }
-                    else return null;
                 }
             }
+        }
+
+        private void InitializeSession(Guid sessionUID, string userUID)
+        {
+            IsAuthenticated = true;
+            SessionID = sessionUID;
+            _userUID = userUID;
         }
     }
 }

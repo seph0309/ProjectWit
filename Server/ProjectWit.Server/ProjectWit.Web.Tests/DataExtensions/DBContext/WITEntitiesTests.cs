@@ -35,9 +35,9 @@ namespace ProjectWit.Model.Tests
 
                 WitService wt = new WitService();
                 LoginServiceArgs args;
-                args = wt.Login("SYSADMIN", "password", "Chrome"," Ipad");
-                args = wt.Login("SYSADMIN", "passworD", "Chrome", "Ipad");
-                args = wt.Login("admin", "password", "Chrome", "Ipad");
+                args = wt.LoginByUser("SYSADMIN", "password", "Chrome"," Ipad");
+                args = wt.LoginByUser("SYSADMIN", "passworD", "Chrome", "Ipad");
+                args = wt.LoginByUser("admin", "password", "Chrome", "Ipad");
 
             }
             catch(Exception ex)
