@@ -58,9 +58,9 @@ namespace ProjectWit.Web
         /// </summary>
         /// <param name="sessionUID"></param>
         /// <returns></returns>
-        public LoginServiceArgs LoginBySession(string sessionUID)
+        public LoginServiceArgs LoginBySession(string sessionID)
         {
-            LoginServiceArgs serviceArgs = new LoginServiceArgs(sessionUID);
+            LoginServiceArgs serviceArgs = new LoginServiceArgs(sessionID);
             return serviceArgs;
         }
     }
