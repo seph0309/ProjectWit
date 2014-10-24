@@ -47,35 +47,49 @@ namespace ProjectWit.Service.ServiceArguments
             {
                 var _comp = (from col in db.Wit_User
                               where col.User_UID == new Guid(UserUID)
-                              select new { CompanyUID = col.Company_UID }).Single();
+                              select new { CompanyUID = col.Company_UID }).FirstOrDefault();
                 _companyUID = _comp.CompanyUID.ToString();
             }
         }
         public LoginServiceArgs()
         {
         }
-     
-        public LoginServiceArgs(string sessionUID)
-        {
-            if (Wit_Commons.IsStringGUID(sessionUID))
-            {
-                AuthenticateSession(sessionUID);
-                if (!IsAuthenticated) return;
-                else
-                {
-                    InitializeCompanyUID(_userUID);
-                    GetCategories(_companyUID);
-                }
-            }
-            else
-                LogMessage.Add("Invalid Session");
-        }
 
+        public LoginServiceArgs(string sessionID)
+        {
+            AuthenticateSession(sessionID);
+            if (!IsAuthenticated) return;
+            else
+            {
+                InitializeCompanyUID(_userUID);
+                GetCategories(_companyUID);
+            }
+        }
+        /// <summary>
+        /// Checks if session exist in database
+        /// </summary>
+        /// <param name="sessionID"></param>
+        /// <returns></returns>
+        public bool IsSessionActive(string sessionID)
+        {
+            AuthenticateSession(sessionID);
+            return IsAuthenticated;
+        }
         public LoginServiceArgs(string userName, string password, string browser, string deviceType)
         {
             if(AuthenticateUser(userName, password, browser, deviceType))
                 //Populate category and item
                 GetCategories(_companyUID);
+        }
+        public void TerminateSession(string sessionID)
+        {
+            if (Wit_Commons.IsStringGUID(sessionID))
+            {
+                if (TerminateSessionID(sessionID) > 0)
+                    LogMessage.Add("Session Deleted");
+            }
+            else
+                LogMessage.Add("Invalid Session");
         }
   
         private bool AuthenticateUser(string userName, string password, string browser, string deviceType)
@@ -94,7 +108,7 @@ namespace ProjectWit.Service.ServiceArguments
                     if (authenticatePassword)
                     {
                         InitializeCompanyUID(user.Id);
-                        AuthenticateSession(user.Id, true);
+                        GenerateSession(user.Id);
                         return true;
                     }
                 }

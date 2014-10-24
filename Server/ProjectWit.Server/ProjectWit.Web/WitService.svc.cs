@@ -64,6 +64,18 @@ namespace ProjectWit.Web
             return serviceArgs;
         }
 
+        public LoginServiceArgs TerminateSession(string sessionID)
+        {
+            LoginServiceArgs serviceArgs = new LoginServiceArgs();
+            serviceArgs.TerminateSession(sessionID);
+            return serviceArgs;
+        }
 
+        public LoginServiceArgs IsSessionActive(string sessionID)
+        {
+            LoginServiceArgs serviceArgs = new LoginServiceArgs();
+            serviceArgs.IsSessionActive(sessionID);
+            return serviceArgs;
+        }
     }
 }

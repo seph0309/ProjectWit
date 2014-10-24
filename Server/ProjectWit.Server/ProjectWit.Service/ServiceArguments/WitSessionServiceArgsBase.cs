@@ -28,9 +28,13 @@ namespace ProjectWit.Service
         {
             LogMessage = new List<string>();
         }
-
         internal bool AuthenticateSession(string sessionUID)
         {
+            if (!Wit_Commons.IsStringGUID(sessionUID))
+            {
+                LogMessage.Add("Invalid Session");
+                return false;
+            }
             using(WITEntities db = new WITEntities())
             {
 
@@ -46,37 +50,33 @@ namespace ProjectWit.Service
             }
             return true;
         }
- 
-        internal void AuthenticateSession(string userUID, bool saveWhenNoSession)
+        internal void GenerateSession(string userUID)
         {
             using (WITEntities db = new WITEntities())
             {
-                var _getSession = (from col in db.Wit_Session
-                                   where col.User_UID == new Guid(userUID)
-                                   select new { Session_UID = col.Session_UID }).ToList();
-
-                if (_getSession.Count > 0)
-                {
-                    InitializeSession(_getSession[0].Session_UID, userUID); 
-                }
-                else
-                {
-                    if (saveWhenNoSession)
-                    {
-                        Wit_Session session = new Wit_Session { User_UID = new Guid(userUID), Browser = Browser, DeviceType = DeviceType };
-                        db.Wit_Session.Add(session);
-                        db.SaveChanges();
-                        InitializeSession(session.Session_UID, userUID); 
-                    }
-                }
+                Wit_Session session = new Wit_Session { User_UID = new Guid(userUID), Browser = Browser, DeviceType = DeviceType };
+                db.Wit_Session.Add(session);
+                db.SaveChanges();
+                InitializeSession(session.Session_UID, userUID); 
             }
         }
-
         private void InitializeSession(Guid sessionUID, string userUID)
         {
             IsAuthenticated = true;
             SessionID = sessionUID;
             _userUID = userUID;
+        }
+
+        internal int TerminateSessionID(string sessionID)
+        {
+            int rowsAffected =0;
+            using (WITEntities db = new WITEntities())
+            {
+                string _sql;
+                _sql = string.Format("DELETE FROM Wit_Session WHERE Session_UID = '{0}'", sessionID);
+                rowsAffected = db.Database.ExecuteSqlCommand(_sql);
+                return rowsAffected;
+            }
         }
     }
 }
