@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using ProjectWit.Model;
 using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 
 namespace ProjectWit.Service
 {
@@ -16,13 +18,16 @@ namespace ProjectWit.Service
         public bool IsAuthenticated { get; set; }
         [DataMember(Order = 2)]
         public List<string> LogMessage { get; set; }
-        [DataMember(Order = 3)]
-        public string DeviceType { get; set; }
-        [DataMember(Order = 4)]
-        public string Browser { get; set; }
 
-        internal string _userUID;
-        internal string _companyUID;
+        protected string _deviceType;
+        protected string _browser;
+        //TEMPORARY!
+        [DataMember(Order = 2)]
+        public string _iP;
+        protected string _location;
+
+        protected string _userUID;
+        protected string _companyUID;
 
         internal WitSessionServiceArgsBase()
         {
@@ -54,7 +59,13 @@ namespace ProjectWit.Service
         {
             using (WITEntities db = new WITEntities())
             {
-                Wit_Session session = new Wit_Session { User_UID = new Guid(userUID), Browser = Browser, DeviceType = DeviceType };
+                //Get Actual IP
+                _iP = GetIP();
+
+                Wit_Session session = new Wit_Session { User_UID = new Guid(userUID), Browser = _browser, 
+                    DeviceType = _deviceType, IP = _iP, 
+                    Location = _location };
+
                 db.Wit_Session.Add(session);
                 db.SaveChanges();
                 InitializeSession(session.Session_UID, userUID); 
@@ -78,5 +89,17 @@ namespace ProjectWit.Service
                 return rowsAffected;
             }
         }
+
+        private string GetIP()
+        {
+            OperationContext context = OperationContext.Current;
+            MessageProperties prop = context.IncomingMessageProperties;
+            RemoteEndpointMessageProperty endpoint =
+                prop[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
+            string ip = endpoint.Address;
+            return ip;
+        }
+
+
     }
 }

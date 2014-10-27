@@ -23,30 +23,7 @@ namespace ProjectWit.Model.Tests
             Assert.IsTrue(1 == 1,"Correct");
         }
 
-
-        /// <summary>
-        /// This method test if generated UID is incremental
-        /// </summary>
-        [TestMethod]
-        public void TestWitService()
-        {
-            try
-            {
-
-                WitService wt = new WitService();
-                LoginServiceArgs args;
-                args = wt.LoginByUser("SYSADMIN", "password", "Chrome"," Ipad");
-                args = wt.LoginByUser("SYSADMIN", "passworD", "Chrome", "Ipad");
-                args = wt.LoginByUser("admin", "password", "Chrome", "Ipad");
-
-            }
-            catch(Exception ex)
-            {
-                Assert.Fail(ex.InnerException.Message.ToString());
-            }
-
-        }
-
+ 
         [TestMethod]
         public void TestPassword()
         {

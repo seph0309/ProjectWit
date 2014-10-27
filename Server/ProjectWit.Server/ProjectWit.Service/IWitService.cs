@@ -30,7 +30,7 @@ namespace ProjectWit.Service
 
         [OperationContract(Name = "LoginByUser")]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        LoginServiceArgs LoginByUser(string userName, string password, string browser, string deviceType);
+        LoginServiceArgs LoginByUser(string userName, string password, string browser, string deviceType, string iP, string location);
 
         [OperationContract(Name = "LoginBySession")]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]

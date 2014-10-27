@@ -47,9 +47,9 @@ namespace ProjectWit.Web
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public LoginServiceArgs LoginByUser(string userName, string password, string browser, string deviceType)
-        { 
-            LoginServiceArgs serviceArgs = new LoginServiceArgs(userName, password, browser, deviceType);
+        public LoginServiceArgs LoginByUser(string userName, string password, string browser, string deviceType, string iP, string location)
+        {
+            LoginServiceArgs serviceArgs = new LoginServiceArgs(userName, password, browser, deviceType,iP,location);
             return serviceArgs; 
         }
 

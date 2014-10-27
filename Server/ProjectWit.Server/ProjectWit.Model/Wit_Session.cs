@@ -20,6 +20,8 @@ namespace ProjectWit.Model
         public string DeviceType { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
+        public string IP { get; set; }
+        public string Location { get; set; }
     
         public virtual Wit_User Wit_User { get; set; }
     }

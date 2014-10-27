@@ -13,17 +13,7 @@ namespace ProjectWit.Web.Tests.WitServiceTest
     [TestClass]
     public class WitServiceTest
     {
-        [TestMethod]
-        public void TestSessionServiceBase()
-        {
-            WitService wt = new WitService();
-            LoginServiceArgs args;
-            args = wt.LoginByUser("SYSADMIN", "PASSWORD", "", "");
-            args = wt.LoginByUser("SYSADMIN", "passworD", "Chrome", "Ipad");
-            args = wt.LoginBySession("D697FE5C-E259-E411-9081-0021CCC18CF4");
-
  
-        }
         [TestMethod]
         public void TestGUID()
         {
@@ -31,7 +21,7 @@ namespace ProjectWit.Web.Tests.WitServiceTest
             //valid GUID
             isValid = Wit_Commons.IsStringGUID("3213213");
 
-            isValid = Wit_Commons.IsStringGUID("D697FE5C-E259-E411-9081-0021CCC18CF4");
+            isValid = Wit_Commons.IsStringGUID("D697FE5C-E259-E411-9081-0021CCC18CF4" );
 
         }
 
@@ -43,7 +33,7 @@ namespace ProjectWit.Web.Tests.WitServiceTest
              LoginServiceArgs args = new LoginServiceArgs();
             
              //Login 
-             args= wt.LoginByUser("SYSADMIN", "password", "Chrome", "Ipad");
+             args = wt.LoginByUser("SYSADMIN", "password", "Chrome", "Ipad", "", "");
              if(args.IsAuthenticated)
              {
                  string _guid = args.SessionID.ToString();

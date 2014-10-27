@@ -135,6 +135,8 @@
           <Property Name="User_UID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Browser" Type="nvarchar" MaxLength="50" />
           <Property Name="DeviceType" Type="nvarchar" MaxLength="50" />
+          <Property Name="IP" Type="nvarchar" MaxLength="50" />
+          <Property Name="Location" Type="nvarchar" MaxLength="500" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -946,6 +948,8 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Wit_User" Relationship="WITModel.FK_Wit_Session_Wit_User" FromRole="Wit_Session" ToRole="Wit_User" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Wit_Session_Wit_User">
           <End Type="WITModel.Wit_User" Role="Wit_User" Multiplicity="1" />
@@ -1163,6 +1167,8 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
           <EntitySetMapping Name="Wit_Session">
             <EntityTypeMapping TypeName="WITModel.Wit_Session">
               <MappingFragment StoreEntitySet="Wit_Session">
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
