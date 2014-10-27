@@ -21,9 +21,7 @@ namespace ProjectWit.Service
 
         protected string _deviceType;
         protected string _browser;
-        //TEMPORARY!
-        [DataMember(Order = 2)]
-        public string _iP;
+        protected string _iP;
         protected string _location;
 
         protected string _userUID;

@@ -75,9 +75,9 @@ namespace ProjectWit.Service.ServiceArguments
             AuthenticateSession(sessionID);
             return IsAuthenticated;
         }
-        public LoginServiceArgs(string userName, string password, string browser, string deviceType, string iP, string location)
+        public LoginServiceArgs(string userName, string password, string browser, string deviceType)
         {
-            if(AuthenticateUser(userName, password, browser, deviceType,iP,location))
+            if(AuthenticateUser(userName, password, browser, deviceType))
                 //Populate category and item
                 GetCategories(_companyUID);
         }
@@ -94,12 +94,10 @@ namespace ProjectWit.Service.ServiceArguments
                 LogMessage.Add("Invalid Session");
         }
 
-        private bool AuthenticateUser(string userName, string password, string browser, string deviceType, string iP, string location)
+        private bool AuthenticateUser(string userName, string password, string browser, string deviceType)
         {
             _browser = browser;
             _deviceType = deviceType;
-            _iP = iP;
-            _location = location;
 
             if (userName == null) return false;
             using (WITEntities db = new WITEntities())

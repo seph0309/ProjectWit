@@ -33,7 +33,7 @@ namespace ProjectWit.Web.Tests.WitServiceTest
              LoginServiceArgs args = new LoginServiceArgs();
             
              //Login 
-             args = wt.LoginByUser("SYSADMIN", "password", "Chrome", "Ipad", "", "");
+             args = wt.LoginByUser("SYSADMIN", "password", "Chrome", "Ipad");
              if(args.IsAuthenticated)
              {
                  string _guid = args.SessionID.ToString();
