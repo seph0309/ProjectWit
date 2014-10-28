@@ -85,16 +85,20 @@ namespace ProjectWit.Service
             }
         }
 
+
         private string GetIP()
         {
+            string ip = string.Empty;
+
             OperationContext context = OperationContext.Current;
-            MessageProperties prop = context.IncomingMessageProperties;
-            RemoteEndpointMessageProperty endpoint =
-                prop[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
-            string ip = endpoint.Address;
+            if (context != null)
+            {
+                MessageProperties prop = context.IncomingMessageProperties;
+                RemoteEndpointMessageProperty endpoint =
+                    prop[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
+                ip = endpoint.Address;
+            }
             return ip;
         }
-
-
     }
 }
