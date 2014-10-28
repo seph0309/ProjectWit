@@ -21,7 +21,7 @@ namespace ProjectWit.Service
 
         protected string _deviceType;
         protected string _browser;
-        protected string _iP;
+        protected string _iP { get { return GetIP(); } }
         protected string _location;
 
         protected string _userUID;
@@ -57,9 +57,6 @@ namespace ProjectWit.Service
         {
             using (WITEntities db = new WITEntities())
             {
-                //Get Actual IP
-                _iP = GetIP();
-
                 Wit_Session session = new Wit_Session { User_UID = new Guid(userUID), Browser = _browser, 
                     DeviceType = _deviceType, IP = _iP, 
                     Location = _location };
