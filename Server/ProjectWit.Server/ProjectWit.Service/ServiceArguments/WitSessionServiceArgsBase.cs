@@ -10,7 +10,7 @@ using System.ServiceModel.Channels;
 namespace ProjectWit.Service
 {
     [DataContract]
-    public abstract class WitSessionServiceArgsBase
+    public class WitSessionServiceArgsBase
     {
         [DataMember(Order = 0)]
         public Guid? SessionID { get; set; }
@@ -27,7 +27,7 @@ namespace ProjectWit.Service
         protected string _userUID;
         protected string _companyUID;
 
-        internal WitSessionServiceArgsBase()
+        protected WitSessionServiceArgsBase()
         {
             LogMessage = new List<string>();
         }
