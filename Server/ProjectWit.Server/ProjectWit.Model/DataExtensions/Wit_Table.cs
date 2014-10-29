@@ -6,7 +6,18 @@ namespace ProjectWit.Model
     using System.Collections.Generic;
 
     [MetadataType(typeof(Wit_TableMetaData))]
-    public partial class Wit_Table { }
+    public partial class Wit_Table 
+    {
+        public Wit_Table(Wit_Table _wit_Table)
+        {
+            Table_UID = _wit_Table.Table_UID;
+            TableName = _wit_Table.TableName;
+            TableDescription=_wit_Table.TableDescription;
+            Company_UID = _wit_Table.Company_UID;
+            ModifiedBy = _wit_Table.ModifiedBy;
+            ModifiedDate = _wit_Table.ModifiedDate;
+        }
+    }
 
     public class Wit_TableMetaData
     {

@@ -15,12 +15,32 @@ namespace ProjectWit.Service.ServiceArguments
         public List<Wit_Category> Categories;
         [DataMember(Order = 1)]
         public List<Wit_Item> Items;
+        [DataMember(Order = 2)]
+        public List<Wit_Table> Tables;
 
-        private List<Wit_Category> GetCategories(string companyUID)
+        #region GetData
+        private void GetData(string companyUID)
         {
             Categories = new List<Wit_Category>();
-            Items= new List<Wit_Item>();
+            Items = new List<Wit_Item>();
+            Tables = new List<Wit_Table>();
 
+            GetCategories(companyUID);
+            GetTables(companyUID);
+        }
+        private void GetTables(string companyUID)
+        {
+            using (WITEntities db = new WITEntities())
+            {
+                var tables = db.Wit_Table.Where(m => m.Company_UID == new Guid(companyUID)).ToList();
+                foreach(Wit_Table tab in tables)
+                {
+                    Tables.Add(new Wit_Table(tab));
+                }
+            }
+        }
+        private void GetCategories(string companyUID)
+        {
             using (WITEntities db = new WITEntities())
             {
                 var cat = db.Wit_Category.Where(m => m.Company_UID == new Guid(companyUID)).ToList();
@@ -30,9 +50,7 @@ namespace ProjectWit.Service.ServiceArguments
                     AddItem(category);
                 }
             }
-            return Categories;
         }
-
         private void AddItem(Wit_Category category)
         {
             foreach (Wit_Item item in category.Wit_Item)
@@ -40,7 +58,7 @@ namespace ProjectWit.Service.ServiceArguments
                 Items.Add(new Wit_Item(item));
             }
         }
-
+        #endregion
         private void InitializeCompanyUID(string UserUID)
         {
             using (WITEntities db = new WITEntities())
@@ -51,10 +69,10 @@ namespace ProjectWit.Service.ServiceArguments
                 _companyUID = _comp.CompanyUID.ToString();
             }
         }
+        #region Constructors
         public LoginServiceArgs()
         {
         }
-
         public LoginServiceArgs(string sessionID)
         {
             AuthenticateSession(sessionID);
@@ -62,9 +80,15 @@ namespace ProjectWit.Service.ServiceArguments
             else
             {
                 InitializeCompanyUID(_userUID);
-                GetCategories(_companyUID);
+                GetData(_companyUID);
             }
         }
+        public LoginServiceArgs(string userName, string password, string browser, string deviceType)
+        {
+            if (AuthenticateUser(userName, password, browser, deviceType))
+                GetData(_companyUID);
+        }
+        #endregion
         /// <summary>
         /// Checks if session exist in database
         /// </summary>
@@ -74,12 +98,6 @@ namespace ProjectWit.Service.ServiceArguments
         {
             AuthenticateSession(sessionID);
             return IsAuthenticated;
-        }
-        public LoginServiceArgs(string userName, string password, string browser, string deviceType)
-        {
-            if(AuthenticateUser(userName, password, browser, deviceType))
-                //Populate category and item
-                GetCategories(_companyUID);
         }
         public void TerminateSession(string sessionID)
         {
@@ -93,7 +111,6 @@ namespace ProjectWit.Service.ServiceArguments
             else
                 LogMessage.Add("Invalid Session");
         }
-
         private bool AuthenticateUser(string userName, string password, string browser, string deviceType)
         {
             _browser = browser;
