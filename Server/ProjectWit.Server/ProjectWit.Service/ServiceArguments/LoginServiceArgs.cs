@@ -33,7 +33,7 @@ namespace ProjectWit.Service.ServiceArguments
             using (WitServiceDBContext db = new WitServiceDBContext())
             { 
                 var tables = db.Wit_Table.Where(m => m.Company_UID == new Guid(companyUID)).ToList();
-               Tables = tables;
+                Tables = tables;
             }
         }
         private void GetCategories(string companyUID)

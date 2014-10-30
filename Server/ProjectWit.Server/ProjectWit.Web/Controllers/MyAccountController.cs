@@ -21,7 +21,7 @@ namespace ProjectWit.Web.Controllers
 
         public ActionResult GetNavBar()
         {
-            using (WITEntities db = new WITEntities(User.Identity.Name))
+            using (WitDbContext db = new WitDbContext(User.Identity.Name))
             {
                 var nav = (from col in db.Wit_NavBar
                            select new { Menu = col.Menu, SubMenu = col.SubMenu, URL = col.URL }

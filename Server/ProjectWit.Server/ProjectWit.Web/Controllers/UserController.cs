@@ -19,7 +19,7 @@ namespace ProjectWit.Web.Controllers
     [WitAuthorize]
     public class UserController : WitBaseController
     {
-        private WITEntities db = new WITEntities();
+        private WitDbContext db = new WitDbContext("User");
         private ApplicationDbContext Userdb = new ApplicationDbContext();
 
         // GET: User

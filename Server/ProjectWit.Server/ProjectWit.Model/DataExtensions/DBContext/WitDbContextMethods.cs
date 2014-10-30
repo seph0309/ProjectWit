@@ -7,7 +7,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public partial class WITEntities : DbContext
+    public partial class WitDbContext : WITEntities
     {
 
         public bool UpdateUser(UsersViewModel usersViewModel)

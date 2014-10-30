@@ -10,12 +10,12 @@ using ProjectWit.Service.ServiceArguments;
 namespace ProjectWit.Model.Tests
 {
     [TestClass()]
-    public class WITEntitiesTests
+    public class WitDbContextTests
     {
         [TestMethod()]
         public void GetUserDetailTest()
         {
-            using(WITEntities db = new WITEntities())
+            using(WitDbContext db = new WitDbContext("User"))
             {
                 db.GetUserDetail(new Guid("274862DB-E708-4D24-8B2B-80734929F3FA"));
 

@@ -17,11 +17,10 @@ namespace ProjectWit.Web.Tests.WitServiceTest
         [TestMethod]
         public void TestGUID()
         {
-            bool isValid = false;
-            //valid GUID
-            isValid = Wit_Commons.IsStringGUID("3213213");
-
-            isValid = Wit_Commons.IsStringGUID("D697FE5C-E259-E411-9081-0021CCC18CF4" );
+            using (WitDbContext db = new WitDbContext(""))
+            {
+                var varr = db.Wit_Category.ToList();
+            }
 
         }
 
