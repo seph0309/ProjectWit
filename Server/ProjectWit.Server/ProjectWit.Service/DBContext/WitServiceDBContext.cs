@@ -10,6 +10,7 @@ namespace ProjectWit.Service
     {
         public WitServiceDBContext() :base()
         {
+            //Turning them off for performance purposes. And since we don't track changes over service
             this.Configuration.AutoDetectChangesEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
         }

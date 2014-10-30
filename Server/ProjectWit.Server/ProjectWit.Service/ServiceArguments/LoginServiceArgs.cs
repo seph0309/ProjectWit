@@ -33,16 +33,15 @@ namespace ProjectWit.Service.ServiceArguments
             using (WitServiceDBContext db = new WitServiceDBContext())
             { 
                 var tables = db.Wit_Table.Where(m => m.Company_UID == new Guid(companyUID)).ToList();
-                foreach(Wit_Table tab in tables)
-                {
-                    Tables.Add(new Wit_Table(tab));
-                }
+               Tables = tables;
             }
         }
         private void GetCategories(string companyUID)
         {
             using (WitServiceDBContext db = new WitServiceDBContext())
             {
+                db.Configuration.LazyLoadingEnabled = true;
+                db.Configuration.ProxyCreationEnabled = true;
                 var cat = db.Wit_Category.Where(m => m.Company_UID == new Guid(companyUID)).ToList();
                 foreach (Wit_Category category in cat)
                 {
