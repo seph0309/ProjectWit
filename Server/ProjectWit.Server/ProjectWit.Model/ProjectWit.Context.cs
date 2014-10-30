@@ -20,6 +20,7 @@ namespace ProjectWit.Model
         public WITEntities()
             : base("name=WITEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

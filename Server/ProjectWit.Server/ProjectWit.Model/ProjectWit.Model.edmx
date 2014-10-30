@@ -738,7 +738,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="WITEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="WITEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="Wit_Category" EntityType="Self.Wit_Category" />
           <EntitySet Name="Wit_Company" EntityType="Self.Wit_Company" />
           <EntitySet Name="Wit_Item" EntityType="Self.Wit_Item" />
