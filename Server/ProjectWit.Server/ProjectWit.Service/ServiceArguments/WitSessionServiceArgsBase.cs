@@ -38,7 +38,7 @@ namespace ProjectWit.Service
                 LogMessage.Add("Invalid Session");
                 return false;
             }
-            using(WITEntities db = new WITEntities())
+            using(WitServiceDBContext db = new WitServiceDBContext())
             {
 
                 var _getSession = (from col in db.Wit_Session
@@ -55,7 +55,7 @@ namespace ProjectWit.Service
         }
         internal void GenerateSession(string userUID)
         {
-            using (WITEntities db = new WITEntities())
+            using (WitServiceDBContext db = new WitServiceDBContext())
             {
                 Wit_Session session = new Wit_Session { User_UID = new Guid(userUID), Browser = _browser, 
                     DeviceType = _deviceType, IP = _iP, 
@@ -76,7 +76,7 @@ namespace ProjectWit.Service
         internal int TerminateSessionID(string sessionID)
         {
             int rowsAffected =0;
-            using (WITEntities db = new WITEntities())
+            using (WitServiceDBContext db = new WitServiceDBContext())
             {
                 string _sql;
                 _sql = string.Format("DELETE FROM Wit_Session WHERE Session_UID = '{0}'", sessionID);

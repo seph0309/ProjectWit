@@ -30,8 +30,8 @@ namespace ProjectWit.Service.ServiceArguments
         }
         private void GetTables(string companyUID)
         {
-            using (WITEntities db = new WITEntities())
-            {
+            using (WitServiceDBContext db = new WitServiceDBContext())
+            { 
                 var tables = db.Wit_Table.Where(m => m.Company_UID == new Guid(companyUID)).ToList();
                 foreach(Wit_Table tab in tables)
                 {
@@ -41,7 +41,7 @@ namespace ProjectWit.Service.ServiceArguments
         }
         private void GetCategories(string companyUID)
         {
-            using (WITEntities db = new WITEntities())
+            using (WitServiceDBContext db = new WitServiceDBContext())
             {
                 var cat = db.Wit_Category.Where(m => m.Company_UID == new Guid(companyUID)).ToList();
                 foreach (Wit_Category category in cat)
@@ -61,7 +61,7 @@ namespace ProjectWit.Service.ServiceArguments
         #endregion
         private void InitializeCompanyUID(string UserUID)
         {
-            using (WITEntities db = new WITEntities())
+            using (WitServiceDBContext db = new WitServiceDBContext())
             {
                 var _comp = (from col in db.Wit_User
                               where col.User_UID == new Guid(UserUID)
@@ -117,7 +117,7 @@ namespace ProjectWit.Service.ServiceArguments
             _deviceType = deviceType;
 
             if (userName == null) return false;
-            using (WITEntities db = new WITEntities())
+            using (WitServiceDBContext db = new WitServiceDBContext())
             {
                 var user = db.AspNetUsers.Where(m => m.UserName == userName.ToString()).FirstOrDefault();
 
