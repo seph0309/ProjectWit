@@ -24,10 +24,26 @@ namespace ProjectWit.Model.Tests
         }
 
         [TestMethod]
+        public void TestRawSQL()
+        {
+            using(WitDbContext db = new WitDbContext())
+            {
+                string _sql = string.Empty;
+                _sql = string.Format("select * from Wit_NavBar where Menu = 'My Profile' ");
+                _sql = _sql + string.Format("union all ");
+                _sql = _sql + string.Format("select * from Wit_NavBar where Menu = 'Admin Maintenance' ");
+                db.Configuration.ProxyCreationEnabled = false;
+                var nav = db.Wit_NavBar.SqlQuery(_sql).ToList();
+
+            }
+        }
+
+        [TestMethod]
         public void TestInsert()
         {
             using(WitDbContext db = new WitDbContext())
             {
+                //AutoDetectChangesEnabled improves performance
                 db.Configuration.AutoDetectChangesEnabled = false;
                 for(int x = 0; x<1000; x++)
                 {
