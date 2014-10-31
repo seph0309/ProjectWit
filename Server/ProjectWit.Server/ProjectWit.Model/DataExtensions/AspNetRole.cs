@@ -15,5 +15,55 @@ namespace ProjectWit.Model
     public partial class AspNetRole
     {
         public bool IsSelected { get; set; }
+
+        protected const string SYSADMIN = "SYSADMIN";
+        protected const string ADMIN = "ADMIN";
+        protected const string CREW = "CREW";
+        protected const string CUSTOMER = "CUSTOMER";
+        protected const string GUEST = "GUEST";
+
+        public bool IsMobileUser()
+        {
+            if (Name == CREW || Name == ADMIN || Name == SYSADMIN)
+                return true;
+            else
+                return false;
+        }
+        public bool IsPowerUser()
+        {
+            if (Name == SYSADMIN)
+                return true;
+            else
+                return false;
+        }
+        public bool IsCompanyAdmin()
+        {
+            //If ADMIN, he has control of all users under the company
+            if (Name == ADMIN)
+                return true;
+            else
+                return false;
+        }
+        public bool IsCrew()
+        {
+            if (Name == CREW)
+                return true;
+            else
+                return false;
+        }
+        public bool IsGuest()
+        {
+            if (Name == GUEST)
+                return true;
+            else
+                return false;
+        }
+        public bool IsCustomer()
+        {
+            if (Name == CUSTOMER)
+                return true;
+            else
+                return false;
+        }
     }
 }

@@ -30,9 +30,14 @@ namespace ProjectWit.Web.Tests.WitServiceTest
              //Test the process from creating session to terminating it
              WitService wt = new WitService();
              LoginServiceArgs args = new LoginServiceArgs();
-            
+
              //Login 
              args = wt.LoginByUser("SYSADMIN", "password", "Chrome", "Ipad");
+             args = wt.LoginByUser("ADMIN", "password", "Chrome", "Ipad");
+             args = wt.LoginByUser("CREW", "password", "Chrome", "Ipad");
+             args = wt.LoginByUser("CUSTOMER", "password", "Chrome", "Ipad");
+
+             return;
              if(args.IsAuthenticated)
              {
                  string _guid = args.SessionID.ToString();

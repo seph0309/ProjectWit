@@ -83,5 +83,24 @@ namespace ProjectWit.Model.Tests
                 
             }
         }
+
+        [TestMethod]
+        public void GetSessionTest()
+        {
+            string SYSADMIN = "299A2AD2-B6A4-47E8-A66A-CA84333AF7C0";
+            string ADMIN = "299A2AD2-B6A4-47E8-A66A-CA84333AF7C2";
+            string CREW = "299A2AD2-B6A4-47E8-A66A-CA84333AF7C1";
+            string CUSTOMER = "31CAA23C-A8CE-4F25-B737-C435AD71A443";
+            string GUEST = "299A2AD2-B6A4-47E8-A66A-CA84333AF7C3";
+
+            using (WitDbContext db = new WitDbContext())
+            {
+                var ret = db.GetSession(SYSADMIN);
+                ret = db.GetSession(ADMIN);
+                ret = db.GetSession(CREW);
+                //ret = db.GetSession(CUSTOMER);
+                ret = db.GetSession(GUEST);
+            }
+        }
     }
 }
