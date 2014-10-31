@@ -23,6 +23,20 @@ namespace ProjectWit.Model.Tests
             Assert.IsTrue(1 == 1,"Correct");
         }
 
+        [TestMethod]
+        public void TestInsert()
+        {
+            using(WitDbContext db = new WitDbContext())
+            {
+                db.Configuration.AutoDetectChangesEnabled = false;
+                for(int x = 0; x<1000; x++)
+                {
+                    db.Wit_Company.Add(new Wit_Company { CompanyName = "ewan" });
+                }
+                db.SaveChanges();
+            }
+
+        }
  
         [TestMethod]
         public void TestPassword()
