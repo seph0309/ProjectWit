@@ -75,6 +75,7 @@
     <Compile Include="DataExtensions\Wit_Company.cs" />
     <Compile Include="DataExtensions\Wit_Cryptography.cs" />
     <Compile Include="DataExtensions\Wit_Item.cs" />
+    <Compile Include="DataExtensions\Wit_Menu.cs" />
     <Compile Include="DataExtensions\Wit_Order.cs" />
     <Compile Include="DataExtensions\Wit_Status.cs" />
     <Compile Include="DataExtensions\Wit_Table.cs" />
