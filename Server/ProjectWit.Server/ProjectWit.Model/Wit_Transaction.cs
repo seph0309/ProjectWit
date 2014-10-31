@@ -27,7 +27,6 @@ namespace ProjectWit.Model
         public string ModifiedBy { get; set; }
     
         public virtual ICollection<Wit_Order> Wit_Order { get; set; }
-        public virtual Wit_Status Wit_Status { get; set; }
         public virtual Wit_Table Wit_Table { get; set; }
     }
 }

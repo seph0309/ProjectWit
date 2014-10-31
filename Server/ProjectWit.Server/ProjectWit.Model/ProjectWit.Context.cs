@@ -32,7 +32,6 @@ namespace ProjectWit.Model
         public virtual DbSet<Wit_Company> Wit_Company { get; set; }
         public virtual DbSet<Wit_Item> Wit_Item { get; set; }
         public virtual DbSet<Wit_Order> Wit_Order { get; set; }
-        public virtual DbSet<Wit_Status> Wit_Status { get; set; }
         public virtual DbSet<Wit_Table> Wit_Table { get; set; }
         public virtual DbSet<Wit_Transaction> Wit_Transaction { get; set; }
         public virtual DbSet<Wit_User> Wit_User { get; set; }

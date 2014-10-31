@@ -17,6 +17,8 @@ namespace ProjectWit.Service.ServiceArguments
         public List<Wit_Item> Items;
         [DataMember(Order = 2)]
         public List<Wit_Table> Tables;
+        [DataMember(Order = 3)]
+        public List<KeyValuePair<int, string>> Status;
 
         #region GetData
         private void GetData(string companyUID)
@@ -24,10 +26,12 @@ namespace ProjectWit.Service.ServiceArguments
             Categories = new List<Wit_Category>();
             Items = new List<Wit_Item>();
             Tables = new List<Wit_Table>();
+            Status = Wit_Status.Status;
 
             GetCategories(companyUID);
             GetTables(companyUID);
         }
+ 
         private void GetTables(string companyUID)
         {
             using (WitServiceDBContext db = new WitServiceDBContext())

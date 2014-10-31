@@ -118,9 +118,6 @@
     <Compile Include="Wit_Session.cs">
       <DependentUpon>ProjectWit.tt</DependentUpon>
     </Compile>
-    <Compile Include="Wit_Status.cs">
-      <DependentUpon>ProjectWit.tt</DependentUpon>
-    </Compile>
     <Compile Include="Wit_Table.cs">
       <DependentUpon>ProjectWit.tt</DependentUpon>
     </Compile>

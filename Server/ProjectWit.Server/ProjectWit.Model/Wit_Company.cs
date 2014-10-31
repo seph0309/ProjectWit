@@ -17,7 +17,6 @@ namespace ProjectWit.Model
         public Wit_Company()
         {
             this.Wit_Category = new HashSet<Wit_Category>();
-            this.Wit_Status = new HashSet<Wit_Status>();
             this.Wit_Table = new HashSet<Wit_Table>();
             this.Wit_User = new HashSet<Wit_User>();
         }
@@ -30,7 +29,6 @@ namespace ProjectWit.Model
         public string ModifiedBy { get; set; }
     
         public virtual ICollection<Wit_Category> Wit_Category { get; set; }
-        public virtual ICollection<Wit_Status> Wit_Status { get; set; }
         public virtual ICollection<Wit_Table> Wit_Table { get; set; }
         public virtual ICollection<Wit_User> Wit_User { get; set; }
     }

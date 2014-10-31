@@ -62,5 +62,13 @@ namespace ProjectWit.Model.Tests
             bool ver = Wit_Cryptography.VerifyHashedPassword("AKhzjiA1IUNU/1oocYMYx48xteD7aBOCPr/pUiH4e1M/ikFMxDvr1vCxclpCDjsgwQ==", password);
         }
 
+        [TestMethod]
+        public void TestWitStatus()
+        {             
+            string x = Wit_Status.Started.ToString();
+
+            List<KeyValuePair<int, string>> Status = Wit_Status.Status;
+            string value = Status[0].Value;
+        }
     }
 }

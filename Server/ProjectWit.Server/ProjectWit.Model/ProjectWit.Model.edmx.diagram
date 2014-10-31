@@ -9,18 +9,15 @@
         <EntityTypeShape EntityType="WITModel.Wit_Company" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="WITModel.Wit_Item" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="WITModel.Wit_Order" Width="1.5" PointX="7.5" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WITModel.Wit_Status" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WITModel.Wit_Table" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="WITModel.Wit_Transaction" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="WITModel.Wit_User" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
         <AssociationConnector Association="WITModel.FK_Wit_Category_Wit_Company" ManuallyRouted="false" />
         <AssociationConnector Association="WITModel.FK_Wit_Item_Wit_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="WITModel.FK_Wit_Status_Wit_Company" ManuallyRouted="false" />
         <AssociationConnector Association="WITModel.FK_Wit_Table_Wit_Company" ManuallyRouted="false" />
         <AssociationConnector Association="WITModel.FK_Wit_User_Wit_Company" ManuallyRouted="false" />
         <AssociationConnector Association="WITModel.FK_Wit_Order_Wit_Item" ManuallyRouted="false" />
         <AssociationConnector Association="WITModel.FK_Wit_Order_Wit_Transaction" ManuallyRouted="false" />
-        <AssociationConnector Association="WITModel.FK_Wit_Transaction_Wit_Status" ManuallyRouted="false" />
         <AssociationConnector Association="WITModel.FK_Wit_Transaction_Wit_Table" ManuallyRouted="false" />
         <EntityTypeShape EntityType="WITModel.C__MigrationHistory" Width="1.5" PointX="10.375" PointY="0.75" />
         <EntityTypeShape EntityType="WITModel.AspNetRole" Width="1.5" PointX="7.375" PointY="10.125" />

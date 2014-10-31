@@ -5,17 +5,28 @@ namespace ProjectWit.Model
     using System;
     using System.Collections.Generic;
 
-    [MetadataType(typeof(Wit_StatusMetaData))]
-    public partial class Wit_Status { }
-
-    public class Wit_StatusMetaData
+    public sealed class Wit_Status
     {
-        public System.Guid Status_UID { get; set; }
-        [Required]
-        [Display(Name = "Company")]
-        public System.Guid Company_UID { get; set; }
-        [Display(Name = "Description")]
-        public string SatusDescription { get; set; }
+        private readonly String name;
+        private readonly int value;
 
+        public static readonly List<KeyValuePair<int, string>> Status = new List<KeyValuePair<int, string>>();
+        public static readonly Wit_Status Started = new Wit_Status(1, "Started");
+        public static readonly Wit_Status Accepted = new Wit_Status(2, "Accepted");
+        public static readonly Wit_Status Submitted = new Wit_Status(3, "Submitted");
+
+        private Wit_Status(int _value, string _name)
+        {
+            value = _value;
+            name = _name;
+            Status.Add(new KeyValuePair<int,string>(value,name));
+        }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
+
+   
 }
