@@ -77,6 +77,7 @@
     <Compile Include="DataExtensions\Wit_Item.cs" />
     <Compile Include="DataExtensions\Wit_Menu.cs" />
     <Compile Include="DataExtensions\Wit_Order.cs" />
+    <Compile Include="DataExtensions\Wit_Session.cs" />
     <Compile Include="DataExtensions\Wit_Status.cs" />
     <Compile Include="DataExtensions\Wit_Table.cs" />
     <Compile Include="DataExtensions\Wit_Transaction.cs" />

@@ -9,6 +9,7 @@ namespace ProjectWit.Model
     public static class Wit_Menu
     {
         public const string AdminMaintenance = "Admin Maintenance";
+        public const string MobileAdministrator = "Mobile Administrator";
         public const string MyProfile = "My Profile";
     }
 }

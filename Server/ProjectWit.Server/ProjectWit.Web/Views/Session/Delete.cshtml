@@ -1,4 +1,4 @@
-﻿@model ProjectWit.Model.Wit_Category
+﻿@model ProjectWit.Model.Wit_Session
 
 @{
     ViewBag.Title = "Delete";
@@ -12,11 +12,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.CategoryName)
+            @Html.DisplayNameFor(model => model.Browser)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CategoryName)
+            @Html.DisplayFor(model => model.Browser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeviceType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeviceType)
         </dd>
 
         <dt>
@@ -36,20 +44,27 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Wit_Company.CompanyName)
+            @Html.DisplayNameFor(model => model.IP)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Wit_Company.CompanyName)
+            @Html.DisplayFor(model => model.IP)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Terminate" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }

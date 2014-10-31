@@ -21,6 +21,9 @@ INSERT INTO WIT_NAVBAR (Menu,SubMenu,URL)
 VALUES('My Profile', 'User Profile','User/Edit')
 
 INSERT INTO WIT_NAVBAR (Menu,SubMenu,URL) 
+VALUES('Mobile Administrator', 'Session Management','Session/Index')
+
+INSERT INTO WIT_NAVBAR (Menu,SubMenu,URL) 
 VALUES('My Profile', 'Change Password','Account/Manage')
 
 INSERT INTO Wit_Company(Company_UID,CompanyName,CompanyAddress)

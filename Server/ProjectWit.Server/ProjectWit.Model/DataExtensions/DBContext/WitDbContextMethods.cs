@@ -107,16 +107,17 @@
           
             foreach(AspNetRole role in roles)
             {
-                if(role.Name== "SYSADMIN")
+                if (role.Name == "CREW" || role.Name == "ADMIN")
+                {
+                    navBar = navBar.Concat(
+                        Wit_NavBar.Where(m => m.Menu == Wit_Menu.MobileAdministrator));
+                }
+                else if(role.Name == "SYSADMIN")
                 {
                     navBar = navBar.Concat(
                         Wit_NavBar.Where(m => m.Menu == Wit_Menu.AdminMaintenance)); 
                 }
             }
-
-
-
-
             return navBar.ToList();
         }
     }
