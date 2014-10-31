@@ -64,8 +64,8 @@ namespace ProjectWit.Model.Tests
 
         [TestMethod]
         public void TestWitStatus()
-        {             
-            string x = Wit_Status.Started.ToString();
+        {
+            string x = Wit_Status.Open.ToString();
 
             List<KeyValuePair<int, string>> Status = Wit_Status.Status;
             string value = Status[0].Value;
