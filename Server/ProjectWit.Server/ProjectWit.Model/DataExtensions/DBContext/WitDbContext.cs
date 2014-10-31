@@ -7,19 +7,9 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public partial class WitDbContext : WITEntities
+    public partial class WitDbContext
     {
-        public string User_UID = string.Empty;
-
-        /// <summary>
-        /// WitDbContext will only contain 1 constructor.
-        /// </summary>
-        /// <param name="userID">This will be used to get the user who modifies the row</param>
-        public WitDbContext(string userID) : base()
-        {
-            this.Configuration.LazyLoadingEnabled = false;
-            User_UID = userID;
-        }
+        public string User_UID { get; set; }
 
         public override System.Threading.Tasks.Task<int> SaveChangesAsync()
         {

@@ -17,7 +17,7 @@ namespace ProjectWit.Web.Tests.WitServiceTest
         [TestMethod]
         public void TestGUID()
         {
-            using (WitDbContext db = new WitDbContext(""))
+            using (WitDbContext db = new WitDbContext())
             {
                 var varr = db.Wit_Category.ToList();
             }

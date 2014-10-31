@@ -15,10 +15,10 @@ namespace ProjectWit.Model
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class WITEntities : DbContext
+    public partial class WitDbContext : DbContext
     {
-        public WITEntities()
-            : base("name=WITEntities")
+        public WitDbContext()
+            : base("name=WitDbContext")
         {
             this.Configuration.LazyLoadingEnabled = false;
         }

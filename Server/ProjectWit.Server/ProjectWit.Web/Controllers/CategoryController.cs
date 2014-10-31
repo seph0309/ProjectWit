@@ -15,7 +15,7 @@ namespace ProjectWit.Web.Controllers
     [WitAuthorize]
     public class CategoryController : WitBaseController
     {
-        private WitDbContext db = new WitDbContext("User");
+        private WitDbContext db = new WitDbContext();
 
         // GET: Category
         public async Task<ActionResult> Index()

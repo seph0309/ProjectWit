@@ -8,7 +8,7 @@ namespace ProjectWit.Service
 {
     public class WitServiceDBContext : WitDbContext
     {
-        public WitServiceDBContext() :base("Wit_Service")
+        public WitServiceDBContext()
         {
             //Turning them off for performance purposes. And since we don't track changes over service
             this.Configuration.AutoDetectChangesEnabled = false;

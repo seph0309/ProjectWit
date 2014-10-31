@@ -7,7 +7,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public partial class WitDbContext : WITEntities
+    public partial class WitDbContext
     {
 
         public bool UpdateUser(UsersViewModel usersViewModel)
@@ -68,7 +68,7 @@
             List<AspNetRole> aspNetRole = new List<AspNetRole>();
 
             //Get all Roles
-            using (WITEntities db = new WITEntities())
+            using (WitDbContext db = new WitDbContext())
             {
                 var allRoles = db.AspNetRoles.ToList();
                 var identityUserRole = db.AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == UserID)).ToList();

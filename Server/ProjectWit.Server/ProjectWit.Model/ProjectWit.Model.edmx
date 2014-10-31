@@ -738,7 +738,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="WITEntities" annotation:LazyLoadingEnabled="false" a:TypeAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+        <EntityContainer Name="WitDbContext" annotation:LazyLoadingEnabled="false" a:TypeAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <EntitySet Name="Wit_Category" EntityType="Self.Wit_Category" />
           <EntitySet Name="Wit_Company" EntityType="Self.Wit_Company" />
           <EntitySet Name="Wit_Item" EntityType="Self.Wit_Item" />
@@ -968,7 +968,7 @@ warning 6002: The table/view 'WIT.dbo.UsersViewModel' does not have a primary ke
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="WITModelStoreContainer" CdmEntityContainer="WITEntities">
+        <EntityContainerMapping StorageEntityContainer="WITModelStoreContainer" CdmEntityContainer="WitDbContext">
           <EntitySetMapping Name="Wit_Category">
             <EntityTypeMapping TypeName="WITModel.Wit_Category">
               <MappingFragment StoreEntitySet="Wit_Category">

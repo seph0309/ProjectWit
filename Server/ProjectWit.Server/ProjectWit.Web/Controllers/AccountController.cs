@@ -15,7 +15,7 @@ namespace ProjectWit.Web.Controllers
 {
     public class AccountController : WitBaseController
     {
-        WitDbContext db = new WitDbContext("User");
+        WitDbContext db = new WitDbContext();
         public AccountController()
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
         {

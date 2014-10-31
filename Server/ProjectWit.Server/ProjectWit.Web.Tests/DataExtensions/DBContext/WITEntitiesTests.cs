@@ -15,7 +15,7 @@ namespace ProjectWit.Model.Tests
         [TestMethod()]
         public void GetUserDetailTest()
         {
-            using(WitDbContext db = new WitDbContext("User"))
+            using(WitDbContext db = new WitDbContext())
             {
                 db.GetUserDetail(new Guid("274862DB-E708-4D24-8B2B-80734929F3FA"));
 
