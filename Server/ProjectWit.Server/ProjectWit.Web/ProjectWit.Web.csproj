@@ -178,7 +178,7 @@
     <Compile Include="Models\ISessionManager.cs" />
     <Compile Include="Models\WitAuthorize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SessionController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="WitService.svc.cs">
       <DependentUpon>WitService.svc</DependentUpon>
