@@ -10,19 +10,17 @@
     public partial class WitDbContext
     {
         public string User_UID { get; set; }
-
+        
         public override System.Threading.Tasks.Task<int> SaveChangesAsync()
         {
             SetProperties();
             return base.SaveChangesAsync();
         }
-
         public override int SaveChanges()
         {
             SetProperties();
             return base.SaveChanges();
         }
-
         private void SetProperties()
         {
             var modifiedEntries = this.ChangeTracker.Entries()
@@ -37,11 +35,9 @@
                     //    dbEntityEntry.Property("Category_UID").CurrentValue = null;
                 }
                     
-
                 dbEntityEntry.Property("ModifiedDate").CurrentValue = DateTime.Now;
                 dbEntityEntry.Property("ModifiedBy").CurrentValue = User_UID;
             }
         }
-
     }
 }

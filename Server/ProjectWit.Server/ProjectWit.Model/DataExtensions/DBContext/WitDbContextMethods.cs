@@ -9,7 +9,53 @@
 
     public partial class WitDbContext
     {
+        public bool DeleteUser(Guid? guid)
+        {
+            Wit_User wit_user = this.Wit_User.Find(guid);
+            AspNetUser aspnetuser = this.AspNetUsers.Find(guid.ToString());
 
+            this.Wit_User.Remove(wit_user);
+            this.AspNetUsers.Remove(aspnetuser);
+            this.SaveChangesAsync();
+            return true;
+        }
+        private List<AspNetRole> GetRoles(string UserID)
+        {
+            //Get Roles from user
+            List<AspNetRole> aspNetRole = new List<AspNetRole>();
+
+            //Get all Roles
+            using (WitDbContext db = new WitDbContext())
+            {
+                db.Configuration.AutoDetectChangesEnabled = false;
+                var allRoles = db.AspNetRoles.ToList();
+                var identityUserRole = db.AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == UserID)).ToList();
+
+                foreach (AspNetRole role in allRoles)
+                {
+                    var isSelected = from x in identityUserRole
+                                     where x.Id == role.Id
+                                     select x;
+
+                    aspNetRole.Add(new AspNetRole
+                    {
+                        Id = role.Id.ToString(),
+                        Name = role.Name.ToString(),
+                        IsSelected = (isSelected.Count() > 0)
+                    });
+                }
+            }
+            return aspNetRole;
+        }
+        public UsersViewModel GetUserDetail(Guid? userID)
+        {
+            UsersViewModel usersViewModel = this.UsersViewModels.Find(userID);
+
+            if (usersViewModel == null) return null;
+
+            usersViewModel.AspNetRole = GetRoles(userID.ToString());
+            return usersViewModel;
+        }
         public bool UpdateUser(UsersViewModel usersViewModel)
         {
             Wit_User wit_user = new Wit_User();
@@ -50,57 +96,6 @@
                     throw ex;
                 }
             }
-        }
-        
-        public UsersViewModel GetUserDetail(Guid? userID)
-        {
-            UsersViewModel usersViewModel = this.UsersViewModels.Find(userID);
-            
-            if (usersViewModel == null) return null;
-            
-            usersViewModel.AspNetRole = GetRoles(userID.ToString());
-            return usersViewModel;
-        }
-
-        private List<AspNetRole> GetRoles(string UserID)
-        {
-            //Get Roles from user
-            List<AspNetRole> aspNetRole = new List<AspNetRole>();
-
-            //Get all Roles
-            using (WitDbContext db = new WitDbContext())
-            {
-                db.Configuration.AutoDetectChangesEnabled = false;
-                var allRoles = db.AspNetRoles.ToList();
-                var identityUserRole = db.AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == UserID)).ToList();
-
-                foreach (AspNetRole role in allRoles)
-                {
-                    var isSelected = from x in identityUserRole
-                                     where x.Id == role.Id
-                                     select x;
-
-                    aspNetRole.Add(new AspNetRole
-                    {
-                        Id = role.Id.ToString(),
-                        Name = role.Name.ToString(),
-                        IsSelected = (isSelected.Count() > 0)
-                    });
-                }
-            }
-            return aspNetRole;
-        }
-
-
-        public bool DeleteUser(Guid? guid)
-        {
-            Wit_User wit_user = this.Wit_User.Find(guid);
-            AspNetUser aspnetuser = this.AspNetUsers.Find(guid.ToString());
-            
-            this.Wit_User.Remove(wit_user);
-            this.AspNetUsers.Remove(aspnetuser);
-            this.SaveChangesAsync();
-            return true;
         }
 
         public List<Wit_NavBar> GetNavBar(string userUID)
