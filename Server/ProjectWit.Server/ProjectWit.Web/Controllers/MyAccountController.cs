@@ -23,10 +23,9 @@ namespace ProjectWit.Web.Controllers
         {
             using (WitDbContext db = new WitDbContext())
             {
-                var nav = (from col in db.Wit_NavBar
-                           select new { Menu = col.Menu, SubMenu = col.SubMenu, URL = col.URL }
-                           ).OrderBy(or => or.Menu).ToList();
-                return Json(nav, JsonRequestBehavior.AllowGet);
+                db.Configuration.AutoDetectChangesEnabled = false;
+                db.Configuration.ProxyCreationEnabled = false;
+                return Json(db.GetNavBar(Session["userID"].ToString()), JsonRequestBehavior.AllowGet);
             }
         }
 	}

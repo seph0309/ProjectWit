@@ -69,6 +69,19 @@ namespace ProjectWit.Model.Tests
 
             List<KeyValuePair<int, string>> Status = Wit_Status.Status;
             string value = Status[0].Value;
+
+            using (WitDbContext db = new WitDbContext())
+            {
+
+                string _sql = string.Empty;
+                _sql = "SELECT Menu,SubMenu,URL FROM Wit_NavBar WHERE Menu= '{0}'";
+
+                string var = string.Format(_sql, "hello");
+
+                List<Wit_NavBar> bar = new List<Wit_NavBar>();
+                var _bar = db.GetNavBar("299A2AD2-B6A4-47E8-A66A-CA84333AF7C0");
+                
+            }
         }
     }
 }

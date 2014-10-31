@@ -20,9 +20,18 @@
                     {
                         @Html.AntiForgeryToken()
                         <li>
-                            <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <a href="javascript:LogOut()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     }
             </li>
         </ul>
     </li>
+
+<script>
+    function LogOut()
+    {
+        sessionStorage.clear();
+        localStorage.clear();
+        document.getElementById('logoutForm').submit();
+    }
+</script>
