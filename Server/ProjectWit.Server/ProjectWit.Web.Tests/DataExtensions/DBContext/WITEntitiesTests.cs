@@ -95,6 +95,7 @@ namespace ProjectWit.Model.Tests
 
             using (WitDbContext db = new WitDbContext())
             {
+                //TODO: Test the results. They must match with the roles they are in
                 var ret = db.GetSession(SYSADMIN);
                 ret = db.GetSession(ADMIN);
                 ret = db.GetSession(CREW);

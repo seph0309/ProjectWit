@@ -100,8 +100,9 @@
 
         public List<Wit_Session> GetSession(string userUID)
         {
-            List<AspNetRole> roles = AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == userUID)).ToList();
+            SetTrackingAndProxy(false);
 
+            List<AspNetRole> roles = AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == userUID)).ToList();
             List<Wit_Session> returnVal = new List<Wit_Session>();
 
             foreach (AspNetRole role in roles)
@@ -153,6 +154,11 @@
                 }
             }
             return navBar.ToList();
+        }
+        private void SetTrackingAndProxy(bool value)
+        {
+            Configuration.ProxyCreationEnabled = value;
+            Configuration.AutoDetectChangesEnabled = value;
         }
     }
 }
