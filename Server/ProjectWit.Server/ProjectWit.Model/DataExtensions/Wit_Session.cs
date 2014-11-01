@@ -20,6 +20,7 @@ namespace ProjectWit.Model
 
     public class WitSessionMetaData
     {
+        [Display(Name="Session ID")]
         public System.Guid Session_UID { get; set; }
         public System.Guid User_UID { get; set; }
         public string Browser { get; set; }

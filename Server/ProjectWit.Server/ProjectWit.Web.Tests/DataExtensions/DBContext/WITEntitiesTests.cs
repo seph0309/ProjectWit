@@ -94,11 +94,11 @@ namespace ProjectWit.Model.Tests
             string GUEST = "299A2AD2-B6A4-47E8-A66A-CA84333AF7C3";
 
             using (WitDbContext db = new WitDbContext())
-            {
+            {   
                 //TODO: Test the results. They must match with the roles they are in
                 var ret = db.GetSession(SYSADMIN);
-                ret = db.GetSession(ADMIN);
-                ret = db.GetSession(CREW);
+                var ret2 = db.GetSession(ADMIN);
+                var ret3 = db.GetSession(CREW);
                 //ret = db.GetSession(CUSTOMER);
                 ret = db.GetSession(GUEST);
             }

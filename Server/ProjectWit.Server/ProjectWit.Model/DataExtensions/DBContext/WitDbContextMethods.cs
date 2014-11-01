@@ -100,17 +100,14 @@
 
         public List<Wit_Session> GetSession(string userUID)
         {
-            SetTrackingAndProxy(false);
-
+            Configuration.LazyLoadingEnabled = true;
             List<AspNetRole> roles = AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == userUID)).ToList();
-            List<Wit_Session> returnVal = new List<Wit_Session>();
-
+            
             foreach (AspNetRole role in roles)
             {
                 if(role.IsPowerUser())
                 {
-                    returnVal = Wit_Session.ToList();
-                    break;
+                    return Wit_Session.ToList();
                 }
                 else if (role.IsCompanyAdmin())
                 {
@@ -119,17 +116,14 @@
                                 select new { CompanyUID = user.Company_UID }).FirstOrDefault();
                     if (comp.CompanyUID != null)
                     {
-                        string _sql = string.Format("SELECT Session_UID,User_UID,Browser,DeviceType,IP,Location,ModifiedDate,ModifiedBy FROM Wit_Session ");
-                        _sql = _sql + string.Format("WHERE User_UID IN (SELECT User_UID FROM Wit_User WHERE Company_UID IN ('{0}'))", comp.CompanyUID.ToString());
-                        returnVal = Wit_Session.SqlQuery(_sql).ToList();
-                        break;
+                        var returnVal =  Wit_Session.SqlQuery(AspNetRole.GeAdminSessionQuery(comp.CompanyUID.ToString()));
+                        return returnVal.ToList();
                     }
                 }
             }
 
-            if (returnVal.Count ==0 )
-                returnVal = Wit_Session.Where(m => m.User_UID == new Guid(userUID)).ToList();
-            return returnVal;
+            //Return default (per user)
+            return Wit_Session.Where(m => m.User_UID == new Guid(userUID)).ToList();
         }
 
         public List<Wit_NavBar> GetNavBar(string userUID)
@@ -138,21 +132,22 @@
             var navBar = Wit_NavBar.Where(m => m.Menu == Wit_Menu.MyProfile);
 
             List<AspNetRole> roles = AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == userUID)).ToList();
-          
-            foreach(AspNetRole role in roles)
+
+
+            foreach (AspNetRole role in roles)
             {
-                if (role.IsMobileUser())
+                if (!role.IsGuest())
                 {
-                    navBar = navBar.Concat(
+                    if (role.IsPowerUser())
+                    {
+                        navBar = navBar.Union(
+                                Wit_NavBar.Where(m => m.Menu == Wit_Menu.AdminMaintenance));
+                    }
+                    navBar = navBar.Union(
                         Wit_NavBar.Where(m => m.Menu == Wit_Menu.MobileAdministrator));
                 }
-
-                if (role.IsPowerUser())
-                {
-                    navBar = navBar.Concat(
-                        Wit_NavBar.Where(m => m.Menu == Wit_Menu.AdminMaintenance)); 
-                }
             }
+
             return navBar.ToList();
         }
         private void SetTrackingAndProxy(bool value)

@@ -22,6 +22,27 @@ namespace ProjectWit.Model
         protected const string CUSTOMER = "CUSTOMER";
         protected const string GUEST = "GUEST";
 
+
+        /// <summary>
+        /// Creates a query which extracts session by Company and excludes SYSADMIN
+        /// </summary>
+        /// <param name="companyUID"></param>
+        /// <returns></returns>
+        public static string GeAdminSessionQuery(string companyUID)
+        {
+            string _sql = string.Format("SELECT DISTINCT Session_UID,Wit_Session.User_UID,Browser,DeviceType,IP, ");
+            _sql = _sql + string.Format("Location,Wit_Session.ModifiedDate,Wit_Session.ModifiedBy,Wit_User.FirstName, Wit_User.LastName ");
+            _sql = _sql + string.Format("FROM Wit_Session ");
+            _sql = _sql + string.Format("INNER JOIN Wit_User ON Wit_Session.User_UID = Wit_User.User_UID ");
+            _sql = _sql + string.Format("INNER JOIN Wit_Company ON Wit_User.Company_UID=Wit_Company.Company_UID ");
+            _sql = _sql + string.Format("LEFT JOIN AspNetUserRoles ON Wit_User.User_UID= AspNetUserRoles.UserId ");
+            _sql = _sql + string.Format("INNER JOIN AspNetRoles ON AspNetUserRoles.RoleId = AspNetRoles.Id ");
+            _sql = _sql + string.Format("WHERE Wit_Session.User_UID IN ");
+            _sql = _sql + string.Format("(SELECT User_UID FROM Wit_User WHERE Company_UID IN ('{0}')) ", companyUID);
+            _sql = _sql + string.Format("AND AspNetRoles.Id <> '{0}'", SYSADMIN);
+            return _sql;
+        }
+
         public bool IsMobileUser()
         {
             if (Name == CREW || Name == ADMIN || Name == SYSADMIN)
@@ -53,17 +74,11 @@ namespace ProjectWit.Model
         }
         public bool IsGuest()
         {
-            if (Name == GUEST)
+            if (Name == GUEST || Name == CUSTOMER)
                 return true;
             else
                 return false;
         }
-        public bool IsCustomer()
-        {
-            if (Name == CUSTOMER)
-                return true;
-            else
-                return false;
-        }
+ 
     }
 }

@@ -10,6 +10,12 @@
 <br />
 <table class="table">
     <tr>
+        @if (ViewBag.ShowFullName)
+        { 
+            <th>
+                User
+            </th>
+        }
         <th>
             @Html.DisplayNameFor(model => model.Browser)
         </th>
@@ -26,10 +32,17 @@
             @Html.DisplayNameFor(model => model.ModifiedDate)
         </th>
         <th></th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        @if (ViewBag.ShowFullName)
+        { 
+            <td>
+                @Html.DisplayFor(modelItem => item.Wit_User.FullName)
+            </td>
+        }
         <td>
             @Html.DisplayFor(modelItem => item.Browser)
         </td>
@@ -43,12 +56,14 @@
             @Html.DisplayFor(modelItem => item.Location)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Location)
+            @Html.DisplayFor(modelItem => item.ModifiedDate)
         </td>
         <td>
-            @Html.ActionLink("Terminate", "Delete", new { id=item.Session_UID })
+            @Html.ActionLink("Details", "Details", new { id = item.Session_UID })
+        </td>
+        <td>
+            @Html.ActionLink("Terminate", "Delete", new { id = item.Session_UID })
         </td>
     </tr>
 }
-
 </table>

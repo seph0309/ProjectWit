@@ -8,18 +8,31 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProjectWit.Model;
+using ProjectWit.Web.Models;
 
-namespace ProjectWit.Web
+namespace ProjectWit.Web.Controllers
 {
-    public class SessionController : Controller
+    [WitAuthorize]
+    public class SessionController : WitBaseController
     {
         private WitDbContext db = new WitDbContext();
 
         // GET: Session
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var wit_Session = db.Wit_Session.Include(w => w.Wit_User);
-            return View(await wit_Session.ToListAsync());
+            var wit_Session = db.GetSession(Session["userId"].ToString()).ToList();
+            
+            //If Wit_User is null it means that the user in SYSADMIN/ADMIN role
+            if (wit_Session.Count > 0 && wit_Session[0].Wit_User == null)
+                ViewBag.ShowFullName = true;
+            else
+                ViewBag.ShowFullName = false;
+
+            //TODO: Temporarily set it as true
+            ViewBag.ShowFullName = true;
+
+
+            return View(wit_Session);
         }
 
         // GET: Session/Details/5
@@ -29,6 +42,7 @@ namespace ProjectWit.Web
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            db.Configuration.LazyLoadingEnabled = true;
             Wit_Session wit_Session = await db.Wit_Session.FindAsync(id);
             if (wit_Session == null)
             {

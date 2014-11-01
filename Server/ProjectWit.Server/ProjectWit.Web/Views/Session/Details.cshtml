@@ -8,9 +8,39 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Wit_Session</h4>
     <hr />
     <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Session_UID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Session_UID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Wit_User.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wit_User.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Browser)
         </dt>
@@ -43,29 +73,7 @@
             @Html.DisplayFor(model => model.ModifiedBy)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IP)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IP)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Location)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Wit_User.MiddleName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Wit_User.MiddleName)
-        </dd>
 
     </dl>
 </div>

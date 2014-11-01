@@ -9,7 +9,8 @@ namespace ProjectWit.Model
     public partial class Wit_User {
 
         public string ConfirmPassword { get; set; }
-        public string UserName { get; set; }
+        [Display(Name = "User")]
+        public string FullName { get { return string.Format("{0},{1}", FirstName, LastName); } }
     }
 
     public class Wit_UserMetaData
