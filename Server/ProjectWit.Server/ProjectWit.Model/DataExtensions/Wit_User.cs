@@ -10,7 +10,7 @@ namespace ProjectWit.Model
 
         public string ConfirmPassword { get; set; }
         [Display(Name = "User")]
-        public string FullName { get { return string.Format("{0},{1}", FirstName, LastName); } }
+        public string FullName { get { return string.Format("{0}, {1}", LastName, FirstName); } }
     }
 
     public class Wit_UserMetaData
