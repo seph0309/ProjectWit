@@ -62,7 +62,7 @@
             @Html.ActionLink("Details", "Details", new { id = item.Session_UID })
         </td>
         <td>
-            @Html.ActionLink("Terminate", "Delete", new { id = item.Session_UID })
+            @Html.ActionLink("Terminate", "Delete", new { id = item.Session_UID }, new { onclick = "return confirm('Are you sure you want to delete this session?');" })
         </td>
     </tr>
 }

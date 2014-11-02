@@ -111,31 +111,18 @@ namespace ProjectWit.Web.Controllers
         }
 
         // GET: Session/Delete/5
-        public async Task<ActionResult> Delete(Guid? id)
+        public async Task<ActionResult> Delete(Guid id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Wit_Session wit_Session = await db.Wit_Session.FindAsync(id);
-            if (wit_Session == null)
-            {
-                return HttpNotFound();
-            }
-            return View(wit_Session);
-        }
-
-        // POST: Session/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(Guid id)
-        {
-            Wit_Session wit_Session = await db.Wit_Session.FindAsync(id);
             db.Wit_Session.Remove(wit_Session);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-
+         
         protected override void Dispose(bool disposing)
         {
             if (disposing)
