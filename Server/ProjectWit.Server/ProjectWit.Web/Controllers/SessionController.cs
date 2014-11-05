@@ -20,17 +20,17 @@ namespace ProjectWit.Web.Controllers
         /// </summary>
         private WitDbContext db = new WitDbContext();
 
-        private IWit_Session _iwit_session;
+        private IWit_Session _wit_session;
 
         public SessionController(IWit_Session iWit)
         {
-            _iwit_session = iWit;
+            _wit_session = iWit;
         }
 
         // GET: Session
         public ActionResult Index()
         {
-            string _Sample = _iwit_session.helloWorld("hello!");
+            string _Sample = _wit_session.helloWorld("hello!");
             var wit_Session = db.GetSession(Session["userId"].ToString()).ToList();
             
             //If Wit_User is null it means that the user in SYSADMIN/ADMIN role
