@@ -14,8 +14,23 @@ namespace ProjectWit.Model
     using System.ComponentModel.DataAnnotations;
     
     [MetadataType(typeof(WitSessionMetaData))]
-    public partial class Wit_Session
+    public partial class Wit_Session :IWit_Session
     {
+        /// <summary>
+        /// TODO: Implement dependency injection
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        public string sample(string msg)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public interface IWit_Session
+    {
+        string sample(string msg);
+
     }
 
     public class WitSessionMetaData
