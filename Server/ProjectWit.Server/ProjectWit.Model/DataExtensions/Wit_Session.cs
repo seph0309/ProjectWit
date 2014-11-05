@@ -16,22 +16,14 @@ namespace ProjectWit.Model
     [MetadataType(typeof(WitSessionMetaData))]
     public partial class Wit_Session :IWit_Session
     {
-        /// <summary>
-        /// TODO: Implement dependency injection
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <returns></returns>
-        public string sample(string msg)
+        protected WitDbContext db;
+        public string ShowFullName { get; set; }
+
+        public string helloWorld(string msg)
         {
-            throw new NotImplementedException();
+            return "Hello World!!";
         }
-    }
-
-    public interface IWit_Session
-    {
-        string sample(string msg);
-
-    }
+    } 
 
     public class WitSessionMetaData
     {

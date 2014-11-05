@@ -15,21 +15,22 @@ namespace ProjectWit.Web.Controllers
     [WitAuthorize]
     public class SessionController : WitBaseController
     {
+        /// <summary>
+        /// TODO: Use Unity here.
+        /// </summary>
         private WitDbContext db = new WitDbContext();
 
-        private readonly IWit_Session Iwit_Session;
-
-        //public SessionController() : this(new Wit_Session()) {}
+        private IWit_Session _iwit_session;
 
         public SessionController(IWit_Session iWit)
         {
-            Iwit_Session = iWit;
+            _iwit_session = iWit;
         }
 
         // GET: Session
         public ActionResult Index()
         {
-            string x = Iwit_Session.sample("Hello world");
+            string _Sample = _iwit_session.helloWorld("hello!");
             var wit_Session = db.GetSession(Session["userId"].ToString()).ToList();
             
             //If Wit_User is null it means that the user in SYSADMIN/ADMIN role
