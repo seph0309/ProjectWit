@@ -20,18 +20,17 @@ namespace ProjectWit.Web.Controllers
         /// </summary>
         private WitDbContext db = new WitDbContext();
 
-        private IWit_Session _wit_session;
+        private IWit_Session ISession;
 
         public SessionController(IWit_Session iWit)
         {
-            _wit_session = iWit;
+            ISession = iWit;
         }
 
         // GET: Session
         public ActionResult Index()
         {
-            string _Sample = _wit_session.helloWorld("hello!");
-            var wit_Session = db.GetSession(Session["userId"].ToString()).ToList();
+            var wit_Session = ISession.GetSession(Session["userId"].ToString()).ToList();
             
             //If Wit_User is null it means that the user in SYSADMIN/ADMIN role
             if (wit_Session.Count > 0 && wit_Session[0].Wit_User == null)
@@ -47,14 +46,13 @@ namespace ProjectWit.Web.Controllers
         }
 
         // GET: Session/Details/5
-        public async Task<ActionResult> Details(Guid? id)
+        public ActionResult Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            db.Configuration.LazyLoadingEnabled = true;
-            Wit_Session wit_Session = await db.Wit_Session.FindAsync(id);
+            Wit_Session wit_Session =  ISession.FindById(id);
             if (wit_Session == null)
             {
                 return HttpNotFound();
@@ -65,7 +63,7 @@ namespace ProjectWit.Web.Controllers
         // GET: Session/Create
         public ActionResult Create()
         {
-            ViewBag.User_UID = new SelectList(db.Wit_User, "User_UID", "MiddleName");
+            ViewBag.User_UID = new SelectList(ISession.GetAll(), "User_UID", "MiddleName");
             return View();
         }
 
@@ -74,17 +72,15 @@ namespace ProjectWit.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Session_UID,User_UID,Browser,DeviceType,ModifiedDate,ModifiedBy,IP,Location")] Wit_Session wit_Session)
+        public ActionResult Create([Bind(Include = "Session_UID,User_UID,Browser,DeviceType,ModifiedDate,ModifiedBy,IP,Location")] Wit_Session wit_Session)
         {
             if (ModelState.IsValid)
             {
-                wit_Session.Session_UID = Guid.NewGuid();
-                db.Wit_Session.Add(wit_Session);
-                await db.SaveChangesAsync();
+                ISession.Create(ref wit_Session);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.User_UID = new SelectList(db.Wit_User, "User_UID", "MiddleName", wit_Session.User_UID);
+            ViewBag.User_UID = new SelectList(ISession.GetAll(), "User_UID", "MiddleName", wit_Session.User_UID);
             return View(wit_Session);
         }
 
@@ -95,12 +91,12 @@ namespace ProjectWit.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Wit_Session wit_Session = await db.Wit_Session.FindAsync(id);
+            Wit_Session wit_Session = ISession.FindById(id);
             if (wit_Session == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.User_UID = new SelectList(db.Wit_User, "User_UID", "MiddleName", wit_Session.User_UID);
+            ViewBag.User_UID = new SelectList(ISession.GetAll(), "User_UID", "MiddleName", wit_Session.User_UID);
             return View(wit_Session);
         }
 
@@ -109,12 +105,12 @@ namespace ProjectWit.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Session_UID,User_UID,Browser,DeviceType,ModifiedDate,ModifiedBy,IP,Location")] Wit_Session wit_Session)
+        public ActionResult Edit([Bind(Include = "Session_UID,User_UID,Browser,DeviceType,ModifiedDate,ModifiedBy,IP,Location")] Wit_Session wit_Session)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(wit_Session).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.User_UID = new SelectList(db.Wit_User, "User_UID", "MiddleName", wit_Session.User_UID);

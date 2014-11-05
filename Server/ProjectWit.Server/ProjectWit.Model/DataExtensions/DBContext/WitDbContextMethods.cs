@@ -97,35 +97,6 @@
                 }
             }
         }
-
-        public List<Wit_Session> GetSession(string userUID)
-        {
-            Configuration.LazyLoadingEnabled = true;
-            List<AspNetRole> roles = AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == userUID)).ToList();
-            
-            foreach (AspNetRole role in roles)
-            {
-                if(role.IsPowerUser())
-                {
-                    return Wit_Session.ToList();
-                }
-                else if (role.IsCompanyAdmin())
-                {
-                    var comp = (from user in Wit_User
-                                where user.User_UID == new Guid(userUID)
-                                select new { CompanyUID = user.Company_UID }).FirstOrDefault();
-                    if (comp.CompanyUID != null)
-                    {
-                        var returnVal =  Wit_Session.SqlQuery(AspNetRole.GeAdminSessionQuery(comp.CompanyUID.ToString()));
-                        return returnVal.ToList();
-                    }
-                }
-            }
-
-            //Return default (per user)
-            return Wit_Session.Where(m => m.User_UID == new Guid(userUID)).ToList();
-        }
-
         public List<Wit_NavBar> GetNavBar(string userUID)
         {
             //Initial Get
