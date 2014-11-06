@@ -85,7 +85,7 @@ namespace ProjectWit.Model.Tests
         }
 
         [TestMethod]
-        public void GetSessionTest()
+        public async Task GetSessionTest()
         {
             string SYSADMIN = "299A2AD2-B6A4-47E8-A66A-CA84333AF7C0";
             string ADMIN = "299A2AD2-B6A4-47E8-A66A-CA84333AF7C2";
@@ -96,14 +96,12 @@ namespace ProjectWit.Model.Tests
 
             Wit_Session db = new Wit_Session();
             //TODO: Test the results. They must match with the roles they are in
-            var joseph = db.FindById(SampleSession);
-            joseph.Browser = "Josephsss Browser";
-            db.Update(joseph, "sephTest");
-
+            var joseph = await db.GetByIdAsync(SampleSession);
+             
             Wit_Session wit = new Wit_Session { User_UID = new Guid(SYSADMIN) };
-            db.Create(ref wit, "sephTest");
+            await db.CreateAsync(wit, "sephTest");
 
-            db.Remove(wit.Session_UID);
+            db.RemoveAsync(wit.Session_UID);
 
 
             var ret = db.GetSession(SYSADMIN);

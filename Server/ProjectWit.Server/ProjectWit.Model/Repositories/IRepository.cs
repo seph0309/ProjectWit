@@ -8,11 +8,11 @@ namespace ProjectWit.Model
 {
     public interface IRepository<T>
     {
-        T GetById(Guid? id);
-        T FindById(Guid? id);
-        List<T> GetAll();
-        bool Create(ref T entity, string modifiedBy);
-        bool Remove(Guid? id);
-        bool Update(Wit_Session wit_Session, string modifiedBy);
+        Task <T> GetByIdAsync(Guid? id);
+        Task<T> FindByIdAsync(Guid? id);
+        Task<List<T>> GetAllAsync();
+        Task<T> CreateAsync(T entity, string modifiedBy);
+        Task RemoveAsync(Guid? id);
+        Task UpdateAsync(Wit_Session wit_Session, string modifiedBy);
     }
 }

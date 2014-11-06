@@ -47,41 +47,40 @@ namespace ProjectWit.Model
             //Return default (per user)
             return db.Wit_Session.Where(m => m.User_UID == new Guid(userUID)).ToList();
         }
-        public List<Wit_Session> GetAll()
+        public async Task<List<Wit_Session>> GetAllAsync()
         {
-            return db.Wit_Session.ToList();
+            return await db.Wit_Session.ToListAsync();
         }
-        public bool Create(ref Wit_Session entity, string modifiedBy)
+        public async Task<Wit_Session> CreateAsync(Wit_Session entity, string modifiedBy)
         {
             db.ModifiedBy = modifiedBy;
             db.Wit_Session.Add(entity);
-            db.SaveChanges();
-            return true;
+            await db.SaveChangesAsync();
+            return entity;
+
         }
-        public bool Remove(Guid? id)
+        public async Task RemoveAsync(Guid? id)
         {
             Wit_Session wit_Session = db.Wit_Session.Find(id);
             db.Wit_Session.Remove(wit_Session);
-            db.SaveChanges();
-            return true;
+            await db.SaveChangesAsync();
         }
-        public bool Update(Wit_Session wit_Session, string modifiedBy)
+        public async Task UpdateAsync(Wit_Session wit_Session, string modifiedBy)
         {
             db.ModifiedBy = modifiedBy;
             db.Entry(wit_Session).State = EntityState.Modified;
-            db.SaveChanges();
-            return true;
+            await db.SaveChangesAsync();
         }
-        public Wit_Session GetById(Guid? id)
+        public async Task<Wit_Session> GetByIdAsync(Guid? id)
         {
             db.Configuration.LazyLoadingEnabled = true;
-            Wit_Session wit_Session = db.Wit_Session.Where(m => m.Session_UID == id).FirstOrDefault();
+            Wit_Session wit_Session = await db.Wit_Session.Where(m => m.Session_UID == id).FirstOrDefaultAsync();
             return wit_Session;
         }
-        public Wit_Session FindById(Guid? id)
+        public async Task<Wit_Session> FindByIdAsync(Guid? id)
         {
             db.Configuration.LazyLoadingEnabled = true;
-            Wit_Session wit_Session = db.Wit_Session.Find(id);
+            Wit_Session wit_Session = await db.Wit_Session.FindAsync(id);
             db.Configuration.LazyLoadingEnabled = false;
             return wit_Session;
         }

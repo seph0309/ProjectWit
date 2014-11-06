@@ -41,13 +41,13 @@ namespace ProjectWit.Web.Controllers
         }
 
         // GET: Session/Details/5
-        public ActionResult Details(Guid? id)
+        public async Task<ActionResult> Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Wit_Session wit_Session =  ISession.FindById(id);
+            Wit_Session wit_Session = await ISession.FindByIdAsync(id);
             if (wit_Session == null)
             {
                 return HttpNotFound();
@@ -56,9 +56,9 @@ namespace ProjectWit.Web.Controllers
         }
 
         // GET: Session/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            ViewBag.User_UID = new SelectList(ISession.GetAll(), "User_UID", "MiddleName");
+            ViewBag.User_UID = new SelectList(await ISession.GetAllAsync(), "User_UID", "MiddleName");
             return View();
         }
 
@@ -67,15 +67,15 @@ namespace ProjectWit.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Session_UID,User_UID,Browser,DeviceType,ModifiedDate,ModifiedBy,IP,Location")] Wit_Session wit_Session)
+        public async Task<ActionResult> Create([Bind(Include = "Session_UID,User_UID,Browser,DeviceType,ModifiedDate,ModifiedBy,IP,Location")] Wit_Session wit_Session)
         {
             if (ModelState.IsValid)
             {
-                ISession.Create(ref wit_Session, User.Identity.Name);
+                ISession.CreateAsync(wit_Session, User.Identity.Name);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.User_UID = new SelectList(ISession.GetAll(), "User_UID", "MiddleName", wit_Session.User_UID);
+            ViewBag.User_UID = new SelectList(await ISession.GetAllAsync(), "User_UID", "MiddleName", wit_Session.User_UID);
             return View(wit_Session);
         }
 
@@ -86,12 +86,12 @@ namespace ProjectWit.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Wit_Session wit_Session = ISession.FindById(id);
+            Wit_Session wit_Session = await ISession.FindByIdAsync(id);
             if (wit_Session == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.User_UID = new SelectList(ISession.GetAll(), "User_UID", "MiddleName", wit_Session.User_UID);
+            ViewBag.User_UID = new SelectList(await ISession.GetAllAsync(), "User_UID", "MiddleName", wit_Session.User_UID);
             return View(wit_Session);
         }
 
@@ -100,14 +100,14 @@ namespace ProjectWit.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Session_UID,User_UID,Browser,DeviceType,ModifiedDate,ModifiedBy,IP,Location")] Wit_Session wit_Session)
+        public async Task<ActionResult> Edit([Bind(Include = "Session_UID,User_UID,Browser,DeviceType,ModifiedDate,ModifiedBy,IP,Location")] Wit_Session wit_Session)
         {
             if (ModelState.IsValid)
             {
-                ISession.Update(wit_Session, User.Identity.Name);
+                ISession.UpdateAsync(wit_Session, User.Identity.Name);
                 return RedirectToAction("Index");
             }
-            ViewBag.User_UID = new SelectList(ISession.GetAll(), "User_UID", "MiddleName", wit_Session.User_UID);
+            ViewBag.User_UID = new SelectList(await ISession.GetAllAsync(), "User_UID", "MiddleName", wit_Session.User_UID);
             return View(wit_Session);
         }
 
@@ -118,7 +118,7 @@ namespace ProjectWit.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ISession.Remove(id);
+            ISession.RemoveAsync(id);
             return RedirectToAction("Index");
         }
          
