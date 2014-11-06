@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ProjectWit.Web.Models
+namespace ProjectWit.Model
 {
-    public interface ISessionManager
+    public interface ISessionManager<T>
     {
         /// <summary>
         /// Updates the session key values
         /// </summary>
         /// <param name="user"></param>
-        void SetSessions(ApplicationUser user);
+        void SetSessions(T user);
         /// <summary>
         /// Reloads the current session key values
         /// </summary>
