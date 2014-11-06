@@ -15,11 +15,6 @@ namespace ProjectWit.Web.Controllers
     [WitAuthorize]
     public class SessionController : WitBaseController
     {
-        /// <summary>
-        /// TODO: Use Unity here.
-        /// </summary>
-        private WitDbContext db = new WitDbContext();
-
         private IWit_Session ISession;
 
         public SessionController(IWit_Session iWit)
@@ -76,7 +71,7 @@ namespace ProjectWit.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ISession.Create(ref wit_Session);
+                ISession.Create(ref wit_Session, User.Identity.Name);
                 return RedirectToAction("Index");
             }
 
@@ -109,24 +104,21 @@ namespace ProjectWit.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(wit_Session).State = EntityState.Modified;
-                db.SaveChanges();
+                ISession.Update(wit_Session, User.Identity.Name);
                 return RedirectToAction("Index");
             }
-            ViewBag.User_UID = new SelectList(db.Wit_User, "User_UID", "MiddleName", wit_Session.User_UID);
+            ViewBag.User_UID = new SelectList(ISession.GetAll(), "User_UID", "MiddleName", wit_Session.User_UID);
             return View(wit_Session);
         }
 
         // GET: Session/Delete/5
-        public async Task<ActionResult> Delete(Guid id)
+        public ActionResult Delete(Guid id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Wit_Session wit_Session = await db.Wit_Session.FindAsync(id);
-            db.Wit_Session.Remove(wit_Session);
-            await db.SaveChangesAsync();
+            ISession.Remove(id);
             return RedirectToAction("Index");
         }
          
@@ -134,7 +126,7 @@ namespace ProjectWit.Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                ISession.Dispose();
             }
             base.Dispose(disposing);
         }

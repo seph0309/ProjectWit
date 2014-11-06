@@ -11,8 +11,8 @@ namespace ProjectWit.Model
         T GetById(Guid? id);
         T FindById(Guid? id);
         List<T> GetAll();
-        bool Create(ref T entity);
-        bool Delete(Guid? id);
-        bool Update(Guid? id);
+        bool Create(ref T entity, string modifiedBy);
+        bool Remove(Guid? id);
+        bool Update(Wit_Session wit_Session, string modifiedBy);
     }
 }

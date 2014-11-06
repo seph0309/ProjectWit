@@ -20,7 +20,6 @@ namespace ProjectWit.Web.Controllers
     {
         //All common methods goes here
         ApplicationDbContext Userdb = new ApplicationDbContext();
-
         
         public void SetSessions(ApplicationUser user)
         {

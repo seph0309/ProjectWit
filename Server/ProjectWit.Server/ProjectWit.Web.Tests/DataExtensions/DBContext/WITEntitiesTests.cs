@@ -92,9 +92,20 @@ namespace ProjectWit.Model.Tests
             string CREW = "299A2AD2-B6A4-47E8-A66A-CA84333AF7C1";
             string CUSTOMER = "31CAA23C-A8CE-4F25-B737-C435AD71A443";
             string GUEST = "299A2AD2-B6A4-47E8-A66A-CA84333AF7C3";
+            Guid SampleSession = new Guid("63340BA6-2F61-E411-8182-0021CCC18CF4");
 
             Wit_Session db = new Wit_Session();
             //TODO: Test the results. They must match with the roles they are in
+            var joseph = db.FindById(SampleSession);
+            joseph.Browser = "Josephsss Browser";
+            db.Update(joseph, "sephTest");
+
+            Wit_Session wit = new Wit_Session { User_UID = new Guid(SYSADMIN) };
+            db.Create(ref wit, "sephTest");
+
+            db.Remove(wit.Session_UID);
+
+
             var ret = db.GetSession(SYSADMIN);
             var ret2 = db.GetSession(ADMIN);
             var ret3 = db.GetSession(CREW);

@@ -9,7 +9,7 @@
 
     public partial class WitDbContext
     {
-        public string User_UID { get; set; }
+        public string ModifiedBy { get; set; }
         
         public override System.Threading.Tasks.Task<int> SaveChangesAsync()
         {
@@ -28,15 +28,14 @@
 
             foreach (var dbEntityEntry in modifiedEntries)
             {
-                if (dbEntityEntry.State == EntityState.Added)
+                if (dbEntityEntry.State == EntityState.Added || dbEntityEntry.State == EntityState.Modified)
                 {
-                    ////Remove GUID's value when saving
-                    //if (dbEntityEntry.Entity.GetType() == typeof(ProjectWit.Model.Wit_Category))
-                    //    dbEntityEntry.Property("Category_UID").CurrentValue = null;
+                    //Strictly track who modified the item
+                    if (String.IsNullOrEmpty(ModifiedBy)) throw new Exception("ModifiedBy is required");
                 }
-                    
+
                 dbEntityEntry.Property("ModifiedDate").CurrentValue = DateTime.Now;
-                dbEntityEntry.Property("ModifiedBy").CurrentValue = User_UID;
+                dbEntityEntry.Property("ModifiedBy").CurrentValue = ModifiedBy;
             }
         }
     }

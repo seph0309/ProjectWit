@@ -18,19 +18,11 @@ namespace ProjectWit.Model
     using System.Threading.Tasks;
     
     [MetadataType(typeof(WitSessionMetaData))]
-    public partial class Wit_Session : IWit_Session
+    public partial class Wit_Session : WitDbContextBase, IWit_Session
     {
-        public WitDbContext db;
         public string ShowFullName { get; set; }
-
-        public string helloWorld(string msg)
-        {
-            return "Hello World!!";
-        }
-
         public List<Wit_Session> GetSession(string userUID)
         {
-            db = new WitDbContext();
             db.Configuration.LazyLoadingEnabled = true;
             List<AspNetRole> roles = db.AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == userUID)).ToList();
 
@@ -55,49 +47,49 @@ namespace ProjectWit.Model
             //Return default (per user)
             return db.Wit_Session.Where(m => m.User_UID == new Guid(userUID)).ToList();
         }
-
-        public IList<Wit_Session> GetByID(Guid? id)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Wit_Session> GetAll()
         {
-            throw new NotImplementedException();
+            return db.Wit_Session.ToList();
         }
-
-        public bool Create(ref Wit_Session entity)
+        public bool Create(ref Wit_Session entity, string modifiedBy)
         {
-            throw new NotImplementedException();
+            db.ModifiedBy = modifiedBy;
+            db.Wit_Session.Add(entity);
+            db.SaveChanges();
+            return true;
         }
-
-        public bool Delete(Guid? id)
+        public bool Remove(Guid? id)
         {
-            throw new NotImplementedException();
+            Wit_Session wit_Session = db.Wit_Session.Find(id);
+            db.Wit_Session.Remove(wit_Session);
+            db.SaveChanges();
+            return true;
         }
-
-        public bool Update(Guid? id)
+        public bool Update(Wit_Session wit_Session, string modifiedBy)
         {
-            throw new NotImplementedException();
+            db.ModifiedBy = modifiedBy;
+            db.Entry(wit_Session).State = EntityState.Modified;
+            db.SaveChanges();
+            return true;
         }
-
         public Wit_Session GetById(Guid? id)
         {
-            db = new WitDbContext();
             db.Configuration.LazyLoadingEnabled = true;
-            Wit_Session wit_Session = db.Wit_Session.Find(id);
+            Wit_Session wit_Session = db.Wit_Session.Where(m => m.Session_UID == id).FirstOrDefault();
             return wit_Session;
         }
-
         public Wit_Session FindById(Guid? id)
         {
-            db = new WitDbContext();
             db.Configuration.LazyLoadingEnabled = true;
             Wit_Session wit_Session = db.Wit_Session.Find(id);
+            db.Configuration.LazyLoadingEnabled = false;
             return wit_Session;
         }
-
-
+        public void Dispose()
+        {
+            GC.Collect();
+            db.Dispose();
+        }
     } 
 
     public class WitSessionMetaData
