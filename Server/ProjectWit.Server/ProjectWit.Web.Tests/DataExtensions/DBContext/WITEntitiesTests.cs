@@ -85,7 +85,7 @@ namespace ProjectWit.Model.Tests
         }
 
         [TestMethod]
-        public async Task GetSessionTest()
+        public void GetSessionTest()
         {
             string SYSADMIN = "299A2AD2-B6A4-47E8-A66A-CA84333AF7C0";
             string ADMIN = "299A2AD2-B6A4-47E8-A66A-CA84333AF7C2";
@@ -94,21 +94,20 @@ namespace ProjectWit.Model.Tests
             string GUEST = "299A2AD2-B6A4-47E8-A66A-CA84333AF7C3";
             Guid SampleSession = new Guid("63340BA6-2F61-E411-8182-0021CCC18CF4");
 
-            Wit_Session db = new Wit_Session();
-            //TODO: Test the results. They must match with the roles they are in
-            var joseph = await db.GetByIdAsync(SampleSession);
-             
-            Wit_Session wit = new Wit_Session { User_UID = new Guid(SYSADMIN) };
-            await db.CreateAsync(wit, "sephTest");
+          
 
-            db.RemoveAsync(wit.Session_UID);
+            using (Wit_Session db = new Wit_Session())
+            {
+                Wit_Session wit = new Wit_Session { User_UID = new Guid(SYSADMIN) };
+
+                db.CreateAsync(wit, "sephTessst").Wait();
 
 
-            var ret = db.GetSession(SYSADMIN);
-            var ret2 = db.GetSession(ADMIN);
-            var ret3 = db.GetSession(CREW);
-            //ret = db.GetSession(CUSTOMER);
-            ret = db.GetSession(GUEST);
+                db.RemoveAsync(wit.Session_UID).Wait();
+
+                // wit.Browser = "Goooogl CHRRROOMe";  
+                //db.RemoveAsync(wit.Session_UID); 
+            }
         }
     }
 }

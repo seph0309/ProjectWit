@@ -126,5 +126,6 @@
             Configuration.ProxyCreationEnabled = value;
             Configuration.AutoDetectChangesEnabled = value;
         }
+     
     }
 }

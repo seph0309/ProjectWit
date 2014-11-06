@@ -47,9 +47,10 @@ namespace ProjectWit.Service.ServiceArguments
                 db.Configuration.LazyLoadingEnabled = true;
                 db.Configuration.ProxyCreationEnabled = true;
                 var cat = db.Wit_Category.Where(m => m.Company_UID == new Guid(companyUID)).ToList();
+                                
                 foreach (Wit_Category category in cat)
                 {
-                    Categories.Add(new Wit_Category(category));
+                    Categories.Add(Wit_Category.ToSerializable(category));
                     AddItem(category);
                 }
             }
@@ -58,7 +59,7 @@ namespace ProjectWit.Service.ServiceArguments
         {
             foreach (Wit_Item item in category.Wit_Item)
             {
-                Items.Add(new Wit_Item(item));
+                Items.Add(Wit_Item.ToSerializable(item));
             }
         }
         #endregion

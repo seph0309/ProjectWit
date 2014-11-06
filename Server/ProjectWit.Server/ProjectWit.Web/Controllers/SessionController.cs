@@ -71,7 +71,7 @@ namespace ProjectWit.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ISession.CreateAsync(wit_Session, User.Identity.Name);
+                await ISession.CreateAsync(wit_Session, User.Identity.Name);
                 return RedirectToAction("Index");
             }
 
@@ -104,7 +104,7 @@ namespace ProjectWit.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ISession.UpdateAsync(wit_Session, User.Identity.Name);
+                await ISession.UpdateAsync(wit_Session, User.Identity.Name);
                 return RedirectToAction("Index");
             }
             ViewBag.User_UID = new SelectList(await ISession.GetAllAsync(), "User_UID", "MiddleName", wit_Session.User_UID);
@@ -112,13 +112,13 @@ namespace ProjectWit.Web.Controllers
         }
 
         // GET: Session/Delete/5
-        public ActionResult Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ISession.RemoveAsync(id);
+            await ISession.RemoveAsync(id);
             return RedirectToAction("Index");
         }
          

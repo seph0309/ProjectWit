@@ -8,22 +8,25 @@ namespace ProjectWit.Model
     [MetadataType(typeof(Wit_ItemMetaData))]
     public partial class Wit_Item {
 
-        public Wit_Item(Wit_Item _wit_Item)
+        public static Wit_Item ToSerializable(Wit_Item _wit_Item)
         {
-            Item_UID = _wit_Item.Item_UID;
-            Category_UID = _wit_Item.Category_UID;
-            ItemName = _wit_Item.ItemName;
-            ItemDescription = _wit_Item.ItemDescription;
-            ImageURL = _wit_Item.ImageURL;
-            OnStock = _wit_Item.OnStock;
-            SpiceLevel = _wit_Item.SpiceLevel;
-            Likes = _wit_Item.Likes;
-            FoodMark = _wit_Item.FoodMark;
-            Amount = _wit_Item.Amount;
-            DiscountedPrice = _wit_Item.DiscountedPrice;
-            IsBestSeller = _wit_Item.IsBestSeller;
-            ModifiedDate = _wit_Item.ModifiedDate;
-            ModifiedBy = _wit_Item.ModifiedBy;
+            return new Wit_Item
+            {
+                Item_UID = _wit_Item.Item_UID,
+                Category_UID = _wit_Item.Category_UID,
+                ItemName = _wit_Item.ItemName,
+                ItemDescription = _wit_Item.ItemDescription,
+                ImageURL = _wit_Item.ImageURL,
+                OnStock = _wit_Item.OnStock,
+                SpiceLevel = _wit_Item.SpiceLevel,
+                Likes = _wit_Item.Likes,
+                FoodMark = _wit_Item.FoodMark,
+                Amount = _wit_Item.Amount,
+                DiscountedPrice = _wit_Item.DiscountedPrice,
+                IsBestSeller = _wit_Item.IsBestSeller,
+                ModifiedDate = _wit_Item.ModifiedDate,
+                ModifiedBy = _wit_Item.ModifiedBy
+            };
         }
     }
 

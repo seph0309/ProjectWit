@@ -18,7 +18,7 @@ namespace ProjectWit.Model
     using System.Threading.Tasks;
     
     [MetadataType(typeof(WitSessionMetaData))]
-    public partial class Wit_Session : WitDbContextBase, IWit_Session
+    public partial class Wit_Session : WitDbContextBase<Wit_Session>, IWit_Session
     {
         public string ShowFullName { get; set; }
         public List<Wit_Session> GetSession(string userUID)
@@ -49,40 +49,34 @@ namespace ProjectWit.Model
         }
         public async Task<List<Wit_Session>> GetAllAsync()
         {
-            return await db.Wit_Session.ToListAsync();
-        }
-        public async Task<Wit_Session> CreateAsync(Wit_Session entity, string modifiedBy)
-        {
-            db.ModifiedBy = modifiedBy;
-            db.Wit_Session.Add(entity);
-            await db.SaveChangesAsync();
-            return entity;
-
-        }
-        public async Task RemoveAsync(Guid? id)
-        {
-            Wit_Session wit_Session = db.Wit_Session.Find(id);
-            db.Wit_Session.Remove(wit_Session);
-            await db.SaveChangesAsync();
-        }
-        public async Task UpdateAsync(Wit_Session wit_Session, string modifiedBy)
-        {
-            db.ModifiedBy = modifiedBy;
-            db.Entry(wit_Session).State = EntityState.Modified;
-            await db.SaveChangesAsync();
+            return await base.dbGetAllAsync();
         }
         public async Task<Wit_Session> GetByIdAsync(Guid? id)
         {
             db.Configuration.LazyLoadingEnabled = true;
             Wit_Session wit_Session = await db.Wit_Session.Where(m => m.Session_UID == id).FirstOrDefaultAsync();
+            db.Configuration.LazyLoadingEnabled = false;
             return wit_Session;
         }
         public async Task<Wit_Session> FindByIdAsync(Guid? id)
         {
             db.Configuration.LazyLoadingEnabled = true;
-            Wit_Session wit_Session = await db.Wit_Session.FindAsync(id);
+            Wit_Session wit_Session = await base.dbFindByIdAsync(id);
             db.Configuration.LazyLoadingEnabled = false;
             return wit_Session;
+        }
+
+        public async Task<Wit_Session> CreateAsync(Wit_Session entity, string modifiedBy)
+        {
+            return await base.dbCreateAsync(entity,modifiedBy);
+        }
+        public async Task RemoveAsync(Guid? id)
+        {
+            await base.dbRemoveAsync(id);
+        }
+        public async Task UpdateAsync(Wit_Session entity, string modifiedBy)
+        {
+            await base.dbUpdateAsync(entity, modifiedBy);
         }
         public void Dispose()
         {

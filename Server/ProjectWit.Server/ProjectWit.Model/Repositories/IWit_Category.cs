@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ProjectWit.Model
 {
-    public interface IWit_Session : IReadable<Wit_Session>, IWritable<Wit_Session>, IDisposable
+    public interface IWit_Category : IReadable<Wit_Category>, IWritable<Wit_Category>, IDisposable
     {
-        List<Wit_Session> GetSession(string userUID);
+        string hello();
     }
 }

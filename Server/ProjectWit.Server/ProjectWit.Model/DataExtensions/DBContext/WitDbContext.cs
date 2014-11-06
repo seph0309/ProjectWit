@@ -31,7 +31,7 @@
                 if (dbEntityEntry.State == EntityState.Added || dbEntityEntry.State == EntityState.Modified)
                 {
                     //Strictly track who modified the item
-                    if (String.IsNullOrEmpty(ModifiedBy)) throw new Exception("ModifiedBy is required");
+                    //if (String.IsNullOrEmpty(ModifiedBy)) throw new Exception("ModifiedBy is required");
                 }
 
                 dbEntityEntry.Property("ModifiedDate").CurrentValue = DateTime.Now;

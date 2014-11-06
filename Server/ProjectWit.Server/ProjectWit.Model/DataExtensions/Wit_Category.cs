@@ -4,19 +4,69 @@ namespace ProjectWit.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     [MetadataType(typeof(Wit_CategoryMetaData))]
-    public partial class Wit_Category { 
-    
-        public Wit_Category(Wit_Category _wit_Category)
+    public partial class Wit_Category : WitDbContextBase<Wit_Category>, IWit_Category
+    {
+        public static Wit_Category ToSerializable(Wit_Category _wit_Category)
         {
-            Category_UID = _wit_Category.Category_UID;
-            CategoryName = _wit_Category.CategoryName;
-            Company_UID = _wit_Category.Company_UID;
-            ModifiedBy = _wit_Category.ModifiedBy;
-            ModifiedDate = _wit_Category.ModifiedDate;
+            return new Wit_Category
+            {
+                Category_UID = _wit_Category.Category_UID,
+                CategoryName = _wit_Category.CategoryName,
+                Company_UID = _wit_Category.Company_UID,
+                ModifiedBy = _wit_Category.ModifiedBy,
+                ModifiedDate = _wit_Category.ModifiedDate
+            };
         }
-    
+
+        public async Task<Wit_Category> GetByIdAsync(Guid? id)
+        {
+            db.Configuration.LazyLoadingEnabled = true;
+            Wit_Category wit_category = await db.Wit_Category.Where(m => m.Category_UID == id).FirstOrDefaultAsync();
+            db.Configuration.LazyLoadingEnabled = false;
+            return wit_category;
+        }
+
+        public async Task<Wit_Category> FindByIdAsync(Guid? id)
+        {
+            return await base.dbFindByIdAsync(id);
+        }
+
+        public async Task<List<Wit_Category>> GetAllAsync()
+        {
+            return await base.dbGetAllAsync();
+        }
+
+        public async Task<Wit_Category> CreateAsync(Wit_Category entity, string modifiedBy)
+        {
+            return await base.dbCreateAsync(entity, modifiedBy);
+        }
+
+        public async Task RemoveAsync(Guid? id)
+        {
+            await base.dbRemoveAsync(id);
+        }
+
+        public async Task UpdateAsync(Wit_Category entity, string modifiedBy)
+        {
+            await base.dbUpdateAsync(entity, modifiedBy);
+        }
+        public string hello()
+        {
+            string var = "ssss";
+            return var;
+        }
+        public void Dispose()
+        {
+            GC.Collect();
+            db.Dispose();
+        }
     }
 
     public class Wit_CategoryMetaData

@@ -15,13 +15,18 @@ namespace ProjectWit.Web.Controllers
     [WitAuthorize]
     public class CategoryController : WitBaseController
     {
-        private WitDbContext db = new WitDbContext();
+        private IWit_Category ICategory;
+
+        public CategoryController(IWit_Category icat)
+        {
+            this.ICategory = icat;
+        }
 
         // GET: Category
         public async Task<ActionResult> Index()
         {
-            var wit_Category = db.Wit_Category.Include(w => w.Wit_Company);
-            return View(await wit_Category.ToListAsync());
+            var wit_Category = await ICategory.GetAllAsync();
+            return View(wit_Category);
         }
 
         // GET: Category/Details/5
@@ -31,7 +36,7 @@ namespace ProjectWit.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Wit_Category wit_Category = await db.Wit_Category.FindAsync(id);
+            Wit_Category wit_Category = await ICategory.FindByIdAsync(id);
             if (wit_Category == null)
             {
                 return HttpNotFound();
@@ -42,7 +47,7 @@ namespace ProjectWit.Web.Controllers
         // GET: Category/Create
         public ActionResult Create()
         {
-            ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName");
+            //ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName");
             return View();
         }
 
@@ -55,13 +60,12 @@ namespace ProjectWit.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                wit_Category.Category_UID = Guid.NewGuid();
-                db.Wit_Category.Add(wit_Category);
-                await db.SaveChangesAsync();
+                await ICategory.CreateAsync(wit_Category, User.Identity.Name);
+                
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", wit_Category.Company_UID);
+            //ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", wit_Category.Company_UID);
             return View(wit_Category);
         }
 
@@ -72,12 +76,12 @@ namespace ProjectWit.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Wit_Category wit_Category = await db.Wit_Category.FindAsync(id);
+            Wit_Category wit_Category = await ICategory.FindByIdAsync(id);
             if (wit_Category == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", wit_Category.Company_UID);
+            //ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", wit_Category.Company_UID);
             return View(wit_Category);
         }
 
@@ -90,11 +94,10 @@ namespace ProjectWit.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(wit_Category).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                await ICategory.UpdateAsync(wit_Category, User.Identity.Name);
                 return RedirectToAction("Index");
             }
-            ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", wit_Category.Company_UID);
+            //ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", wit_Category.Company_UID);
             return View(wit_Category);
         }
 
@@ -105,7 +108,7 @@ namespace ProjectWit.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Wit_Category wit_Category = await db.Wit_Category.FindAsync(id);
+            Wit_Category wit_Category = await ICategory.FindByIdAsync(id);
             if (wit_Category == null)
             {
                 return HttpNotFound();
@@ -118,9 +121,7 @@ namespace ProjectWit.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            Wit_Category wit_Category = await db.Wit_Category.FindAsync(id);
-            db.Wit_Category.Remove(wit_Category);
-            await db.SaveChangesAsync();
+            await ICategory.RemoveAsync(id);
             return RedirectToAction("Index");
         }
 
@@ -128,7 +129,7 @@ namespace ProjectWit.Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                ICategory.Dispose();
             }
             base.Dispose(disposing);
         }
