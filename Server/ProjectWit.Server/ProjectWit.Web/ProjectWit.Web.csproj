@@ -185,6 +185,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -260,7 +261,6 @@
     <Content Include="Views\Shared\_UserProfilePartial.cshtml" />
     <Content Include="Views\Shared\_NavigationBarPartial.cshtml" />
     <Content Include="Views\Category\Create.cshtml" />
-    <Content Include="Views\Category\Delete.cshtml" />
     <Content Include="Views\Category\Details.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
@@ -272,6 +272,10 @@
     <Content Include="Views\Session\Details.cshtml" />
     <Content Include="Views\Session\Edit.cshtml" />
     <Content Include="Views\Session\Index.cshtml" />
+    <Content Include="Views\Company\Create.cshtml" />
+    <Content Include="Views\Company\Details.cshtml" />
+    <Content Include="Views\Company\Edit.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 
 namespace ProjectWit.Model
 {
@@ -9,6 +8,7 @@ namespace ProjectWit.Model
     using System.Data.Entity.Infrastructure;
     using System.Linq;
     using System.Threading.Tasks;
+
 
     [MetadataType(typeof(Wit_CategoryMetaData))]
     public partial class Wit_Category : WitDbContextBase<Wit_Category>, IWit_Category
@@ -28,9 +28,7 @@ namespace ProjectWit.Model
         public async Task<Wit_Category> GetByIdAsync(Guid? id)
         {
             db.Configuration.LazyLoadingEnabled = true;
-            Wit_Category wit_category = await db.Wit_Category.Where(m => m.Category_UID == id).FirstOrDefaultAsync();
-            db.Configuration.LazyLoadingEnabled = false;
-            return wit_category;
+            return await db.Wit_Category.Where(m => m.Category_UID == id).FirstOrDefaultAsync();
         }
 
         public async Task<Wit_Category> FindByIdAsync(Guid? id)
@@ -40,6 +38,7 @@ namespace ProjectWit.Model
 
         public async Task<List<Wit_Category>> GetAllAsync()
         {
+            db.Configuration.LazyLoadingEnabled = true;
             return await base.dbGetAllAsync();
         }
 
@@ -56,11 +55,6 @@ namespace ProjectWit.Model
         public async Task UpdateAsync(Wit_Category entity, string modifiedBy)
         {
             await base.dbUpdateAsync(entity, modifiedBy);
-        }
-        public string hello()
-        {
-            string var = "ssss";
-            return var;
         }
         public void Dispose()
         {

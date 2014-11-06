@@ -38,6 +38,7 @@ namespace ProjectWit.Web.App_Start
 
             // TODO: Register your types here
             //// container.RegisterType<IProductRepository, ProductRepository>();
+            container.RegisterType<IWit_Company, Wit_Company>();
             container.RegisterType<IWit_Category, Wit_Category>();
             container.RegisterType<IWit_Session, Wit_Session>();
         }

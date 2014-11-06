@@ -45,9 +45,14 @@ namespace ProjectWit.Model
         }
         protected async Task dbRemoveAsync(Guid? id)
         {
+            db.SetTrackingAndProxy(false);
+
             var _entity = db.Set<T>().Find(id);
-            db.Set<T>().Remove(_entity);
-            await db.SaveChangesAsync();
-        } 
+            if (_entity != null)
+            {
+                db.Set<T>().Remove(_entity);
+                await db.SaveChangesAsync();
+            }
+        }
     }
 }

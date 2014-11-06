@@ -121,7 +121,7 @@
 
             return navBar.ToList();
         }
-        private void SetTrackingAndProxy(bool value)
+        public void SetTrackingAndProxy(bool value)
         {
             Configuration.ProxyCreationEnabled = value;
             Configuration.AutoDetectChangesEnabled = value;

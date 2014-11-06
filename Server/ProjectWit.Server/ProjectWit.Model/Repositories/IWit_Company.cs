@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectWit.Model
 {
-    public interface IWit_Category : IReadable<Wit_Category>, IWritable<Wit_Category>, IDisposable
+    public interface IWit_Company : IReadable<Wit_Company>, IWritable<Wit_Company>, IDisposable
     {
     }
 }

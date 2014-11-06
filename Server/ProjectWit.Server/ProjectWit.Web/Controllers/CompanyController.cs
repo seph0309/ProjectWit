@@ -9,116 +9,108 @@ using System.Web;
 using System.Web.Mvc;
 using ProjectWit.Model;
 using ProjectWit.Web.Models;
-using System.Collections;
 
 namespace ProjectWit.Web.Controllers
 {
     [WitAuthorize]
-    public class CategoryController : WitBaseController
+    public class CompanyController : WitBaseController
     {
-        private IWit_Category ICategory;
         private IWit_Company ICompany;
 
-        public CategoryController(IWit_Category iCat, IWit_Company IComp)
+        public CompanyController(IWit_Company iComp)
         {
-            ICategory = iCat;
-            ICompany = IComp;
+            ICompany = iComp;
         }
 
-        // GET: Category
+        // GET: Company
         public async Task<ActionResult> Index()
         {
-            var wit_Category = await ICategory.GetAllAsync();
-            return View(wit_Category);
+            return View(await ICompany.GetAllAsync());
         }
 
-        // GET: Category/Details/5
+        // GET: Company/Details/5
         public async Task<ActionResult> Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Wit_Category wit_Category = await ICategory.FindByIdAsync(id);
-            if (wit_Category == null)
+            Wit_Company wit_Company = await ICompany.FindByIdAsync(id);
+            if (wit_Company == null)
             {
                 return HttpNotFound();
             }
-            return View(wit_Category);
+            return View(wit_Company);
         }
 
-        // GET: Category/Create
-        public async Task<ActionResult> Create()
+        // GET: Company/Create
+        public ActionResult Create()
         {
-            ViewBag.Company_UID = new SelectList(await ICompany.GetAllAsync(), "Company_UID", "CompanyName");
             return View();
         }
 
-        // POST: Category/Create
+        // POST: Company/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Category_UID,Company_UID,CategoryName")] Wit_Category wit_Category)
+        public async Task<ActionResult> Create([Bind(Include = "Company_UID,CompanyName,CompanyAddress,CompanyNumber,ModifiedDate,ModifiedBy")] Wit_Company wit_Company)
         {
             if (ModelState.IsValid)
             {
-                await ICategory.CreateAsync(wit_Category, User.Identity.Name);
-                
+                await ICompany.CreateAsync(wit_Company, User.Identity.Name);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Company_UID = new SelectList(await ICompany.GetAllAsync(), "Company_UID", "CompanyName", wit_Category.Company_UID);
-            return View(wit_Category);
+            return View(wit_Company);
         }
 
-        // GET: Category/Edit/5
+        // GET: Company/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Wit_Category wit_Category = await ICategory.FindByIdAsync(id);
-            if (wit_Category == null)
+            Wit_Company wit_Company = await ICompany.FindByIdAsync(id);
+            if (wit_Company == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Company_UID = new SelectList(await ICompany.GetAllAsync(), "Company_UID", "CompanyName", wit_Category.Company_UID);
-            return View(wit_Category);
+            return View(wit_Company);
         }
 
-        // POST: Category/Edit/5
+        // POST: Company/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Category_UID,Company_UID,CategoryName")] Wit_Category wit_Category)
+        public async Task<ActionResult> Edit([Bind(Include = "Company_UID,CompanyName,CompanyAddress,CompanyNumber,ModifiedDate,ModifiedBy")] Wit_Company wit_Company)
         {
             if (ModelState.IsValid)
             {
-                await ICategory.UpdateAsync(wit_Category, User.Identity.Name);
+                ICompany.UpdateAsync(wit_Company, User.Identity.Name);
                 return RedirectToAction("Index");
             }
-            ViewBag.Company_UID = new SelectList(await ICompany.GetAllAsync(), "Company_UID", "CompanyName", wit_Category.Company_UID);
-            return View(wit_Category);
+            return View(wit_Company);
         }
 
-        // GET: Category/Delete/5
+        // GET: Company/Delete/5
         public async Task<ActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            await ICategory.RemoveAsync(id);
+            await ICompany.RemoveAsync(id);
             return RedirectToAction("Index");
         }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ICategory.Dispose();
                 ICompany.Dispose();
             }
             base.Dispose(disposing);
