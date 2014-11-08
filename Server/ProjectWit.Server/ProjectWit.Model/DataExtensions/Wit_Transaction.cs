@@ -4,9 +4,61 @@ namespace ProjectWit.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Linq;
+    using System.Data.Entity;
 
     [MetadataType(typeof(Wit_TransactionMetaData))]
-    public partial class Wit_Transaction { }
+    public partial class Wit_Transaction : WitDbContextBase<Wit_Transaction>, IWit_Transaction
+    {
+         
+        public static Wit_Transaction ToSerializable(Wit_Transaction _wit_Transaction)
+        {
+            return new Wit_Transaction
+            {
+                Transaction_UID = _wit_Transaction.Transaction_UID,
+                Table_UID = _wit_Transaction.Table_UID,
+                Status = _wit_Transaction.Status,
+                ModifiedDate = _wit_Transaction.ModifiedDate,
+                ModifiedBy = _wit_Transaction.ModifiedBy
+            };
+        }
+        public async Task<Wit_Transaction> GetByIdAsync(Guid? id)
+        {
+            db.Configuration.LazyLoadingEnabled = true;
+            return await db.Wit_Transaction.Where(m => m.Transaction_UID == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<Wit_Transaction> FindByIdAsync(Guid? id)
+        {
+            return await base.dbFindByIdAsync(id);
+        }
+
+        public async Task<List<Wit_Transaction>> GetAllAsync()
+        {
+            return await base.dbGetAllAsync();
+        }
+
+        public async Task<Wit_Transaction> CreateAsync(Wit_Transaction entity, string modifiedBy)
+        {
+            return await base.dbCreateAsync(entity, modifiedBy);
+        }
+
+        public async Task RemoveAsync(Guid? id)
+        {
+            await base.dbRemoveAsync(id);
+        }
+
+        public async Task UpdateAsync(Wit_Transaction entity, string modifiedBy)
+        {
+            await base.dbUpdateAsync(entity, modifiedBy);
+        }
+        public void Dispose()
+        {
+            GC.Collect();
+            db.Dispose();
+        }
+    }
 
     public class Wit_TransactionMetaData
     {

@@ -98,6 +98,8 @@
       <DependentUpon>ProjectWit.Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IWit_Order.cs" />
+    <Compile Include="Repositories\IWit_Transaction.cs" />
     <Compile Include="Repositories\IWit_Company.cs" />
     <Compile Include="Repositories\IWritable.cs" />
     <Compile Include="Repositories\IReadable.cs" />

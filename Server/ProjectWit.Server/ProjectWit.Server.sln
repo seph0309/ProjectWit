@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWit.Web.Tests", "Pro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWit.Service", "ProjectWit.Service\ProjectWit.Service.csproj", "{5F49D4A1-2E7F-4B6A-ADCC-6C6534173FFC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWit.ModelTests", "ProjectWit.ModelTests\ProjectWit.ModelTests.csproj", "{918EB215-3C0C-45E8-9B07-B16FEB76558E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{5F49D4A1-2E7F-4B6A-ADCC-6C6534173FFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F49D4A1-2E7F-4B6A-ADCC-6C6534173FFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F49D4A1-2E7F-4B6A-ADCC-6C6534173FFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{918EB215-3C0C-45E8-9B07-B16FEB76558E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{918EB215-3C0C-45E8-9B07-B16FEB76558E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{918EB215-3C0C-45E8-9B07-B16FEB76558E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{918EB215-3C0C-45E8-9B07-B16FEB76558E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

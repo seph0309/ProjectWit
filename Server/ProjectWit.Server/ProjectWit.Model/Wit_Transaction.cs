@@ -22,9 +22,9 @@ namespace ProjectWit.Model
         public System.Guid Transaction_UID { get; set; }
         public System.Guid Table_UID { get; set; }
         public Nullable<int> NumberOfGuest { get; set; }
-        public System.Guid Status_UID { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
+        public string Status { get; set; }
     
         public virtual ICollection<Wit_Order> Wit_Order { get; set; }
         public virtual Wit_Table Wit_Table { get; set; }
