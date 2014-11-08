@@ -14,6 +14,7 @@ namespace ProjectWit.Service
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.AutoDetectChangesEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
+            this.ModifiedBy = "Wit_Service";
         }
     }
 }
