@@ -22,6 +22,9 @@ namespace ProjectWit.Web.Controllers
         private WitDbContext db = new WitDbContext();
         private ApplicationDbContext Userdb = new ApplicationDbContext();
 
+        //TODO::::
+        public UserController() { }
+
         // GET: User
         public async Task<ActionResult> Index()
         {
