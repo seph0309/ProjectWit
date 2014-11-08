@@ -43,8 +43,8 @@ namespace ProjectWit.Web.App_Start
             container.RegisterType<IWit_Session, Wit_Session>();
             container.RegisterType<IWit_Company, Wit_Company>();
             container.RegisterType<IWit_User, Wit_User>();
-            //container.RegisterType<IAspNetRoles, AspNetRole>();
-            //container.RegisterType<IWit_Item, Wit_Item>(); 
+            container.RegisterType<IAspNetRole, AspNetRole>();
+            container.RegisterType<IUsersViewModel, UsersViewModel>(); 
         }
     }
 }

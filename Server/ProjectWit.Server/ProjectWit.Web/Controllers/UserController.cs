@@ -19,16 +19,23 @@ namespace ProjectWit.Web.Controllers
     [WitAuthorize]
     public class UserController : WitBaseController
     {
-        private WitDbContext db = new WitDbContext();
         private ApplicationDbContext Userdb = new ApplicationDbContext();
+        private IWit_User IUser;
+        private IWit_Company ICompany;
+        private IUsersViewModel IUserView;
 
         //TODO::::
-        public UserController() { }
+        public UserController(IWit_User iUser, IWit_Company iComp, IUsersViewModel iUserView) 
+        {
+            IUser = iUser;
+            ICompany = iComp;
+            IUserView = iUserView;
+        }
 
         // GET: User
         public async Task<ActionResult> Index()
         {
-            return View(await db.UsersViewModels.ToListAsync());
+            return View(await IUserView.GetAllAsync());
         }
 
         // GET: User/Details/5
@@ -38,7 +45,7 @@ namespace ProjectWit.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UsersViewModel usersViewModel = await db.UsersViewModels.FindAsync(id);
+            UsersViewModel usersViewModel = await IUserView.FindByIdAsync(id);
             if (usersViewModel == null)
             {
                 return HttpNotFound();
@@ -53,24 +60,24 @@ namespace ProjectWit.Web.Controllers
         }
 
         // GET: User/Edit/0416
-        public ActionResult Edit(Guid? id)
+        public async Task<ActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
                 id = new Guid(Session["UserID"].ToString());
                 //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UsersViewModel usersViewModel = db.GetUserDetail(id);
+            UsersViewModel usersViewModel =  IUserView.GetUserDetail(id);
             
             if (usersViewModel == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", usersViewModel.Company_UID);
-            ViewBag.IsSysAdmin = (bool)Session["IsSysAdmin"];
+            ViewBag.Company_UID = new SelectList(await ICompany.GetAllAsync(), "Company_UID", "CompanyName", usersViewModel.Company_UID);
+            ViewBag.IsSysAdmin = User.IsInRole(AspNetRole.SYSADMIN);
 
-            if (Convert.ToString(Session["UserID"]) == id.ToString())
+            if (User.Identity.GetUserId() == id.ToString())
                 ViewBag.Title = "User Profile";
             else
                 ViewBag.Title = "Edit My Profile";
@@ -83,12 +90,13 @@ namespace ProjectWit.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "User_UID,FirstName,MiddleName,LastName,Company_UID,EmailAddress,Id,Name,IsSelected")] UsersViewModel usersViewModel, List<AspNetRole> aspnetRole)
+        public async Task<ActionResult> Edit([Bind(Include = "User_UID,FirstName,MiddleName,LastName,Company_UID,EmailAddress,Id,Name,IsSelected")] UsersViewModel usersViewModel, List<AspNetRole> aspnetRole)
         {
             if (ModelState.IsValid)
             {
+                //TODO: Error
                 usersViewModel.AspNetRole = aspnetRole;
-                db.UpdateUser(usersViewModel);
+                await IUserView.UpdateAsync(usersViewModel, User.Identity.Name);
 
                 if (Convert.ToString(Session["UserID"]) == usersViewModel.User_UID.ToString().ToUpper())
                 {
@@ -98,7 +106,7 @@ namespace ProjectWit.Web.Controllers
                 else
                     return RedirectToAction("Index");
             }
-            ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", usersViewModel.Company_UID);
+            ViewBag.Company_UID = new SelectList(await ICompany.GetAllAsync(), "Company_UID", "CompanyName", usersViewModel.Company_UID);
             return View(usersViewModel);
         }
 
@@ -109,8 +117,8 @@ namespace ProjectWit.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-           
-            db.DeleteUser(id);
+
+            await IUser.RemoveAsync(id);
             return RedirectToAction("Index");
         }
 
@@ -119,9 +127,7 @@ namespace ProjectWit.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            UsersViewModel usersViewModel = await db.UsersViewModels.FindAsync(id);
-            db.UsersViewModels.Remove(usersViewModel);
-            await db.SaveChangesAsync();
+            await IUserView.RemoveAsync(id);
             return RedirectToAction("Index");
         }
 
@@ -129,7 +135,9 @@ namespace ProjectWit.Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                IUser.Dispose();
+                IUserView.Dispose();
+                ICompany.Dispose();
             }
             base.Dispose(disposing);
         }

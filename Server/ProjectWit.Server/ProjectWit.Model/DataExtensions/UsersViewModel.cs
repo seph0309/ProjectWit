@@ -12,13 +12,61 @@ namespace ProjectWit.Model
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Threading.Tasks;
     using System.Linq;
+    using System.Data.Entity;
 
     [MetadataType(typeof(UsersViewModelMetaData))]
-    public partial class UsersViewModel
+    public partial class UsersViewModel : WitDbContextBase<UsersViewModel>, IUsersViewModel
     {    
         [Display(Name="Roles")]
         public List<AspNetRole> AspNetRole;
+
+        public async Task<UsersViewModel> GetByIdAsync(Guid? id)
+        {
+            db.Configuration.LazyLoadingEnabled = true;
+            return await db.UsersViewModels.Where(m => m.User_UID == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<UsersViewModel> FindByIdAsync(Guid? id)
+        {
+            return await base.dbFindByIdAsync(id);
+        }
+
+        public async Task<List<UsersViewModel>> GetAllAsync()
+        {
+            return await base.dbGetAllAsync();
+        }
+
+        public async Task<UsersViewModel> CreateAsync(UsersViewModel entity, string modifiedBy)
+        {
+            return await base.dbCreateAsync(entity, modifiedBy);
+        }
+
+        public async Task RemoveAsync(Guid? id)
+        {
+            await base.dbRemoveAsync(id);
+        }
+
+        public async Task UpdateAsync(UsersViewModel entity, string modifiedBy)
+        {
+            await base.dbUpdateAsync(entity, modifiedBy);
+        }
+        public UsersViewModel GetUserDetail(Guid? userID)
+        {
+            UsersViewModel usersViewModel = db.UsersViewModels.Find(userID);
+
+            if (usersViewModel == null) return null;
+
+            AspNetRole _role = new AspNetRole();
+            usersViewModel.AspNetRole = _role.GetRoles(userID.ToString());
+            return usersViewModel;
+        } 
+        public void Dispose()
+        {
+            GC.Collect();
+            db.Dispose();
+        }
     }
 
     public class UsersViewModelMetaData

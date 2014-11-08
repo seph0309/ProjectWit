@@ -28,13 +28,17 @@ namespace ProjectWit.Model
     public interface IWit_User : IReadable<Wit_User>, IWritable<Wit_User>, IDisposable
     {
         bool UpdateUser(UsersViewModel usersViewModel);
-        UsersViewModel GetUserDetail(Guid? userID);
+        
     }
-    public interface IAspNetRoles : IReadable<AspNetRole>, IWritable<AspNetRole>, IDisposable
+    public interface IAspNetRole : IReadable<AspNetRole>, IWritable<AspNetRole>, IDisposable
     {
         List<AspNetRole> GetRoles(string UserID);
     }
     public interface IWit_Item : IReadable<Wit_Item>, IWritable<Wit_Item>, IDisposable
     {
+    }
+    public interface IUsersViewModel : IReadable<UsersViewModel>, IWritable<UsersViewModel>, IDisposable
+    {
+        UsersViewModel GetUserDetail(Guid? userID);
     }
 }

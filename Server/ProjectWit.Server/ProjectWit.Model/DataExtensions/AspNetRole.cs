@@ -11,17 +11,83 @@ namespace ProjectWit.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Linq;
+    using System.Data.Entity;
     
-    public partial class AspNetRole
+    public partial class AspNetRole : WitDbContextBase<AspNetRole> , IAspNetRole
     {
         public bool IsSelected { get; set; }
 
-        protected const string SYSADMIN = "SYSADMIN";
+        public const string SYSADMIN = "SYSADMIN";
         protected const string ADMIN = "ADMIN";
         protected const string CREW = "CREW";
         protected const string CUSTOMER = "CUSTOMER";
         protected const string GUEST = "GUEST";
 
+        public async Task<AspNetRole> GetByIdAsync(Guid? id)
+        {
+            db.Configuration.LazyLoadingEnabled = true;
+            return await db.AspNetRoles.Where(m => m.Id == id.ToString()).FirstOrDefaultAsync();
+        }
+
+        public async Task<AspNetRole> FindByIdAsync(Guid? id)
+        {
+            return await base.dbFindByIdAsync(id);
+        }
+
+        public async Task<List<AspNetRole>> GetAllAsync()
+        {
+            return await base.dbGetAllAsync();
+        }
+
+        public async Task<AspNetRole> CreateAsync(AspNetRole entity, string modifiedBy)
+        {
+            return await base.dbCreateAsync(entity, modifiedBy);
+        }
+
+        public async Task RemoveAsync(Guid? id)
+        {
+            await base.dbRemoveAsync(id);
+        }
+
+        public async Task UpdateAsync(AspNetRole entity, string modifiedBy)
+        {
+            await base.dbUpdateAsync(entity, modifiedBy);
+        }
+        public void Dispose()
+        {
+            GC.Collect();
+            db.Dispose();
+        }
+        public List<AspNetRole> GetRoles(string UserID)
+        {
+            //Get Roles from user
+            List<AspNetRole> aspNetRole = new List<AspNetRole>();
+
+            //Get all Roles
+            using (WitDbContext db = new WitDbContext())
+            {
+                db.Configuration.AutoDetectChangesEnabled = false;
+                var allRoles = db.AspNetRoles.ToList();
+                var identityUserRole = db.AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == UserID)).ToList();
+
+                foreach (AspNetRole role in allRoles)
+                {
+                    var isSelected = from x in identityUserRole
+                                     where x.Id == role.Id
+                                     select x;
+
+                    aspNetRole.Add(new AspNetRole
+                    {
+                        Id = role.Id.ToString(),
+                        Name = role.Name.ToString(),
+                        IsSelected = (isSelected.Count() > 0)
+                    });
+                }
+            }
+            return aspNetRole;
+        }
 
         /// <summary>
         /// Creates a query which extracts session by Company and excludes SYSADMIN

@@ -70,15 +70,7 @@ namespace ProjectWit.Model
             else
                 return false;
         }
-        public UsersViewModel GetUserDetail(Guid? userID)
-        {
-            UsersViewModel usersViewModel = db.UsersViewModels.Find(userID);
-
-            if (usersViewModel == null) return null;
-
-            usersViewModel.AspNetRole = GetRoles(userID.ToString());
-            return usersViewModel;
-        }        
+               
         private void UpdateRole(string userId, List<AspNetRole> aspNetRole)
         {
             using (var tran = db.Database.BeginTransaction())
@@ -99,34 +91,6 @@ namespace ProjectWit.Model
                     throw ex;
                 }
             }
-        }
-        private List<AspNetRole> GetRoles(string UserID)
-        {
-            //Get Roles from user
-            List<AspNetRole> aspNetRole = new List<AspNetRole>();
-
-            //Get all Roles
-            using (WitDbContext db = new WitDbContext())
-            {
-                db.Configuration.AutoDetectChangesEnabled = false;
-                var allRoles = db.AspNetRoles.ToList();
-                var identityUserRole = db.AspNetRoles.Where(m => m.AspNetUsers.Any(user => user.Id == UserID)).ToList();
-
-                foreach (AspNetRole role in allRoles)
-                {
-                    var isSelected = from x in identityUserRole
-                                     where x.Id == role.Id
-                                     select x;
-
-                    aspNetRole.Add(new AspNetRole
-                    {
-                        Id = role.Id.ToString(),
-                        Name = role.Name.ToString(),
-                        IsSelected = (isSelected.Count() > 0)
-                    });
-                }
-            }
-            return aspNetRole;
         }
 
         public void Dispose()

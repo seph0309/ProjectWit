@@ -90,7 +90,6 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountControllerTests.cs" />
     <Compile Include="Controllers\MyAccountControllerTests.cs" />
-    <Compile Include="DataExtensions\DBContext\WITEntitiesTests.cs" />
     <Compile Include="DataExtensions\Wit_CategoryTests.cs" />
     <Compile Include="DataExtensions\Wit_TransactionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

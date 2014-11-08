@@ -23,22 +23,22 @@ namespace ProjectWit.Web.Controllers
         
         public void SetSessions(ApplicationUser user)
         {
-            Session["userID"] = user.Id;
-            Session["IsSysAdmin"] = user.IsSysAdmin;
+            Session["userID"] = User.Identity.GetUserId(); 
+            Session["IsSysAdmin"] = User.IsInRole(AspNetRole.SYSADMIN);
         }
 
         public void ReloadCurrentSession(string userID)
         {
             var user = Userdb.UserManager.FindById(userID);
             Userdb.UpdateUserLogin(HttpContext.GetOwinContext().Authentication, user);
-            SetSessions(user);
+            //SetSessions(user);
         }
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             base.Initialize(requestContext);
 
-            if (Session["UserID"] == null)
+            if (Session["userID"] == null)
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
