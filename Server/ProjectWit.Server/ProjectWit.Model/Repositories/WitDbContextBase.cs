@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,7 +52,22 @@ namespace ProjectWit.Model
             if (_entity != null)
             {
                 db.Set<TWitEntity>().Remove(_entity);
-                await db.SaveChangesAsync();
+                try
+                {
+                    await db.SaveChangesAsync();
+                }
+                catch(Exception ex)
+                {
+                    //Workaround for the meantime. Refactor this
+                    if (ex.InnerException.InnerException is SqlException)
+                    {
+                        switch (((SqlException)ex.InnerException.InnerException).Number)
+                        {
+                            case 547:
+                                throw new Exception("You cannot delete this row because it's being used by others");
+                        }
+                    }
+                }
             }
         }
     }
