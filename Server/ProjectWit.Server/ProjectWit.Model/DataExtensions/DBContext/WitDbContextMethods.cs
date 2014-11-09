@@ -9,20 +9,6 @@
 
     public partial class WitDbContext
     {
-        //public bool DeleteUser(Guid? guid)
-        //{
-        //    Wit_User wit_user = this.Wit_User.Find(guid);
-        //    AspNetUser aspnetuser = this.AspNetUsers.Find(guid.ToString());
-
-        //    this.Wit_User.Remove(wit_user);
-        //    this.AspNetUsers.Remove(aspnetuser);
-        //    this.SaveChangesAsync();
-        //    return true;
-        //}
-       
-       
-       
-      
         public List<Wit_NavBar> GetNavBar(string userUID)
         {
             //Initial Get

@@ -88,6 +88,27 @@ namespace ProjectWit.Model
             }
             return aspNetRole;
         }
+        public void UpdateRole(string userId, List<AspNetRole> aspNetRole)
+        {
+            using (var tran = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    db.Database.ExecuteSqlCommand("DELETE FROM AspNetUserRoles WHERE UserId={0}", userId);
+                    foreach (AspNetRole role in aspNetRole)
+                    {
+                        if (role.IsSelected)
+                            db.Database.ExecuteSqlCommand("INSERT INTO AspNetUserRoles (RoleId,UserId) VALUES ({0},{1})", role.Id, userId);
+                    }
+                    tran.Commit();
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();
+                    throw ex;
+                }
+            }
+        }
 
         /// <summary>
         /// Creates a query which extracts session by Company and excludes SYSADMIN

@@ -19,12 +19,10 @@ namespace ProjectWit.Web.Controllers
     [WitAuthorize]
     public class UserController : WitBaseController
     {
-        private ApplicationDbContext Userdb = new ApplicationDbContext();
         private IWit_User IUser;
         private IWit_Company ICompany;
         private IUsersViewModel IUserView;
 
-        //TODO::::
         public UserController(IWit_User iUser, IWit_Company iComp, IUsersViewModel iUserView) 
         {
             IUser = iUser;
@@ -94,9 +92,8 @@ namespace ProjectWit.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //TODO: Error
                 usersViewModel.AspNetRole = aspnetRole;
-                await IUserView.UpdateAsync(usersViewModel, User.Identity.Name);
+                IUserView.UpdateUser(usersViewModel, User.Identity.Name);
 
                 if (Convert.ToString(Session["UserID"]) == usersViewModel.User_UID.ToString().ToUpper())
                 {

@@ -27,12 +27,12 @@ namespace ProjectWit.Model
     }
     public interface IWit_User : IReadable<Wit_User>, IWritable<Wit_User>, IDisposable
     {
-        bool UpdateUser(UsersViewModel usersViewModel);
-        
+        //Most of the business logic were moved to IUsersViewModel interface
     }
     public interface IAspNetRole : IReadable<AspNetRole>, IWritable<AspNetRole>, IDisposable
     {
         List<AspNetRole> GetRoles(string UserID);
+        void UpdateRole(string userId, List<AspNetRole> aspNetRole);
     }
     public interface IWit_Item : IReadable<Wit_Item>, IWritable<Wit_Item>, IDisposable
     {
@@ -40,5 +40,6 @@ namespace ProjectWit.Model
     public interface IUsersViewModel : IReadable<UsersViewModel>, IWritable<UsersViewModel>, IDisposable
     {
         UsersViewModel GetUserDetail(Guid? userID);
+        bool UpdateUser(UsersViewModel usersViewModel, string modifiedBy);
     }
 }

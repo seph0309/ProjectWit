@@ -52,6 +52,28 @@ namespace ProjectWit.Model
         {
             await base.dbUpdateAsync(entity, modifiedBy);
         }
+        public bool UpdateUser(UsersViewModel usersViewModel, string modifiedBy)
+        {
+            db.ModifiedBy = modifiedBy;
+            Wit_User wit_user = new Wit_User();
+            wit_user = db.Wit_User.Find(usersViewModel.User_UID);
+            if (wit_user != null)
+            {
+                wit_user.Company_UID = usersViewModel.Company_UID;
+                wit_user.User_UID = usersViewModel.User_UID;
+                wit_user.FirstName = usersViewModel.FirstName;
+                wit_user.MiddleName = usersViewModel.MiddleName;
+                wit_user.LastName = usersViewModel.LastName;
+                wit_user.EmailAddress = usersViewModel.EmailAddress;
+
+                AspNetRole role = new Model.AspNetRole();
+                role.UpdateRole(usersViewModel.User_UID.ToString().ToUpper(), usersViewModel.AspNetRole);
+                db.SaveChanges();
+                return true;
+            }
+            else
+                return false;
+        }
         public UsersViewModel GetUserDetail(Guid? userID)
         {
             UsersViewModel usersViewModel = db.UsersViewModels.Find(userID);

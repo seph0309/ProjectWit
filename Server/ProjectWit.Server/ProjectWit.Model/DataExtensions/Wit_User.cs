@@ -50,48 +50,8 @@ namespace ProjectWit.Model
         {
             await base.dbUpdateAsync(entity, modifiedBy);
         }
-        public bool UpdateUser(UsersViewModel usersViewModel)
-        {
-            Wit_User wit_user = new Wit_User();
-            wit_user = db.Wit_User.Find(usersViewModel.User_UID);
-            if (wit_user != null)
-            {
-                wit_user.Company_UID = usersViewModel.Company_UID;
-                wit_user.User_UID = usersViewModel.User_UID;
-                wit_user.FirstName = usersViewModel.FirstName;
-                wit_user.MiddleName = usersViewModel.MiddleName;
-                wit_user.LastName = usersViewModel.LastName;
-                wit_user.EmailAddress = usersViewModel.EmailAddress;
-
-                UpdateRole(usersViewModel.User_UID.ToString().ToUpper(), usersViewModel.AspNetRole);
-                db.SaveChanges();
-                return true;
-            }
-            else
-                return false;
-        }
+        
                
-        private void UpdateRole(string userId, List<AspNetRole> aspNetRole)
-        {
-            using (var tran = db.Database.BeginTransaction())
-            {
-                try
-                {
-                    db.Database.ExecuteSqlCommand("DELETE FROM AspNetUserRoles WHERE UserId={0}", userId);
-                    foreach (AspNetRole role in aspNetRole)
-                    {
-                        if (role.IsSelected)
-                            db.Database.ExecuteSqlCommand("INSERT INTO AspNetUserRoles (RoleId,UserId) VALUES ({0},{1})", role.Id, userId);
-                    }
-                    tran.Commit();
-                }
-                catch (Exception ex)
-                {
-                    tran.Rollback();
-                    throw ex;
-                }
-            }
-        }
 
         public void Dispose()
         {
