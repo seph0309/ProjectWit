@@ -12,8 +12,6 @@ namespace ProjectWit.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
     public partial class WitDbContext : DbContext
     {
@@ -43,38 +41,5 @@ namespace ProjectWit.Model
         public virtual DbSet<Wit_NavBar> Wit_NavBar { get; set; }
         public virtual DbSet<UsersViewModel> UsersViewModels { get; set; }
         public virtual DbSet<Wit_Session> Wit_Session { get; set; }
-    
-        public virtual int CreateUser(string id, string firstName, string middleName, string lastName, Nullable<System.Guid> company_UID, string emailAddress, string modifiedBy)
-        {
-            var idParameter = id != null ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(string));
-    
-            var firstNameParameter = firstName != null ?
-                new ObjectParameter("FirstName", firstName) :
-                new ObjectParameter("FirstName", typeof(string));
-    
-            var middleNameParameter = middleName != null ?
-                new ObjectParameter("MiddleName", middleName) :
-                new ObjectParameter("MiddleName", typeof(string));
-    
-            var lastNameParameter = lastName != null ?
-                new ObjectParameter("LastName", lastName) :
-                new ObjectParameter("LastName", typeof(string));
-    
-            var company_UIDParameter = company_UID.HasValue ?
-                new ObjectParameter("Company_UID", company_UID) :
-                new ObjectParameter("Company_UID", typeof(System.Guid));
-    
-            var emailAddressParameter = emailAddress != null ?
-                new ObjectParameter("EmailAddress", emailAddress) :
-                new ObjectParameter("EmailAddress", typeof(string));
-    
-            var modifiedByParameter = modifiedBy != null ?
-                new ObjectParameter("ModifiedBy", modifiedBy) :
-                new ObjectParameter("ModifiedBy", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CreateUser", idParameter, firstNameParameter, middleNameParameter, lastNameParameter, company_UIDParameter, emailAddressParameter, modifiedByParameter);
-        }
     }
 }

@@ -42,4 +42,8 @@ namespace ProjectWit.Model
         UsersViewModel GetUserDetail(Guid? userID);
         bool UpdateUser(UsersViewModel usersViewModel, string modifiedBy);
     }
+    public interface IWit_NavBar : IDisposable
+    {
+        List<Wit_NavBar> GetNavBar(string userUID);
+    }
 }

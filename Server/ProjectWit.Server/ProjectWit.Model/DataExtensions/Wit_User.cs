@@ -33,7 +33,9 @@ namespace ProjectWit.Model
 
         public async Task<Wit_User> CreateAsync(Wit_User entity, string modifiedBy)
         {
-            return await base.dbCreateAsync(entity, modifiedBy);
+            db.ModifiedBy = modifiedBy;
+            await base.dbCreateAsync(entity, modifiedBy);
+            return entity;
         }
 
         public async Task RemoveAsync(Guid? id)

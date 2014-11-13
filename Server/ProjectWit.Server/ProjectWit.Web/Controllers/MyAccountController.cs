@@ -12,6 +12,13 @@ namespace ProjectWit.Web.Controllers
     [WitAuthorize]
     public class MyAccountController : WitBaseController
     {
+
+        private IWit_NavBar INavBar;
+
+        public MyAccountController(IWit_NavBar inavBar)
+        {
+            INavBar = inavBar;
+        }
         //
         // GET: /MyAccount/
         public async Task<ActionResult> Index()
@@ -21,12 +28,7 @@ namespace ProjectWit.Web.Controllers
 
         public ActionResult GetNavBar()
         {
-            using (WitDbContext db = new WitDbContext())
-            {
-                db.Configuration.AutoDetectChangesEnabled = false;
-                db.Configuration.ProxyCreationEnabled = false;
-                return Json(db.GetNavBar(Session["userID"].ToString()), JsonRequestBehavior.AllowGet);
-            }
+            return Json(INavBar.GetNavBar(Session["userID"].ToString()), JsonRequestBehavior.AllowGet); ;
         }
 	}
 }

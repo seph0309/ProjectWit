@@ -44,7 +44,8 @@ namespace ProjectWit.Web.App_Start
             container.RegisterType<IWit_Company, Wit_Company>();
             container.RegisterType<IWit_User, Wit_User>();
             container.RegisterType<IAspNetRole, AspNetRole>();
-            container.RegisterType<IUsersViewModel, UsersViewModel>(); 
+            container.RegisterType<IUsersViewModel, UsersViewModel>();
+            container.RegisterType<IWit_NavBar, Wit_NavBar>(); 
         }
     }
 }

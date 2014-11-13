@@ -13,7 +13,6 @@ namespace ProjectWit.Web.Controllers.Tests
         [TestMethod()]
         public void AddUserToRoleTest()
         {
-            AccountController ac = new AccountController();
             Assert.Fail();
         }
     }

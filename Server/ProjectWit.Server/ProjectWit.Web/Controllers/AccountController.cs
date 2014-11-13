@@ -15,10 +15,14 @@ namespace ProjectWit.Web.Controllers
 {
     public class AccountController : WitBaseController
     {
-        WitDbContext db = new WitDbContext();
-        public AccountController()
+        private IWit_Company ICompany;
+        private IWit_User IUser;
+
+        public AccountController(IWit_Company ICom, IWit_User IUs)
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
         {
+            ICompany = ICom;
+            IUser = IUs;
         }
 
         public AccountController(UserManager<ApplicationUser> userManager)
@@ -65,9 +69,9 @@ namespace ProjectWit.Web.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public async Task<ActionResult> Register()
         {
-            ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName");
+            ViewBag.Company_UID = new SelectList(await ICompany.GetAllAsync(), "Company_UID", "CompanyName");
             return View();
         }
 
@@ -83,23 +87,35 @@ namespace ProjectWit.Web.Controllers
             TryValidateModel(model.Wit_User);
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                var Wit_user = await IUser.CreateAsync(new Wit_User
                 {
-                    db.CreateUser(user.Id, model.Wit_User.FirstName, model.Wit_User.MiddleName,
-                        model.Wit_User.LastName, model.Wit_User.Company_UID,
-                        model.Wit_User.EmailAddress, user.UserName);
-                    await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "MyAccount");
-                }
-                else
+                    FirstName = model.Wit_User.FirstName,
+                    MiddleName = model.Wit_User.MiddleName,
+                    LastName = model.Wit_User.LastName,
+                    Company_UID = model.Wit_User.Company_UID,
+                    EmailAddress = model.Wit_User.EmailAddress
+
+                }, model.UserName);
+
+                if (Wit_user.User_UID != null)
                 {
-                    AddErrors(result);
+                    var user = new ApplicationUser() { Id = Wit_user.User_UID.ToString(), UserName = model.UserName };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        //Newly added user will have a GUEST as default
+                        UserManager.AddToRole(Wit_user.User_UID.ToString(), AspNetRole.GUEST);
+                        await SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "MyAccount");
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
                 }
             }
 
-            ViewBag.Company_UID = new SelectList(db.Wit_Company, "Company_UID", "CompanyName", model.Wit_User.Company_UID);
+            ViewBag.Company_UID = new SelectList(await ICompany.GetAllAsync(), "Company_UID", "CompanyName", model.Wit_User.Company_UID);
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -325,6 +341,8 @@ namespace ProjectWit.Web.Controllers
             {
                 UserManager.Dispose();
                 UserManager = null;
+                ICompany.Dispose();
+                IUser.Dispose();
             }
             base.Dispose(disposing);
         }

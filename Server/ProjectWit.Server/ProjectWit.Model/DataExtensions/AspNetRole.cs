@@ -20,10 +20,10 @@ namespace ProjectWit.Model
         public bool IsSelected { get; set; }
 
         public const string SYSADMIN = "SYSADMIN";
-        protected const string ADMIN = "ADMIN";
-        protected const string CREW = "CREW";
-        protected const string CUSTOMER = "CUSTOMER";
-        protected const string GUEST = "GUEST";
+        public const string ADMIN = "ADMIN";
+        public const string CREW = "CREW";
+        public const string CUSTOMER = "CUSTOMER";
+        public const string GUEST = "GUEST";
 
         public async Task<AspNetRole> GetByIdAsync(Guid? id)
         {
