@@ -15,7 +15,7 @@ namespace ProjectWit.Service
     {
         [OperationContract(Name = "NewTransaction")]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        LoginServiceArgs NewTransaction(string sessionID, string tableID, string numberOfGuest);
+        TransactionServiceArgs NewTransaction(string sessionID, string tableID, string numberOfGuest);
 
     }
 }

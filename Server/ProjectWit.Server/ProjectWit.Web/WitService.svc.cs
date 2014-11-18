@@ -40,7 +40,6 @@ namespace ProjectWit.Web
         }
         #endregion
 
-
         /// <summary>
         /// Authenticates the user and returns Session ID and Categories/Items list
         /// </summary>
@@ -78,9 +77,10 @@ namespace ProjectWit.Web
             return serviceArgs;
         }
 
-        public LoginServiceArgs NewTransaction(string sessionID, string tableID, string numberOfGuest)
+        public TransactionServiceArgs NewTransaction(string sessionID, string tableID, string numberOfGuest)
         {
-            throw new NotImplementedException();
+            TransactionServiceArgs serviceArgs = new TransactionServiceArgs();
+            return serviceArgs;
         }
     }
 }
