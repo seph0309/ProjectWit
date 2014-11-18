@@ -10,6 +10,7 @@ using ProjectWit.Service.ServiceArguments;
 
 namespace ProjectWit.Service
 {
+    [ServiceContract]
     public interface ITransactionService
     {
         [OperationContract(Name = "NewTransaction")]
