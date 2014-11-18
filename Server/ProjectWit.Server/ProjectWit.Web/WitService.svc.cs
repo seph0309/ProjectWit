@@ -77,5 +77,10 @@ namespace ProjectWit.Web
             serviceArgs.IsSessionActive(sessionID);
             return serviceArgs;
         }
+
+        public LoginServiceArgs NewTransaction(string sessionID, string tableID, string numberOfGuest)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

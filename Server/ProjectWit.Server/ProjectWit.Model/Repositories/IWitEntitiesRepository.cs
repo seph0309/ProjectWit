@@ -25,6 +25,9 @@ namespace ProjectWit.Model
     public interface IWit_Order : IReadable<Wit_Order>, IWritable<Wit_Order>, IDisposable
     {
     }
+    public interface IWit_Transaction : IReadable<Wit_Transaction>, IWritable<Wit_Transaction>, IDisposable
+    {
+    }
     public interface IWit_User : IReadable<Wit_User>, IWritable<Wit_User>, IDisposable
     {
         //Most of the business logic were moved to IUsersViewModel interface
