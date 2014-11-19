@@ -15,8 +15,10 @@ namespace ProjectWit.Service
     /// <summary>
     /// Implementation is in ProjectWit.Web
     /// </summary>
-    [ServiceContract(Namespace="http://wittapps.com/WitService")]
-    public interface IWitService : ILoginService, ITransactionService
+    [ServiceContract(Namespace = "http://wittapps.com/WitService")]
+    public interface IWitService : ILoginService
+        //, ITransactionService
+        //, IOrderService
     {
         #region Test Data HERE
         [OperationContract(Name = "GetListData")]
@@ -28,5 +30,4 @@ namespace ProjectWit.Service
         Wit_Company GetData(int value);
         #endregion
     }
-
 }
