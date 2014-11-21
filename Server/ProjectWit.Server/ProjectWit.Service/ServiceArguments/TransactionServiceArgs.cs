@@ -13,7 +13,7 @@ namespace ProjectWit.Service.ServiceArguments
     public class TransactionServiceArgs : WitSessionServiceArgsBase , ITransactionService
     {
         [DataMember(Order = 0)]
-        Wit_Transaction Transaction;
+        Wit_Transaction Transaction = new Wit_Transaction();
         [DataMember(Order = 1)]
         public List<Wit_Item> Items;
         [DataMember(Order = 2)]
@@ -21,18 +21,16 @@ namespace ProjectWit.Service.ServiceArguments
         [DataMember(Order = 3)]
         public List<KeyValuePair<int, string>> Status;
 
-        private IWit_Transaction ITransaction;
+        private IWit_Transaction ITransaction = new Wit_Transaction();
 
-        public TransactionServiceArgs()
+        public TransactionServiceArgs() : this(new Wit_Transaction())
         {
-            Transaction = new Wit_Transaction();
         }
-        public TransactionServiceArgs(IWit_Transaction itrans)
+
+        public TransactionServiceArgs(IWit_Transaction itran)
         {
-            //Add Logic here
-            ITransaction = itrans;
+            ITransaction = itran;
             ITransaction.SetDbContext(new WitServiceDBContext());
-            Transaction = new Wit_Transaction();
         }
 
         public TransactionServiceArgs NewTransaction(string sessionID, string tableID, int numberOfGuest)
@@ -41,8 +39,6 @@ namespace ProjectWit.Service.ServiceArguments
             Transaction.NumberOfGuest = numberOfGuest;
             Transaction.Status = "Open";
             ITransaction.CreateAsync(Transaction, "gg").Wait();
-            
-         
             return this;
         }
 

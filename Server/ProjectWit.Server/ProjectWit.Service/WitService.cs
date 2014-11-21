@@ -1,21 +1,13 @@
-﻿using ProjectWit.Service;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Activation;
-using System.ServiceModel.Web;
-using System.Text;
-using ProjectWit.Model;
+using System.Web;
 using ProjectWit.Service.ServiceArguments;
 
-namespace ProjectWit.Web
+namespace ProjectWit.Service
 {
-    //[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class WitService : IWitService
+    public class WitService :IWitService
     {
-
         /// <summary>
         /// Authenticates the user and returns Session ID and Categories/Items list
         /// </summary>
@@ -25,7 +17,7 @@ namespace ProjectWit.Web
         public LoginServiceArgs LoginByUser(string userName, string password, string browser, string deviceType)
         {
             LoginServiceArgs serviceArgs = new LoginServiceArgs(userName, password, browser, deviceType);
-            return serviceArgs; 
+            return serviceArgs;
         }
 
         /// <summary>

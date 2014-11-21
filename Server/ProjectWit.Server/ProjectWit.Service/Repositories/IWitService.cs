@@ -15,7 +15,7 @@ namespace ProjectWit.Service
     /// Implementation is in ProjectWit.Web
     /// </summary>
     [ServiceContract(Namespace = "http://wittapps.com/WitService")]
-    public interface IWitService :ITransactionService
+    public interface IWitService : ILoginService, ITransactionService
         //, IOrderService
     {
     }

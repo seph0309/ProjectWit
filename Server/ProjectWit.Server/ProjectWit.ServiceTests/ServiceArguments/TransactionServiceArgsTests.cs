@@ -24,10 +24,7 @@ namespace ProjectWit.Service.ServiceArguments.Tests
         [TestMethod()]
         public void NewTransactionTest()
         {
-            Guid tableID = new Guid("47DF81BC-D64E-E411-A417-D459F8E9FF22");
-            string sessionID = "";
-            TransactionServiceArgs srvcArgs = new TransactionServiceArgs(new Wit_Transaction());
-            srvcArgs.NewTransaction(sessionID, tableID.ToString(), 3);
+         
         }
     }
 }

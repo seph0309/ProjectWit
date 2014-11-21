@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="ProjectWit.Web.WitService" CodeBehind="WitService.svc.cs" Factory="ProjectWit.Service.WcfServiceFactory" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="ProjectWit.Service.WitService" %>
