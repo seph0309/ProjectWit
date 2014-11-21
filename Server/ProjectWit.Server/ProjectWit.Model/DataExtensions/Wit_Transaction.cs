@@ -27,6 +27,53 @@ namespace ProjectWit.Model
             db.Configuration.LazyLoadingEnabled = true;
             return await db.Wit_Transaction.Where(m => m.Transaction_UID == id).FirstOrDefaultAsync();
         }
+        public Wit_Transaction SetTransactionStatus(string transactionID, string status)
+        {
+            try
+            {
+                var trans = GetByIdAsync(new Guid(transactionID)).Result;
+                if (trans == null) return trans;
+                trans.Status = status;
+                UpdateAsync(trans, string.Empty).Wait();
+                return trans;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Wit_Transaction SetTable(string transactionID, string tableID)
+        {
+            try
+            {
+                var trans = GetByIdAsync(new Guid(transactionID)).Result;
+                if (trans == null) return trans;
+                trans.Table_UID = new Guid(tableID);
+                UpdateAsync(trans, string.Empty).Wait();
+                return trans;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Wit_Transaction SetGuestCount(string transactionID, int count)
+        {
+            try
+            {
+                var trans = GetByIdAsync(new Guid(transactionID)).Result;
+                if (trans == null) return trans;
+                trans.NumberOfGuest = count;
+                UpdateAsync(trans, string.Empty).Wait();
+                return trans;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public void Dispose()
         {

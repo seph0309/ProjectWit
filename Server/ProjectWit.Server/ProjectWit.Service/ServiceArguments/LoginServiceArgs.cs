@@ -79,8 +79,7 @@ namespace ProjectWit.Service.ServiceArguments
         }
         public LoginServiceArgs(string sessionID)
         {
-            AuthenticateSession(sessionID);
-            if (!IsAuthenticated) return;
+            if (!AuthenticateSession(sessionID)) return;
             else
             {
                 InitializeCompanyUID(_userUID);

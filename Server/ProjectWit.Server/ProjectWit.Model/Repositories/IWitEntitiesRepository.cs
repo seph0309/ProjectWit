@@ -27,6 +27,9 @@ namespace ProjectWit.Model
     }
     public interface IWit_Transaction : IReadable<Wit_Transaction>, IWritable<Wit_Transaction>, IDisposable
     {
+        Wit_Transaction SetTable(string transactionID, string tableID);
+        Wit_Transaction SetGuestCount(string transactionID, int count);
+        Wit_Transaction SetTransactionStatus(string transactionID, string status);
     }
     public interface IWit_User : IReadable<Wit_User>, IWritable<Wit_User>, IDisposable
     {

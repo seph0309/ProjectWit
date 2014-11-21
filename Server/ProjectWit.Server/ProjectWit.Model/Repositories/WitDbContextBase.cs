@@ -38,7 +38,9 @@ namespace ProjectWit.Model
         }
         public virtual async Task UpdateAsync(TWitEntity entity, string modifiedBy)
         {
-            db.ModifiedBy = modifiedBy;
+            if (String.IsNullOrEmpty(db.ModifiedBy))
+                db.ModifiedBy = modifiedBy;
+
             db.Entry(entity).State = EntityState.Modified;
             await db.SaveChangesAsync();
         }

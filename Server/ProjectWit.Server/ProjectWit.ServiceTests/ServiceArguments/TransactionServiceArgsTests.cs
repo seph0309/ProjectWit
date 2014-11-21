@@ -7,6 +7,7 @@ using ProjectWit.Service.ServiceArguments;
 using ProjectWit.Service;
 using ProjectWit.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics;
 namespace ProjectWit.Service.ServiceArguments.Tests
 {
     [TestClass()]
@@ -16,9 +17,11 @@ namespace ProjectWit.Service.ServiceArguments.Tests
         public void GetTransactionTest()
         {
             string sessionId = "";
-            string transactionID = ""; 
-            TransactionServiceArgs srvcArgs = new TransactionServiceArgs();
-            srvcArgs.GetTransaction(sessionId, transactionID);
+            string transactionID = "F0E2C3DB-3B71-E411-BBC2-0021CCC18CF4";
+            TransactionServiceArgs srvcArgs = new TransactionServiceArgs(sessionId);
+            srvcArgs.GetTransaction(transactionID);
+            Debug.WriteLine(srvcArgs);
+            
         }
 
         [TestMethod()]

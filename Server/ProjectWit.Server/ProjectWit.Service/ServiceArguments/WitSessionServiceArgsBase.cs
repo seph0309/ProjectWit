@@ -6,6 +6,7 @@ using ProjectWit.Model;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Web;
 
 namespace ProjectWit.Service
 {
@@ -31,6 +32,14 @@ namespace ProjectWit.Service
         {
             LogMessage = new List<string>();
         }
+
+        protected WitSessionServiceArgsBase(string sessionID) :this()
+        {
+            if (!AuthenticateSession(sessionID))
+                throw new WebFaultException<string>("Invalid Session",System.Net.HttpStatusCode.Forbidden);
+            SessionID = new Guid(sessionID);
+        }
+
         internal bool AuthenticateSession(string sessionUID)
         {
             if (!Wit_Commons.IsStringGUID(sessionUID))
@@ -45,7 +54,11 @@ namespace ProjectWit.Service
                                    where col.Session_UID == new Guid(sessionUID)
                                    select new { Session_UID = col.Session_UID, UserUID = col.User_UID }).ToList();
 
-                if (_getSession.Count == 0) return false;
+                if (_getSession.Count == 0)
+                {
+                    LogMessage.Add("Invalid session.");
+                    return false;
+                }
                 else
                 {
                     InitializeSession(_getSession[0].Session_UID, _getSession[0].UserUID.ToString());

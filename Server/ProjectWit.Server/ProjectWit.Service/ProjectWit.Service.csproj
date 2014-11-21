@@ -81,6 +81,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ILoginService.cs" />
     <Compile Include="Repositories\IOrderService.cs" />
+    <Compile Include="Repositories\IRequireParameter.cs" />
     <Compile Include="Repositories\ITransactionService.cs" />
     <Compile Include="Repositories\IWitService.cs" />
     <Compile Include="ServiceArguments\LoginServiceArgs.cs" />

@@ -16,5 +16,10 @@ namespace ProjectWit.Service
             this.Configuration.ProxyCreationEnabled = false;
             this.ModifiedBy = "Wit_Service";
         }
+
+        public WitServiceDBContext(string modifiedBy) : this()
+        {
+            this.ModifiedBy = modifiedBy;
+        }
     }
 }

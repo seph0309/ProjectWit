@@ -15,8 +15,8 @@ namespace ProjectWit.Service.ServiceArguments.Tests
         {
             string sessionId = "";
             string transactionID = "";
-            TransactionServiceArgs srvcArgs = new TransactionServiceArgs();
-            srvcArgs.GetTransaction(sessionId, transactionID);
+            TransactionServiceArgs srvcArgs = new TransactionServiceArgs(sessionId);
+            //srvcArgs.GetTransaction(sessionId, transactionID, "Open");
         }
 
         [TestMethod()]
@@ -24,8 +24,8 @@ namespace ProjectWit.Service.ServiceArguments.Tests
         {
             Guid tableID = new Guid("47DF81BC-D64E-E411-A417-D459F8E9FF22");
             string sessionID = "";
-            TransactionServiceArgs srvcArgs = new TransactionServiceArgs();
-            srvcArgs.NewTransaction(sessionID, tableID.ToString(),3);
+            TransactionServiceArgs srvcArgs = new TransactionServiceArgs(sessionID);
+            //srvcArgs.NewTransaction(sessionID, tableID.ToString(),3,"Open");
         }
     }
 }

@@ -10,7 +10,7 @@ using System.ServiceModel.Channels;
 namespace ProjectWit.Service.ServiceArguments
 {
     [DataContract]
-    public class TransactionServiceArgs : WitSessionServiceArgsBase , ITransactionService
+    public class TransactionServiceArgs : WitSessionServiceArgsBase
     {
         [DataMember(Order = 0)]
         Wit_Transaction Transaction = new Wit_Transaction();
@@ -21,47 +21,49 @@ namespace ProjectWit.Service.ServiceArguments
         [DataMember(Order = 3)]
         public List<KeyValuePair<int, string>> Status;
 
-        private IWit_Transaction ITransaction = new Wit_Transaction();
+        private IWit_Transaction ITransaction;
 
-        public TransactionServiceArgs() : this(new Wit_Transaction())
+        public TransactionServiceArgs(string sessionID) : base(sessionID)
         {
+            ITransaction = new Wit_Transaction();
+            ITransaction.SetDbContext(new WitServiceDBContext(SessionID.ToString()));
         }
+ 
 
-        public TransactionServiceArgs(IWit_Transaction itran)
-        {
-            ITransaction = itran;
-            ITransaction.SetDbContext(new WitServiceDBContext());
-        }
-
-        public TransactionServiceArgs NewTransaction(string sessionID, string tableID, int numberOfGuest)
+        public void NewTransaction(string tableID, int numberOfGuest, string status)
         {
             Transaction.Table_UID = new Guid(tableID);
             Transaction.NumberOfGuest = numberOfGuest;
-            Transaction.Status = "Open";
-            ITransaction.CreateAsync(Transaction, "gg").Wait();
-            return this;
+            Transaction.Status = status;
+            ITransaction.CreateAsync(Transaction, SessionID.ToString()).Wait();
         }
 
-        public TransactionServiceArgs GetTransaction(string sessionID, string transactionID)
+        
+        public void GetTransaction(string transactionID)
         {
+            if(String.IsNullOrEmpty(transactionID))
+            {
+                LogMessage.Add("TransactionID is required");
+                return;
+            }
             Transaction = ITransaction.FindByIdAsync(new Guid(transactionID)).Result;
- 
-            return this;
+            if (Transaction == null)
+                LogMessage.Add("Transaction not found");
         }
 
-        public TransactionServiceArgs SetTransactionStatus(string sessionID, string transactionID, string status)
+        public void SetTransactionStatus(string transactionID, string status)
         {
-            return this;
+            Transaction = ITransaction.SetTransactionStatus(transactionID, status);
         }
 
-        public TransactionServiceArgs ChangeTable(string sessionID, string transactionID, string tableID)
+        public void SetTable(string transactionID, string tableID)
         {
-            return this;
+            Transaction = ITransaction.SetTable(transactionID, tableID);
         }
 
-        public TransactionServiceArgs UpdateGuestCount(string sessionID, string transactionID, int count)
+        public void SetGuestCount(string transactionID, int count)
         {
-            return this;
+            Transaction = ITransaction.SetGuestCount(transactionID, count);
         }
     }
 }

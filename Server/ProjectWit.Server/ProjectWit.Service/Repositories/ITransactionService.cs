@@ -15,7 +15,7 @@ namespace ProjectWit.Service
     {
         [OperationContract(Name = "NewTransaction")]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        TransactionServiceArgs NewTransaction(string sessionID, string tableID, int numberOfGuest);
+        TransactionServiceArgs NewTransaction(string sessionID, string tableID, int numberOfGuest, string status);
 
         [OperationContract(Name = "GetTransaction")]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
@@ -25,12 +25,12 @@ namespace ProjectWit.Service
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
         TransactionServiceArgs SetTransactionStatus(string sessionID, string transactionID, string status);
 
-        [OperationContract(Name = "ChangeTable")]
+        [OperationContract(Name = "SetTable")]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        TransactionServiceArgs ChangeTable(string sessionID, string transactionID, string tableID);
+        TransactionServiceArgs SetTable(string sessionID, string transactionID, string tableID);
 
-        [OperationContract(Name = "UpdateGuestCount")]
+        [OperationContract(Name = "SetGuestCount")]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        TransactionServiceArgs UpdateGuestCount(string sessionID, string transactionID, int count);
+        TransactionServiceArgs SetGuestCount(string sessionID, string transactionID, int count);
     }
 }
