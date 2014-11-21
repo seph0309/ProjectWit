@@ -20,39 +20,18 @@ namespace ProjectWit.Model
             db.Configuration.LazyLoadingEnabled = true;
             return await db.Wit_User.Where(m => m.User_UID == id).FirstOrDefaultAsync();
         }
+  
 
-        public async Task<Wit_User> FindByIdAsync(Guid? id)
+        public override async Task RemoveAsync(Guid? id)
         {
-            return await base.dbFindByIdAsync(id);
-        }
-
-        public async Task<List<Wit_User>> GetAllAsync()
-        {
-            return await base.dbGetAllAsync();
-        }
-
-        public async Task<Wit_User> CreateAsync(Wit_User entity, string modifiedBy)
-        {
-            db.ModifiedBy = modifiedBy;
-            await base.dbCreateAsync(entity, modifiedBy);
-            return entity;
-        }
-
-        public async Task RemoveAsync(Guid? id)
-        {
-            await base.dbRemoveAsync(id);
+            await base.RemoveAsync(id);
             //Delete AspNetUser too
             AspNetUser aspnetuser = db.AspNetUsers.Find(id);
 
             db.AspNetUsers.Remove(aspnetuser);
             await db.SaveChangesAsync();
         }
-
-        public async Task UpdateAsync(Wit_User entity, string modifiedBy)
-        {
-            await base.dbUpdateAsync(entity, modifiedBy);
-        }
-        
+ 
                
 
         public void Dispose()

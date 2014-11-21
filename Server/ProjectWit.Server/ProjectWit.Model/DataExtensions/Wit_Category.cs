@@ -30,32 +30,12 @@ namespace ProjectWit.Model
             db.Configuration.LazyLoadingEnabled = true;
             return await db.Wit_Category.Where(m => m.Category_UID == id).FirstOrDefaultAsync();
         }
-
-        public async Task<Wit_Category> FindByIdAsync(Guid? id)
-        {
-            return await base.dbFindByIdAsync(id);
-        }
-
-        public async Task<List<Wit_Category>> GetAllAsync()
+        public override async Task<List<Wit_Category>> GetAllAsync()
         {
             db.Configuration.LazyLoadingEnabled = true;
-            return await base.dbGetAllAsync();
+            return await base.GetAllAsync();
         }
 
-        public async Task<Wit_Category> CreateAsync(Wit_Category entity, string modifiedBy)
-        {
-            return await base.dbCreateAsync(entity, modifiedBy);
-        }
-
-        public async Task RemoveAsync(Guid? id)
-        {
-            await base.dbRemoveAsync(id);
-        }
-
-        public async Task UpdateAsync(Wit_Category entity, string modifiedBy)
-        {
-            await base.dbUpdateAsync(entity, modifiedBy);
-        }
         public void Dispose()
         {
             GC.Collect();

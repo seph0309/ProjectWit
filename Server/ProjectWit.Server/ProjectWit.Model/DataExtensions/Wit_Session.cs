@@ -47,10 +47,7 @@ namespace ProjectWit.Model
             //Return default (per user)
             return db.Wit_Session.Where(m => m.User_UID == new Guid(userUID)).ToList();
         }
-        public async Task<List<Wit_Session>> GetAllAsync()
-        {
-            return await base.dbGetAllAsync();
-        }
+  
         public async Task<Wit_Session> GetByIdAsync(Guid? id)
         {
             db.Configuration.LazyLoadingEnabled = true;
@@ -58,26 +55,14 @@ namespace ProjectWit.Model
             db.Configuration.LazyLoadingEnabled = false;
             return wit_Session;
         }
-        public async Task<Wit_Session> FindByIdAsync(Guid? id)
+        public override async Task<Wit_Session> FindByIdAsync(Guid? id)
         {
             db.Configuration.LazyLoadingEnabled = true;
-            Wit_Session wit_Session = await base.dbFindByIdAsync(id);
+            Wit_Session wit_Session = await base.FindByIdAsync(id);
             db.Configuration.LazyLoadingEnabled = false;
             return wit_Session;
         }
-
-        public async Task<Wit_Session> CreateAsync(Wit_Session entity, string modifiedBy)
-        {
-            return await base.dbCreateAsync(entity,modifiedBy);
-        }
-        public async Task RemoveAsync(Guid? id)
-        {
-            await base.dbRemoveAsync(id);
-        }
-        public async Task UpdateAsync(Wit_Session entity, string modifiedBy)
-        {
-            await base.dbUpdateAsync(entity, modifiedBy);
-        }
+         
         public void Dispose()
         {
             GC.Collect();

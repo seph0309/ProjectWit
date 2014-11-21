@@ -11,7 +11,6 @@ namespace ProjectWit.Model
     [MetadataType(typeof(Wit_TransactionMetaData))]
     public partial class Wit_Transaction : WitDbContextBase<Wit_Transaction>, IWit_Transaction
     {
-         
         public static Wit_Transaction ToSerializable(Wit_Transaction _wit_Transaction)
         {
             return new Wit_Transaction
@@ -29,30 +28,6 @@ namespace ProjectWit.Model
             return await db.Wit_Transaction.Where(m => m.Transaction_UID == id).FirstOrDefaultAsync();
         }
 
-        public async Task<Wit_Transaction> FindByIdAsync(Guid? id)
-        {
-            return await base.dbFindByIdAsync(id);
-        }
-
-        public async Task<List<Wit_Transaction>> GetAllAsync()
-        {
-            return await base.dbGetAllAsync();
-        }
-
-        public async Task<Wit_Transaction> CreateAsync(Wit_Transaction entity, string modifiedBy)
-        {
-            return await base.dbCreateAsync(entity, modifiedBy);
-        }
-
-        public async Task RemoveAsync(Guid? id)
-        {
-            await base.dbRemoveAsync(id);
-        }
-
-        public async Task UpdateAsync(Wit_Transaction entity, string modifiedBy)
-        {
-            await base.dbUpdateAsync(entity, modifiedBy);
-        }
         public void Dispose()
         {
             GC.Collect();
@@ -68,8 +43,6 @@ namespace ProjectWit.Model
         public System.Guid Table_UID { get; set; }
         [Display(Name = "Number of Guest")]
         public Nullable<int> NumberOfGuest { get; set; }
-        [Display(Name = "Status")]
-        public System.Guid Status_UID { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
    

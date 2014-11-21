@@ -6,7 +6,6 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using ProjectWit.Model;
-using ProjectWit.Service.ServiceArguments;
 
 namespace ProjectWit.Service
 {
@@ -16,18 +15,8 @@ namespace ProjectWit.Service
     /// Implementation is in ProjectWit.Web
     /// </summary>
     [ServiceContract(Namespace = "http://wittapps.com/WitService")]
-    public interface IWitService : ILoginService
-        //, ITransactionService
+    public interface IWitService :ITransactionService
         //, IOrderService
     {
-        #region Test Data HERE
-        [OperationContract(Name = "GetListData")]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        List<Wit_Company> GetListData(int value);
-
-        [OperationContract(Name = "GetData")]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        Wit_Company GetData(int value);
-        #endregion
     }
 }

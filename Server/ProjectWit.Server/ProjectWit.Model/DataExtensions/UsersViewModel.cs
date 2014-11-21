@@ -27,31 +27,7 @@ namespace ProjectWit.Model
             db.Configuration.LazyLoadingEnabled = true;
             return await db.UsersViewModels.Where(m => m.User_UID == id).FirstOrDefaultAsync();
         }
-
-        public async Task<UsersViewModel> FindByIdAsync(Guid? id)
-        {
-            return await base.dbFindByIdAsync(id);
-        }
-
-        public async Task<List<UsersViewModel>> GetAllAsync()
-        {
-            return await base.dbGetAllAsync();
-        }
-
-        public async Task<UsersViewModel> CreateAsync(UsersViewModel entity, string modifiedBy)
-        {
-            return await base.dbCreateAsync(entity, modifiedBy);
-        }
-
-        public async Task RemoveAsync(Guid? id)
-        {
-            await base.dbRemoveAsync(id);
-        }
-
-        public async Task UpdateAsync(UsersViewModel entity, string modifiedBy)
-        {
-            await base.dbUpdateAsync(entity, modifiedBy);
-        }
+         
         public bool UpdateUser(UsersViewModel usersViewModel, string modifiedBy)
         {
             db.ModifiedBy = modifiedBy;

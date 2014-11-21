@@ -30,31 +30,6 @@ namespace ProjectWit.Model
             db.Configuration.LazyLoadingEnabled = true;
             return await db.AspNetRoles.Where(m => m.Id == id.ToString()).FirstOrDefaultAsync();
         }
-
-        public async Task<AspNetRole> FindByIdAsync(Guid? id)
-        {
-            return await base.dbFindByIdAsync(id);
-        }
-
-        public async Task<List<AspNetRole>> GetAllAsync()
-        {
-            return await base.dbGetAllAsync();
-        }
-
-        public async Task<AspNetRole> CreateAsync(AspNetRole entity, string modifiedBy)
-        {
-            return await base.dbCreateAsync(entity, modifiedBy);
-        }
-
-        public async Task RemoveAsync(Guid? id)
-        {
-            await base.dbRemoveAsync(id);
-        }
-
-        public async Task UpdateAsync(AspNetRole entity, string modifiedBy)
-        {
-            await base.dbUpdateAsync(entity, modifiedBy);
-        }
         public void Dispose()
         {
             GC.Collect();

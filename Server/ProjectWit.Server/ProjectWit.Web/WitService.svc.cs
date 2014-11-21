@@ -16,30 +16,6 @@ namespace ProjectWit.Web
     public class WitService : IWitService
     {
 
-        #region Test Data HERE
-        public void DoWork()
-        {
-            // Add your operation implementation here
-            return;
-        }
-
-        // Add more operations here and mark them with [OperationContract]
-
-        public List<Wit_Company> GetListData(int value)
-        {
-            List<Wit_Company> comp = new List<Wit_Company>();
-            comp.Add(new Wit_Company { CompanyName = "SephSample", CompanyNumber = "12345" });
-            comp.Add(new Wit_Company { CompanyName = "SephSample", CompanyNumber = "12345" });
-            comp.Add(new Wit_Company { CompanyName = "SephSample", CompanyNumber = "12345" });
-            return comp;
-        }
-
-        public Wit_Company GetData(int value)
-        {
-            return new Wit_Company { CompanyName = "SephSample", CompanyNumber = "12345" };
-        }
-        #endregion
-
         /// <summary>
         /// Authenticates the user and returns Session ID and Categories/Items list
         /// </summary>
@@ -77,7 +53,33 @@ namespace ProjectWit.Web
             return serviceArgs;
         }
 
-        public TransactionServiceArgs NewTransaction(string sessionID, string tableID, string numberOfGuest)
+        public TransactionServiceArgs NewTransaction(string sessionID, string tableID, int numberOfGuest)
+        {
+            TransactionServiceArgs serviceArgs = new TransactionServiceArgs();
+            serviceArgs.NewTransaction(sessionID, tableID, numberOfGuest);
+            return serviceArgs;
+        }
+
+
+        public TransactionServiceArgs GetTransaction(string sessionID, string transactionID)
+        {
+            TransactionServiceArgs serviceArgs = new TransactionServiceArgs();
+            return serviceArgs;
+        }
+
+        public TransactionServiceArgs SetTransactionStatus(string sessionID, string transactionID, string status)
+        {
+            TransactionServiceArgs serviceArgs = new TransactionServiceArgs();
+            return serviceArgs;
+        }
+
+        public TransactionServiceArgs ChangeTable(string sessionID, string transactionID, string tableID)
+        {
+            TransactionServiceArgs serviceArgs = new TransactionServiceArgs();
+            return serviceArgs;
+        }
+
+        public TransactionServiceArgs UpdateGuestCount(string sessionID, string transactionID, int count)
         {
             TransactionServiceArgs serviceArgs = new TransactionServiceArgs();
             return serviceArgs;

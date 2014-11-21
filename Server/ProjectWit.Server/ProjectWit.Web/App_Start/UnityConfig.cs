@@ -2,6 +2,7 @@ using System;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using ProjectWit.Model;
+using ProjectWit.Service;
 
 namespace ProjectWit.Web.App_Start
 {
@@ -46,6 +47,7 @@ namespace ProjectWit.Web.App_Start
             container.RegisterType<IAspNetRole, AspNetRole>();
             container.RegisterType<IUsersViewModel, UsersViewModel>();
             container.RegisterType<IWit_NavBar, Wit_NavBar>(); 
+            container.RegisterType<IWitService, WitService>(); 
         }
     }
 }

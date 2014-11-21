@@ -23,28 +23,35 @@ namespace ProjectWit.Model
             set { _db=value;}
         }
 
-        protected async Task<TWitEntity> dbFindByIdAsync(Guid? id)
+        public void SetDbContext(DbContext db)
+        {
+            if (_db == null)
+                _db = (WitDbContext)db;
+        }
+        public virtual async Task<TWitEntity> FindByIdAsync(Guid? id)
         {
             return await db.Set<TWitEntity>().FindAsync(id);
         }
-        protected async Task<List<TWitEntity>> dbGetAllAsync()
+        public virtual async Task<List<TWitEntity>> GetAllAsync()
         {
             return await db.Set<TWitEntity>().ToListAsync();
         }
-        protected async Task dbUpdateAsync(TWitEntity entity, string modifiedBy)
+        public virtual async Task UpdateAsync(TWitEntity entity, string modifiedBy)
         {
             db.ModifiedBy = modifiedBy;
             db.Entry(entity).State = EntityState.Modified;
             await db.SaveChangesAsync();
         }
-        protected async Task<TWitEntity> dbCreateAsync(TWitEntity entity, string modifiedBy)
+        public virtual async Task<TWitEntity> CreateAsync(TWitEntity entity, string modifiedBy)
         {
-            db.ModifiedBy = modifiedBy;
+            if (String.IsNullOrEmpty(db.ModifiedBy))
+                db.ModifiedBy = modifiedBy;
+
             db.Set<TWitEntity>().Add(entity);
             await db.SaveChangesAsync();
             return entity;
         }
-        protected async Task dbRemoveAsync(Guid? id)
+        public virtual async Task RemoveAsync(Guid? id)
         {
             db.SetTrackingAndProxy(false);
 
