@@ -10,7 +10,7 @@ using System.ServiceModel.Channels;
 namespace ProjectWit.Service.ServiceArguments
 {
     [DataContract]
-    public class TransactionServiceArgs : WitSessionServiceArgsBase
+    public class TransactionServiceArgs : WitSessionServiceArgs
     {
         [DataMember(Order = 0)]
         Wit_Transaction Transaction = new Wit_Transaction();
@@ -36,6 +36,7 @@ namespace ProjectWit.Service.ServiceArguments
             Transaction.NumberOfGuest = numberOfGuest;
             Transaction.Status = status;
             ITransaction.CreateAsync(Transaction, SessionID.ToString()).Wait();
+            
         }
 
         
@@ -43,12 +44,12 @@ namespace ProjectWit.Service.ServiceArguments
         {
             if(String.IsNullOrEmpty(transactionID))
             {
-                LogMessage.Add("TransactionID is required");
+                LogMsg("TransactionID is required");
                 return;
             }
             Transaction = ITransaction.FindByIdAsync(new Guid(transactionID)).Result;
             if (Transaction == null)
-                LogMessage.Add("Transaction not found");
+                LogMsg("Transaction not found");
         }
 
         public void SetTransactionStatus(string transactionID, string status)

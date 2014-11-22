@@ -4,36 +4,26 @@ using System.Linq;
 using System.Web;
 using ProjectWit.Model;
 using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
 using System.ServiceModel.Web;
 
-namespace ProjectWit.Service
+namespace ProjectWit.Service.ServiceArguments
 {
     [DataContract]
-    public class WitSessionServiceArgsBase
+    public class WitSessionServiceArgs : WitServiceArgs
     {
         [DataMember(Order = 0)]
         public Guid? SessionID { get; set; }
         [DataMember(Order = 1)]
         public bool IsAuthenticated { get; set; }
         [DataMember(Order = 2)]
-        public List<string> LogMessage { get; set; }
+        protected List<string> LogMessage { get { return LogMessages; } }
 
-        protected string _deviceType;
-        protected string _browser;
-        protected string _iP { get { return GetIP(); } }
-        protected string _location;
-
-        protected string _userUID;
-        protected string _companyUID;
-
-        protected WitSessionServiceArgsBase()
+        
+        protected WitSessionServiceArgs()
         {
-            LogMessage = new List<string>();
         }
 
-        protected WitSessionServiceArgsBase(string sessionID) :this()
+        protected WitSessionServiceArgs(string sessionID) :this()
         {
             if (!AuthenticateSession(sessionID))
                 throw new WebFaultException<string>("Invalid Session",System.Net.HttpStatusCode.Forbidden);
@@ -44,7 +34,7 @@ namespace ProjectWit.Service
         {
             if (!Wit_Commons.IsStringGUID(sessionUID))
             {
-                LogMessage.Add("Invalid Session");
+                LogMsg("Invalid Session");
                 return false;
             }
             using(WitServiceDBContext db = new WitServiceDBContext())
@@ -56,7 +46,7 @@ namespace ProjectWit.Service
 
                 if (_getSession.Count == 0)
                 {
-                    LogMessage.Add("Invalid session.");
+                    LogMsg("Invalid session.");
                     return false;
                 }
                 else
@@ -98,20 +88,6 @@ namespace ProjectWit.Service
             }
         }
 
-
-        private string GetIP()
-        {
-            string ip = string.Empty;
-
-            OperationContext context = OperationContext.Current;
-            if (context != null)
-            {
-                MessageProperties prop = context.IncomingMessageProperties;
-                RemoteEndpointMessageProperty endpoint =
-                    prop[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
-                ip = endpoint.Address;
-            }
-            return ip;
-        }
+       
     }
 }

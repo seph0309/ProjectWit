@@ -10,7 +10,7 @@ using System.ServiceModel.Channels;
 namespace ProjectWit.Service.ServiceArguments
 {
     [DataContract]
-    public class OrderServiceArgs : WitSessionServiceArgsBase
+    public class OrderServiceArgs : WitSessionServiceArgs
     {
         [DataMember(Order = 0)]
         List<Wit_Order> Orders;

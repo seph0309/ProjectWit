@@ -14,6 +14,7 @@ namespace ProjectWit.Service
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
+        //http://localhost:56401/witservice.svc/LoginByUser?UserName=SYSADMIN&Password=password
         public LoginServiceArgs LoginByUser(string userName, string password, string browser, string deviceType)
         {
             LoginServiceArgs serviceArgs = new LoginServiceArgs(userName, password, browser, deviceType);
@@ -25,19 +26,20 @@ namespace ProjectWit.Service
         /// </summary>
         /// <param name="sessionUID"></param>
         /// <returns></returns>
+        //http://localhost:56401/WitService.svc/LoginBySession?SessionID=FF9AB11A-0172-E411-BBC2-0021CCC18CF4
         public LoginServiceArgs LoginBySession(string sessionID)
         {
             LoginServiceArgs serviceArgs = new LoginServiceArgs(sessionID);
             return serviceArgs;
         }
-
+        //http://localhost:56401/WitService.svc/TerminateSession?SessionID=FF9AB11A-0172-E411-BBC2-0021CCC18CF4
         public LoginServiceArgs TerminateSession(string sessionID)
         {
             LoginServiceArgs serviceArgs = new LoginServiceArgs();
             serviceArgs.TerminateSession(sessionID);
             return serviceArgs;
         }
-
+        //http://localhost:56401/WitService.svc/IsSessionActive?SessionID=FF9AB11A-0172-E411-BBC2-0021CCC18CF4
         public LoginServiceArgs IsSessionActive(string sessionID)
         {
             LoginServiceArgs serviceArgs = new LoginServiceArgs();
@@ -59,7 +61,7 @@ namespace ProjectWit.Service
             TransactionServiceArgs serviceArgs = new TransactionServiceArgs(sessionID);
             if (RequireParameter(transactionID).Count() > 0)
             {
-                serviceArgs.LogMessage.Add("One or more parameters is required.");
+                serviceArgs.LogMsg("One or more parameters is required.");
                 return serviceArgs;
             }
             serviceArgs.GetTransaction(transactionID);
@@ -71,7 +73,7 @@ namespace ProjectWit.Service
             TransactionServiceArgs serviceArgs = new TransactionServiceArgs(sessionID);
             if (RequireParameter(transactionID, status).Count() > 0)
             {
-                serviceArgs.LogMessage.Add("One or more parameters is required.");
+                serviceArgs.LogMsg("One or more parameters is required.");
                 return serviceArgs;
             }
             serviceArgs.SetTransactionStatus(transactionID, status);
@@ -83,26 +85,24 @@ namespace ProjectWit.Service
             TransactionServiceArgs serviceArgs = new TransactionServiceArgs(sessionID);
             if (RequireParameter(transactionID, tableID).Count() > 0)
             {
-                serviceArgs.LogMessage.Add("One or more parameters is required.");
+                serviceArgs.LogMsg("One or more parameters is required.");
                 return serviceArgs;
             }
             serviceArgs.SetTable(transactionID, tableID);
             return serviceArgs;
         }
-
         //http://localhost:56401/witservice.svc/SetTransactionStatus?SessionID=80DE087B-346F-E411-989A-0021CCC18CF4&Count=9
         public TransactionServiceArgs SetGuestCount(string sessionID, string transactionID, int count)
         {
             TransactionServiceArgs serviceArgs = new TransactionServiceArgs(sessionID);
             if (RequireParameter(transactionID, count).Count() > 0)
             {
-                serviceArgs.LogMessage.Add("One or more parameters is required.");
+                serviceArgs.LogMsg("One or more parameters is required.");
                 return serviceArgs;
             }
             serviceArgs.SetGuestCount(transactionID, count);
             return serviceArgs;
         }
-
         public List<string> RequireParameter(params object[] parameters)
         {
             List<string> returnVal = new List<string>();

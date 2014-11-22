@@ -8,9 +8,8 @@ using System.Runtime.Serialization;
 namespace ProjectWit.Service.ServiceArguments
 {
     [DataContract]
-    public class LoginServiceArgs: WitSessionServiceArgsBase
+    public class LoginServiceArgs: WitSessionServiceArgs
     {
-    
         [DataMember(Order = 0)]
         public List<Wit_Category> Categories;
         [DataMember(Order = 1)]
@@ -107,12 +106,12 @@ namespace ProjectWit.Service.ServiceArguments
             if (Wit_Commons.IsStringGUID(sessionID))
             {
                 if (TerminateSessionID(sessionID) > 0)
-                    LogMessage.Add("Session Deleted");
+                    LogMsg("Session Deleted");
                 else
-                    LogMessage.Add("Session does not exist");
+                    LogMsg("Session does not exist");
             }
             else
-                LogMessage.Add("Invalid Session");
+                LogMsg("Invalid Session");
         }
         private bool AuthenticateUser(string userName, string password, string browser, string deviceType)
         {
@@ -134,7 +133,7 @@ namespace ProjectWit.Service.ServiceArguments
                         return true;
                     }
                 }
-                LogMessage.Add("Wrong Username/Password");
+                LogMsg("Wrong Username/Password");
                 return false;
             }
         }
