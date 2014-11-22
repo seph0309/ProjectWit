@@ -18,5 +18,12 @@ namespace ProjectWit.Service
     public interface IWitService : ILoginService, ITransactionService
         //, IOrderService
     {
+        /// <summary>
+        /// Use this to initialize the service for the first time and for faster loading in next transactions.
+        /// May be called async
+        /// </summary>
+        [OperationContract(Name = "InitializeWitService")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
+        void InitializeWitService();
     }
 }

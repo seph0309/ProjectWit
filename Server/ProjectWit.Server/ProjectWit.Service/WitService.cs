@@ -113,5 +113,10 @@ namespace ProjectWit.Service
             }
             return returnVal;
         }
+
+        public void InitializeWitService()
+        {
+            //Do nothing
+        }
     }
 }

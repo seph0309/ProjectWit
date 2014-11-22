@@ -29,7 +29,40 @@ namespace ProjectWit.Model
             db.Configuration.LazyLoadingEnabled = true;
             return await db.Wit_Order.Where(m => m.Order_UID == id).FirstOrDefaultAsync();
         }
-         
+
+        public Wit_Order SetOrderStatus(string orderID, string status)
+        {
+            try
+            {
+                var order = GetByIdAsync(new Guid(orderID)).Result;
+                if (order == null) return order;
+                //Wit_Order.Status is not added in database
+                //order.Status = status;
+                UpdateAsync(order, string.Empty).Wait();
+                return order;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Wit_Order SetOrderQuantity(string orderID, int quantity)
+        {
+            try
+            {
+                var order = GetByIdAsync(new Guid(orderID)).Result;
+                if (order == null) return order;
+                //Wit_Order.Status is not added in database
+                order.Quantity = quantity;
+                UpdateAsync(order, string.Empty).Wait();
+                return order;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public void Dispose()
         {
             GC.Collect();
