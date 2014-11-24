@@ -20,6 +20,7 @@ namespace ProjectWit.Model
         public int Quantity { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
+        public string OrderStatus { get; set; }
     
         public virtual Wit_Item Wit_Item { get; set; }
         public virtual Wit_Transaction Wit_Transaction { get; set; }
