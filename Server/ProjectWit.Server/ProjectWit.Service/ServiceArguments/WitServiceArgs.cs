@@ -5,6 +5,8 @@ using System.ServiceModel.Channels;
 using System.ServiceModel;
 using System.Web;
 using System.Runtime.Serialization;
+using Ninject;
+using Ninject.Modules;
 
 namespace ProjectWit.Service.ServiceArguments
 {
@@ -19,6 +21,13 @@ namespace ProjectWit.Service.ServiceArguments
         protected string _location;
         protected string _userUID;
         protected string _companyUID;
+        protected IKernel kernel;
+
+        public WitServiceArgs()
+        {
+            kernel = new StandardKernel();
+            kernel.Load(new WitServiceLocator());
+        }
 
 
         public void LogMsg(string message)

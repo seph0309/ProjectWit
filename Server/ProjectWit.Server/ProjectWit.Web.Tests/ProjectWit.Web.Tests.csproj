@@ -94,8 +94,6 @@
     <Compile Include="DataExtensions\Wit_TransactionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
-    <Compile Include="ServiceArguments\TransactionServiceArgsTests.cs" />
-    <Compile Include="WitService\WitServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

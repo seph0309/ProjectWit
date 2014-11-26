@@ -36,8 +36,7 @@ namespace ProjectWit.Model
             {
                 var order = GetByIdAsync(new Guid(orderID)).Result;
                 if (order == null) return order;
-                //Wit_Order.Status is not added in database
-                //order.Status = status;
+                order.OrderStatus = status;
                 UpdateAsync(order, string.Empty).Wait();
                 return order;
             }

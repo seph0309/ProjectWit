@@ -6,6 +6,8 @@ using ProjectWit.Model;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using Ninject;
+using Ninject.Modules;
 
 namespace ProjectWit.Service.ServiceArguments
 {
@@ -23,9 +25,10 @@ namespace ProjectWit.Service.ServiceArguments
 
         private IWit_Transaction ITransaction;
 
-        public TransactionServiceArgs(string sessionID) : base(sessionID)
+        public TransactionServiceArgs(string sessionID) 
+            : base(sessionID)
         {
-            ITransaction = new Wit_Transaction();
+            ITransaction = kernel.Get<IWit_Transaction>();
             ITransaction.SetDbContext(new WitServiceDBContext(SessionID.ToString()));
         }
  
@@ -36,17 +39,11 @@ namespace ProjectWit.Service.ServiceArguments
             Transaction.NumberOfGuest = numberOfGuest;
             Transaction.Status = status;
             ITransaction.CreateAsync(Transaction, SessionID.ToString()).Wait();
-            
         }
 
         
         public void GetTransaction(string transactionID)
         {
-            if(String.IsNullOrEmpty(transactionID))
-            {
-                LogMsg("TransactionID is required");
-                return;
-            }
             Transaction = ITransaction.FindByIdAsync(new Guid(transactionID)).Result;
             if (Transaction == null)
                 LogMsg("Transaction not found");

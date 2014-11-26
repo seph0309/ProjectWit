@@ -50,6 +50,9 @@
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Services" />
@@ -89,6 +92,7 @@
     <Compile Include="ServiceArguments\OrderServiceArgs.cs" />
     <Compile Include="ServiceArguments\TransactionServiceArgs.cs" />
     <Compile Include="ServiceArguments\WitServiceArgs.cs" />
+    <Compile Include="ServiceArguments\WitServiceLocator.cs" />
     <Compile Include="ServiceArguments\WitSessionServiceArgs.cs" />
     <Compile Include="WitService.cs" />
   </ItemGroup>
