@@ -24,6 +24,7 @@ namespace ProjectWit.Model
     }
     public interface IWit_Order : IReadable<Wit_Order>, IWritable<Wit_Order>, IDisposable
     {
+        List<Wit_Order> GetOrders(string transactionID);
         Wit_Order SetOrderStatus(string orderID, string status);
         Wit_Order SetOrderQuantity(string orderID, int quantity);
     }

@@ -4,22 +4,57 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Validation;
     using System.Linq;
     using System.Threading.Tasks;
+    using ProjectWit.Model.ErrorLogging;
 
     public partial class WitDbContext
     {
         public string ModifiedBy { get; set; }
+        protected DBContextErrorLogging errorLog = new DBContextErrorLogging();
         
         public override System.Threading.Tasks.Task<int> SaveChangesAsync()
         {
             SetProperties();
-            return base.SaveChangesAsync();
+            try
+            {
+                return base.SaveChangesAsync();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                errorLog.SetErrors(ex.EntityValidationErrors);
+                throw ex;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw ex;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
         public override int SaveChanges()
         {
             SetProperties();
-            return base.SaveChanges();
+            try
+            {
+                return base.SaveChanges();
+            }
+                catch (DbEntityValidationException ex)
+            {
+                errorLog.SetErrors(ex.EntityValidationErrors);
+                throw ex;
+            }
+            catch(DbUpdateException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         private void SetProperties()
         {

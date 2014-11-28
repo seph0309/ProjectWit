@@ -30,6 +30,11 @@ namespace ProjectWit.Model
             return await db.Wit_Order.Where(m => m.Order_UID == id).FirstOrDefaultAsync();
         }
 
+        public List<Wit_Order> GetOrders(string transactionID)
+        {
+            return db.Wit_Order.Where(m => m.Transaction_UID == new Guid(transactionID)).ToList();
+        }
+
         public Wit_Order SetOrderStatus(string orderID, string status)
         {
             try

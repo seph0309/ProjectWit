@@ -14,8 +14,10 @@ namespace ProjectWit.Service.ServiceArguments
     public class OrderServiceArgs : WitSessionServiceArgs
     {
         [DataMember(Order = 0)]
-        List<Wit_Order> Orders;
-
+        public Wit_Order Order = new Wit_Order();
+        [DataMember(Order = 1)]
+        public List<Wit_Order> Orders = new List<Wit_Order>();
+        
         private IWit_Order IOrder;
 
         public OrderServiceArgs(string sessionID)
@@ -23,6 +25,31 @@ namespace ProjectWit.Service.ServiceArguments
         {
             IOrder = kernel.Get<IWit_Order>();
             IOrder.SetDbContext(new WitServiceDBContext(SessionID.ToString()));
+        }
+
+        public void GetOrders(string transactionID)
+        {
+            Orders = IOrder.GetOrders(transactionID);
+        }
+
+        public void SaveOrders(string transactionID, string itemID, int quantity, string status)
+        {
+            Order.Transaction_UID = new Guid(transactionID);
+            Order.Item_UID = new Guid(itemID);
+            Order.Quantity = quantity;
+            Order.OrderStatus = status;
+            IOrder.CreateAsync(Order, string.Empty);
+            Orders.Add(Order);
+        }
+
+        public void SetOrderStatus(string orderID, string orderStatus)
+        {
+            IOrder.SetOrderStatus(orderID, orderStatus);
+        }
+
+        public void SetOrderQuantity(string orderID, int quantity)
+        {
+            IOrder.SetOrderQuantity(orderID, quantity);
         }
     }
 }

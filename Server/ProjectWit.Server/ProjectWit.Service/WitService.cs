@@ -118,5 +118,33 @@ namespace ProjectWit.Service
         {
             //Do nothing
         }
+
+        public OrderServiceArgs GetOrders(string sessionID, string transactionID)
+        {
+            OrderServiceArgs serviceArgs = new OrderServiceArgs(sessionID);
+            serviceArgs.GetOrders(transactionID);
+            return serviceArgs;
+        }
+
+        public OrderServiceArgs SaveOrders(string sessionID, string transactionID, string itemID, int quantity, string status)
+        {
+            OrderServiceArgs serviceArgs = new OrderServiceArgs(sessionID);
+            serviceArgs.SaveOrders(transactionID,itemID,quantity, status);
+            return serviceArgs;
+        }
+
+        public OrderServiceArgs SetOrderStatus(string sessionID, string orderID, string orderStatus)
+        {
+            OrderServiceArgs serviceArgs = new OrderServiceArgs(sessionID);
+            serviceArgs.SetOrderStatus(orderID,orderStatus);
+            return serviceArgs;
+        }
+
+        public OrderServiceArgs SetOrderQuantity(string sessionID, string orderID, int quantity)
+        {
+            OrderServiceArgs serviceArgs = new OrderServiceArgs(sessionID);
+            serviceArgs.SetOrderQuantity(orderID,quantity);
+            return serviceArgs;
+        }
     }
 }
