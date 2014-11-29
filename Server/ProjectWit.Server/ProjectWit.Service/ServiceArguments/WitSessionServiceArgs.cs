@@ -15,9 +15,7 @@ namespace ProjectWit.Service.ServiceArguments
         public Guid? SessionID { get; set; }
         [DataMember(Order = 1)]
         public bool IsAuthenticated { get; set; }
-        [DataMember(Order = 2)]
-        protected List<string> LogMessage { get { return LogMessages; } }
-
+        
         
         protected WitSessionServiceArgs()
         {

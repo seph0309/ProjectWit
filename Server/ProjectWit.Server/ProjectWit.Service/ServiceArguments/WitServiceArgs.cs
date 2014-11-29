@@ -14,7 +14,9 @@ namespace ProjectWit.Service.ServiceArguments
     [DataContract]
     public abstract class WitServiceArgs : ILogger
     {
-        protected List<string> LogMessages = new List<string>();
+
+        [DataMember(Order = 2)]
+        public List<string> LogMessage { get; set; }
         
         protected string _deviceType;
         protected string _browser;
@@ -28,12 +30,13 @@ namespace ProjectWit.Service.ServiceArguments
         {
             kernel = new StandardKernel();
             kernel.Load(new WitServiceLocator());
+            LogMessage = new List<string>();
         }
 
 
         public void LogMsg(string message)
         {
-            LogMessages.Add(message);
+            LogMessage.Add(message);
         }
 
         public void SaveLogToText(string message)
