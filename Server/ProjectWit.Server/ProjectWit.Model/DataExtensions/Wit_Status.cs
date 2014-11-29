@@ -4,8 +4,10 @@ namespace ProjectWit.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Data.Entity;
 
-    public sealed class Wit_Status
+    public sealed class Wit_Status : WitDbContextBase<Wit_Status>
     {
         private readonly String name;
         private readonly int value;
@@ -23,6 +25,19 @@ namespace ProjectWit.Model
             value = _value;
             name = _name;
             Status.Add(new KeyValuePair<int,string>(value,name));
+        }
+
+        public Wit_Status() { }
+
+        public bool IsStatusValid(string status)
+        {
+            if (Wit_Status.Status.Where(statusValue => statusValue.Value == status).Count() == 0)
+            {
+                LogMsg("Invalid status");
+                return false;
+            }
+            else
+                return true;
         }
 
         public override string ToString()

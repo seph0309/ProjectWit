@@ -30,12 +30,16 @@ namespace ProjectWit.Service.ServiceArguments
         {
             kernel = new StandardKernel();
             kernel.Load(new WitServiceLocator());
-            LogMessage = new List<string>();
         }
-
+        protected void GetLogMessage(List<string> Messages)
+        {
+            foreach(string msg in Messages)
+                LogMessage.Add(msg);
+        }
 
         public void LogMsg(string message)
         {
+            if (LogMessage == null) LogMessage = new List<string>();
             LogMessage.Add(message);
         }
 

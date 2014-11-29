@@ -27,7 +27,12 @@ namespace ProjectWit.Service.ServiceArguments.Tests
         [TestMethod()]
         public void NewTransactionTest()
         {
-         
+            Wit_Transaction trans = new Wit_Transaction();
+            IWit_Transaction ITrans = new Wit_Transaction();
+
+            trans.Transaction_UID = new Guid("F0E2C3DB-3B71-E411-BBC2-0021CCC18CF4");
+            var entity = ITrans.FindByIdAsync(trans.Transaction_UID).Result;
+            Debug.WriteLine(ITrans.LogMessage);
         }
     }
 }

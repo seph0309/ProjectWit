@@ -32,13 +32,22 @@ namespace ProjectWit.Model
             try
             {
                 var trans = GetByIdAsync(new Guid(transactionID)).Result;
-                if (trans == null) return trans;
+                if (trans == null) 
+                {
+                    LogMsg("Transaction does not exist");
+                    return trans;
+                }
+
+                Wit_Status wit_status = new Wit_Status();
+                if (!wit_status.IsStatusValid(status)) return null;
+
                 trans.Status = status;
                 UpdateAsync(trans, string.Empty).Wait();
                 return trans;
             }
             catch(Exception ex)
             {
+                LogMsg(ex.Message);
                 throw ex;
             }
         }
@@ -49,6 +58,8 @@ namespace ProjectWit.Model
             {
                 var trans = GetByIdAsync(new Guid(transactionID)).Result;
                 if (trans == null) return trans;
+
+                Model.Wit_Table witTable = new Model.Wit_Table();
                 trans.Table_UID = new Guid(tableID);
                 UpdateAsync(trans, string.Empty).Wait();
                 return trans;
@@ -74,6 +85,7 @@ namespace ProjectWit.Model
                 throw ex;
             }
         }
+
 
         public void Dispose()
         {

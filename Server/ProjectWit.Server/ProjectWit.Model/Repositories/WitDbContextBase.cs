@@ -10,6 +10,9 @@ namespace ProjectWit.Model
 {
     public abstract class WitDbContextBase<TWitEntity> where TWitEntity : class
     {
+        public List<string> LogMessage { get; set; }
+        private bool isValid = true;
+
         private WitDbContext _db;
         protected WitDbContext db
         {
@@ -30,14 +33,24 @@ namespace ProjectWit.Model
         }
         public virtual async Task<TWitEntity> FindByIdAsync(Guid? id)
         {
-            return await db.Set<TWitEntity>().FindAsync(id);
+            if (!isValid) return null;
+            var entity = await db.Set<TWitEntity>().FindAsync(id);
+            if(entity == null)
+            {
+                LogMsg("ID does not exist");
+            }
+            return entity;
         }
         public virtual async Task<List<TWitEntity>> GetAllAsync()
         {
+            if (!isValid) return null;
+
             return await db.Set<TWitEntity>().ToListAsync();
         }
         public virtual async Task UpdateAsync(TWitEntity entity, string modifiedBy)
         {
+            if (!isValid) return;
+
             if (String.IsNullOrEmpty(db.ModifiedBy))
                 db.ModifiedBy = modifiedBy;
 
@@ -46,6 +59,8 @@ namespace ProjectWit.Model
         }
         public virtual async Task<TWitEntity> CreateAsync(TWitEntity entity, string modifiedBy)
         {
+            if (!isValid) return entity;
+
             if (String.IsNullOrEmpty(db.ModifiedBy))
                 db.ModifiedBy = modifiedBy;
 
@@ -55,6 +70,8 @@ namespace ProjectWit.Model
         }
         public virtual async Task RemoveAsync(Guid? id)
         {
+            if (!isValid) return;
+
             db.SetTrackingAndProxy(false);
 
             var _entity = db.Set<TWitEntity>().Find(id);
@@ -78,6 +95,23 @@ namespace ProjectWit.Model
                     }
                 }
             }
+        }
+
+        public void LogMsg(string message)
+        {
+            if (LogMessage == null) LogMessage = new List<string>();
+            LogMessage.Add(message);
+            isValid = false;
+        }
+
+        public void SaveLogToText(string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveLogToEvent(string message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

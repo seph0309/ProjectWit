@@ -39,8 +39,9 @@ namespace ProjectWit.Model
         {
             try
             {
-                var order = GetByIdAsync(new Guid(orderID)).Result;
-                if (order == null) return order;
+                var order = FindByIdAsync(new Guid(orderID)).Result;
+                Wit_Status witStatus = new Wit_Status();
+                if (order == null || witStatus.IsStatusValid(status)) return order;
                 order.OrderStatus = status;
                 UpdateAsync(order, string.Empty).Wait();
                 return order;
@@ -57,13 +58,13 @@ namespace ProjectWit.Model
             {
                 var order = GetByIdAsync(new Guid(orderID)).Result;
                 if (order == null) return order;
-                //Wit_Order.Status is not added in database
                 order.Quantity = quantity;
                 UpdateAsync(order, string.Empty).Wait();
                 return order;
             }
             catch (Exception ex)
             {
+                LogMsg(ex.Message);
                 throw ex;
             }
         }

@@ -4,9 +4,12 @@ namespace ProjectWit.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Data.Entity;
 
     [MetadataType(typeof(Wit_TableMetaData))]
-    public partial class Wit_Table 
+    public partial class Wit_Table : WitDbContextBase<Wit_Table>, IWit_Table
     {
         public static Wit_Table ToSerializable(Wit_Table _wit_Table)
         {
@@ -20,6 +23,17 @@ namespace ProjectWit.Model
                 ModifiedDate = _wit_Table.ModifiedDate
             };
         }
+        public async Task<Wit_Table> GetByIdAsync(Guid? id)
+        {
+            db.Configuration.LazyLoadingEnabled = true;
+            return await db.Wit_Table.Where(m => m.Table_UID == id).FirstOrDefaultAsync();
+        }
+        public void Dispose()
+        {
+            GC.Collect();
+            db.Dispose();
+        }
+ 
     }
 
     public class Wit_TableMetaData
