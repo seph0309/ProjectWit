@@ -118,28 +118,28 @@ namespace ProjectWit.Service
         {
             //Do nothing
         }
-
+        //http://localhost:56401/witservice.svc/GetOrders?SessionID=80DE087B-346F-E411-989A-0021CCC18CF4&TransactionID=F0E2C3DB-3B71-E411-BBC2-0021CCC18CF4
         public OrderServiceArgs GetOrders(string sessionID, string transactionID)
         {
             OrderServiceArgs serviceArgs = new OrderServiceArgs(sessionID);
             serviceArgs.GetOrders(transactionID);
             return serviceArgs;
         }
-
-        public OrderServiceArgs SaveOrders(string sessionID, string transactionID, string itemID, int quantity, string status)
+        //http://localhost:56401/witservice.svc/SaveOrders?SessionID=80DE087B-346F-E411-989A-0021CCC18CF4&TransactionID=F0E2C3DB-3B71-E411-BBC2-0021CCC18CF4&ItemID=44DF81BC-D64E-E411-A417-D459F8E9FF25&Quantity=16&Status=Seph
+        public OrderServiceArgs NewOrder(string sessionID, string transactionID, string itemID, int quantity, string status)
         {
             OrderServiceArgs serviceArgs = new OrderServiceArgs(sessionID);
-            serviceArgs.SaveOrders(transactionID,itemID,quantity, status);
+            serviceArgs.NewOrder(transactionID, itemID, quantity, status);
             return serviceArgs;
         }
-
+        //http://localhost:56401/witservice.svc/SetOrderStatus?SessionID=80DE087B-346F-E411-989A-0021CCC18CF4&OrderID=A5F08289-F076-E411-84BB-0021CCC18CF4&orderStatus=Clossse
         public OrderServiceArgs SetOrderStatus(string sessionID, string orderID, string orderStatus)
         {
             OrderServiceArgs serviceArgs = new OrderServiceArgs(sessionID);
             serviceArgs.SetOrderStatus(orderID,orderStatus);
             return serviceArgs;
         }
-
+        //http://localhost:56401/witservice.svc/SetOrderQuantity?SessionID=80DE087B-346F-E411-989A-0021CCC18CF4&OrderID=A5F08289-F076-E411-84BB-0021CCC18CF4&Quantity=99
         public OrderServiceArgs SetOrderQuantity(string sessionID, string orderID, int quantity)
         {
             OrderServiceArgs serviceArgs = new OrderServiceArgs(sessionID);

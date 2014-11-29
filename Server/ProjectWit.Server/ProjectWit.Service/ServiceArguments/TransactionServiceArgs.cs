@@ -18,12 +18,6 @@ namespace ProjectWit.Service.ServiceArguments
         public Wit_Transaction Transaction = new Wit_Transaction();
         [DataMember(Order = 1)]
         public List<Wit_Transaction> Transactions = new List<Wit_Transaction>();
-        [DataMember(Order = 2)]
-        public List<Wit_Item> Items;
-        [DataMember(Order = 3)]
-        public List<Wit_Table> Tables;
-        [DataMember(Order = 4)]
-        public List<KeyValuePair<int, string>> Status;
 
         private IWit_Transaction ITransaction;
 

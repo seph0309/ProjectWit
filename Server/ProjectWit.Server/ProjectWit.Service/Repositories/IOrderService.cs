@@ -17,9 +17,9 @@ namespace ProjectWit.Service
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
         OrderServiceArgs GetOrders(string sessionID, string transactionID);
 
-        [OperationContract(Name = "SaveOrders")]
+        [OperationContract(Name = "NewOrder")]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        OrderServiceArgs SaveOrders(string sessionID, string transactionID, string itemID, int quantity, string status);
+        OrderServiceArgs NewOrder(string sessionID, string transactionID, string itemID, int quantity, string status);
 
         [OperationContract(Name = "SetOrderStatus")]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]

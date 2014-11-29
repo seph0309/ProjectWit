@@ -28,10 +28,10 @@ namespace ProjectWit.Service.ServiceArguments.Tests
             order.OrderStatus = "Open";
 
             //Steps: SaveOrders, Get, Set
-            srvcArgs = witService.SaveOrders(sessionID, order.Transaction_UID.ToString(), itemID, order.Quantity, status);
-            srvcArgs = witService.SaveOrders(sessionID, order.Transaction_UID.ToString(), itemID, order.Quantity, status);
-            srvcArgs = witService.SaveOrders(sessionID, order.Transaction_UID.ToString(), itemID, order.Quantity, status);
-            srvcArgs = witService.SaveOrders(sessionID, order.Transaction_UID.ToString(), itemID, order.Quantity, status);
+            srvcArgs = witService.NewOrder(sessionID, order.Transaction_UID.ToString(), itemID, order.Quantity, status);
+            srvcArgs = witService.NewOrder(sessionID, order.Transaction_UID.ToString(), itemID, order.Quantity, status);
+            srvcArgs = witService.NewOrder(sessionID, order.Transaction_UID.ToString(), itemID, order.Quantity, status);
+            srvcArgs = witService.NewOrder(sessionID, order.Transaction_UID.ToString(), itemID, order.Quantity, status);
             srvcArgs = witService.GetOrders(sessionID, order.Transaction_UID.ToString());
             
             

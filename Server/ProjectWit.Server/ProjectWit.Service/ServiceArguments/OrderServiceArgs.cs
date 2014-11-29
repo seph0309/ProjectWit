@@ -32,14 +32,13 @@ namespace ProjectWit.Service.ServiceArguments
             Orders = IOrder.GetOrders(transactionID);
         }
 
-        public void SaveOrders(string transactionID, string itemID, int quantity, string status)
+        public void NewOrder(string transactionID, string itemID, int quantity, string status)
         {
             Order.Transaction_UID = new Guid(transactionID);
             Order.Item_UID = new Guid(itemID);
             Order.Quantity = quantity;
             Order.OrderStatus = status;
             IOrder.CreateAsync(Order, string.Empty);
-            Orders.Add(Order);
         }
 
         public void SetOrderStatus(string orderID, string orderStatus)
