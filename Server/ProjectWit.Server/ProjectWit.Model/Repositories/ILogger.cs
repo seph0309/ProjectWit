@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectWit.Service
+namespace ProjectWit.Model
 {
     public interface ILogger
     {

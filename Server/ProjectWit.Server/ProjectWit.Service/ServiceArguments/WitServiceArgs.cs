@@ -7,6 +7,7 @@ using System.Web;
 using System.Runtime.Serialization;
 using Ninject;
 using Ninject.Modules;
+using ProjectWit.Model;
 
 namespace ProjectWit.Service.ServiceArguments
 {
