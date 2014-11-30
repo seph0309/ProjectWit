@@ -25,7 +25,7 @@ namespace ProjectWit.Service.ServiceArguments
             : base(sessionID)
         {
             ITransaction = kernel.Get<IWit_Transaction>();
-            ITransaction.SetDbContext(new WitServiceDBContext(SessionID.ToString()));
+            ITransaction.SetDbContext(new WitServiceDBContext(SessionID.ToString()), LogMessage);
         }
  
 

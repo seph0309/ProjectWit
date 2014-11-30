@@ -11,6 +11,6 @@ namespace ProjectWit.Model
         Task<T> CreateAsync(T entity, string modifiedBy);
         Task RemoveAsync(Guid? id);
         Task UpdateAsync(T entity, string modifiedBy);
-        void SetDbContext(DbContext db);
+        void SetDbContext(DbContext db, List<string> _logs);
     }
 }

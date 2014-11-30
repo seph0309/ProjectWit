@@ -24,7 +24,7 @@ namespace ProjectWit.Service.ServiceArguments
             : base(sessionID)
         {
             IOrder = kernel.Get<IWit_Order>();
-            IOrder.SetDbContext(new WitServiceDBContext(SessionID.ToString()));
+            IOrder.SetDbContext(new WitServiceDBContext(SessionID.ToString()), LogMessage);
         }
 
         public void GetOrders(string transactionID)

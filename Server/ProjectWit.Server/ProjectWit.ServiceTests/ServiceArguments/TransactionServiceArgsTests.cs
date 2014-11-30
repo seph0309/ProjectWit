@@ -16,8 +16,8 @@ namespace ProjectWit.Service.ServiceArguments.Tests
         [TestMethod()]
         public void GetTransactionTest()
         {
-            string sessionId = "";
-            string transactionID = "F0E2C3DB-3B71-E411-BBC2-0021CCC18CF4";
+            string sessionId = "07D92B53-A377-E411-84BB-0021CCC18CF4";
+            string transactionID = "F0E2C3DB-3B71-E411-BBC2-0021CCC18CF5";
             TransactionServiceArgs srvcArgs = new TransactionServiceArgs(sessionId);
             srvcArgs.GetTransaction(transactionID);
             Debug.WriteLine(srvcArgs);

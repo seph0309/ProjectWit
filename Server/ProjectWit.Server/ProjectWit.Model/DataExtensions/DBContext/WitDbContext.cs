@@ -12,8 +12,9 @@
     public partial class WitDbContext
     {
         public string ModifiedBy { get; set; }
-        protected DBContextErrorLogging errorLog = new DBContextErrorLogging();
+        private DBContextErrorLogging errorLog = new DBContextErrorLogging();
         
+   
         public override System.Threading.Tasks.Task<int> SaveChangesAsync()
         {
             SetProperties();
@@ -28,6 +29,7 @@
             }
             catch (DbUpdateException ex)
             {
+                errorLog.dbContextErrorLogMsg.Add(string.Format("DbUpdateException exception"));
                 throw ex;
             }
             catch(Exception ex)
@@ -49,6 +51,7 @@
             }
             catch(DbUpdateException ex)
             {
+                errorLog.dbContextErrorLogMsg.Add(string.Format("DbUpdateException exception"));
                 throw ex;
             }
             catch (Exception ex)

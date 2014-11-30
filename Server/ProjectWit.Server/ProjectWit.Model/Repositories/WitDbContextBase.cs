@@ -26,10 +26,12 @@ namespace ProjectWit.Model
             set { _db=value;}
         }
 
-        public void SetDbContext(DbContext db)
+        public void SetDbContext(DbContext db, List<string> _logs)
         {
             if (_db == null)
                 _db = (WitDbContext)db;
+            LogMessage = _logs;
+            _db.SetLogMessage(LogMessage);
         }
         public virtual async Task<TWitEntity> GetByIdAsync(Guid? id)
         {
