@@ -31,6 +31,13 @@ namespace ProjectWit.Model
             if (_db == null)
                 _db = (WitDbContext)db;
         }
+        public virtual async Task<TWitEntity> GetByIdAsync(Guid? id)
+        {
+            db.Configuration.LazyLoadingEnabled = true;
+            if (db is WitServiceDBContext)
+                LogMsg("For web service, use FindAsync");
+            return null;
+        }
         public virtual async Task<TWitEntity> FindByIdAsync(Guid? id)
         {
             if (!isValid) return null;

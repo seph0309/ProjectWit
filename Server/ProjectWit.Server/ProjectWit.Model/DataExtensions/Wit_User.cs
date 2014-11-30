@@ -15,9 +15,9 @@ namespace ProjectWit.Model
         [Display(Name = "User")]
         public string FullName { get { return string.Format("{0}, {1}", LastName, FirstName); } }
 
-        public async Task<Wit_User> GetByIdAsync(Guid? id)
+        public override async Task<Wit_User> GetByIdAsync(Guid? id)
         {
-            db.Configuration.LazyLoadingEnabled = true;
+            await base.GetByIdAsync(id);
             return await db.Wit_User.Where(m => m.User_UID == id).FirstOrDefaultAsync();
         }
   

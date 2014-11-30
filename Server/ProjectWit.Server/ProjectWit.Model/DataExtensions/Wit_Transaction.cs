@@ -22,11 +22,12 @@ namespace ProjectWit.Model
                 ModifiedBy = _wit_Transaction.ModifiedBy
             };
         }
-        public async Task<Wit_Transaction> GetByIdAsync(Guid? id)
+        public override async Task<Wit_Transaction> GetByIdAsync(Guid? id)
         {
-            db.Configuration.LazyLoadingEnabled = true;
+            await base.GetByIdAsync(id);
             return await db.Wit_Transaction.Where(m => m.Transaction_UID == id).FirstOrDefaultAsync();
         }
+        
         public Wit_Transaction SetTransactionStatus(string transactionID, string status)
         {
             try

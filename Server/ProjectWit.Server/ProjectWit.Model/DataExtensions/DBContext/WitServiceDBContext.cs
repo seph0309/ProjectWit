@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using ProjectWit.Model;
 
-namespace ProjectWit.Service
+namespace ProjectWit.Model
 {
+    /// <summary>
+    /// DBContext used for ProjectWit Web Service
+    /// </summary>
     public class WitServiceDBContext : WitDbContext
     {
         public WitServiceDBContext()

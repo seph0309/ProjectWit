@@ -23,9 +23,9 @@ namespace ProjectWit.Model
                 ModifiedDate = _wit_Table.ModifiedDate
             };
         }
-        public async Task<Wit_Table> GetByIdAsync(Guid? id)
+        public override async Task<Wit_Table> GetByIdAsync(Guid? id)
         {
-            db.Configuration.LazyLoadingEnabled = true;
+            await base.GetByIdAsync(id);
             return await db.Wit_Table.Where(m => m.Table_UID == id).FirstOrDefaultAsync();
         }
         public void Dispose()

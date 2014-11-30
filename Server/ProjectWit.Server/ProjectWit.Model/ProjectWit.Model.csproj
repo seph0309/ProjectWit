@@ -67,6 +67,7 @@
       <DependentUpon>ProjectWit.tt</DependentUpon>
     </Compile>
     <Compile Include="DataExtensions\AspNetRole.cs" />
+    <Compile Include="DataExtensions\DBContext\WitServiceDBContext.cs" />
     <Compile Include="ErrorLogging\DBContextErrorLogging.cs" />
     <Compile Include="DataExtensions\DBContext\WitDbContextMethods.cs" />
     <Compile Include="DataExtensions\DBContext\WitDbContext.cs" />

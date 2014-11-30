@@ -25,9 +25,9 @@ namespace ProjectWit.Model
             };
         }
 
-        public async Task<Wit_Category> GetByIdAsync(Guid? id)
+        public override async Task<Wit_Category> GetByIdAsync(Guid? id)
         {
-            db.Configuration.LazyLoadingEnabled = true;
+            await base.GetByIdAsync(id);
             return await db.Wit_Category.Where(m => m.Category_UID == id).FirstOrDefaultAsync();
         }
         public override async Task<List<Wit_Category>> GetAllAsync()

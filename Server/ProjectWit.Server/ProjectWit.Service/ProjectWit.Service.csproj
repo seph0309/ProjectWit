@@ -80,7 +80,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBContext\WitServiceDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ILoginService.cs" />
     <Compile Include="Repositories\IOrderService.cs" />

@@ -14,9 +14,9 @@ namespace ProjectWit.Model
     public partial class Wit_Company : WitDbContextBase<Wit_Company>, IWit_Company
     {
 
-        public async Task<Wit_Company> GetByIdAsync(Guid? id)
+        public override async Task<Wit_Company> GetByIdAsync(Guid? id)
         {
-            db.Configuration.LazyLoadingEnabled = true;
+            await base.GetByIdAsync(id);
             return await db.Wit_Company.Where(m => m.Company_UID == id).FirstOrDefaultAsync();
         }
          

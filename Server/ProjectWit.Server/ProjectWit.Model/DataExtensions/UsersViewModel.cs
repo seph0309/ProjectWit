@@ -22,9 +22,9 @@ namespace ProjectWit.Model
         [Display(Name="Roles")]
         public List<AspNetRole> AspNetRole;
 
-        public async Task<UsersViewModel> GetByIdAsync(Guid? id)
+        public override async Task<UsersViewModel> GetByIdAsync(Guid? id)
         {
-            db.Configuration.LazyLoadingEnabled = true;
+            await base.GetByIdAsync(id);
             return await db.UsersViewModels.Where(m => m.User_UID == id).FirstOrDefaultAsync();
         }
          

@@ -25,9 +25,9 @@ namespace ProjectWit.Model
         public const string CUSTOMER = "CUSTOMER";
         public const string GUEST = "GUEST";
 
-        public async Task<AspNetRole> GetByIdAsync(Guid? id)
+        public override async Task<AspNetRole> GetByIdAsync(Guid? id)
         {
-            db.Configuration.LazyLoadingEnabled = true;
+            await base.GetByIdAsync(id);
             return await db.AspNetRoles.Where(m => m.Id == id.ToString()).FirstOrDefaultAsync();
         }
         public void Dispose()

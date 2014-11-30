@@ -40,7 +40,7 @@ namespace ProjectWit.Service.ServiceArguments
         
         public void GetTransaction(string transactionID)
         {
-            Transaction = ITransaction.FindByIdAsync(new Guid(transactionID)).Result;
+            Transaction = ITransaction.GetByIdAsync(new Guid(transactionID)).Result;
             if (Transaction == null)
                 LogMsg("Transaction not found");
         }
