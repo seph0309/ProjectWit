@@ -12,7 +12,7 @@ namespace ProjectWit.Model.ErrorLogging
     public class DBContextErrorLogging
     {
         private List<ValidationResult> _errors;
-        protected List<string> dbContextErrorLogMsg { get; set; }
+        public List<string> dbContextErrorLogMsg { get; set; }
  
         public DBContextErrorLogging()
         {

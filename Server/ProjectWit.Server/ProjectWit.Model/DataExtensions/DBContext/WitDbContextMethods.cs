@@ -14,5 +14,9 @@
             Configuration.ProxyCreationEnabled = value;
             Configuration.AutoDetectChangesEnabled = value;
         }
+        public void SetLogMessage(List<string> _log)
+        {
+            errorLog.dbContextErrorLogMsg = _log;
+        }
     }
 }
